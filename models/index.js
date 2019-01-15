@@ -1,3 +1,6 @@
 module.exports = {
-  Book: require("./book")
+  Client: require("./Client"),
+  Session: require("./Session"),
+  Trainer: require("./Trainer"),
+  Workout: require("./Workout")
 };
