@@ -1,15 +1,15 @@
 const path = require("path");
 const router = require("express").Router();
 const clientRoutes = require("./clients");
-const trainerRoutes = require("./trainer");
-const workoutRoutes = require("./workout");
-const sessionRoutes = require("./session");
+const trainerRoutes = require("./trainers");
+const workoutRoutes = require("./workouts");
+const sessionRoutes = require("./sessions");
 
 // Client routes
 router.use("/clients", clientRoutes);
 
 // Trainer routes
-router.use("/trainer", trainerRoutes);
+router.use("/trainers", trainerRoutes);
 
 // Workout routes
 router.use("/workout", workoutRoutes);
