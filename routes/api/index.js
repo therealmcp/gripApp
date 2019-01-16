@@ -12,10 +12,10 @@ router.use("/clients", clientRoutes);
 router.use("/trainers", trainerRoutes);
 
 // Workout routes
-router.use("/workout", workoutRoutes);
+router.use("/workouts", workoutRoutes);
 
 // Session Routes
-router.use("/session", sessionRoutes);
+router.use("/sessions", sessionRoutes);
 
 // For anything else, render the html page
 router.use(function(req, res) {
