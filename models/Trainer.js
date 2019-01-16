@@ -22,7 +22,7 @@ var TrainerSchema = new Schema({
   },
   sessions: {
     type: Schema.Types.ObjectId,
-    ref: "Sessions"
+    ref: "Clients"
   }
 });
 

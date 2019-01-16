@@ -17,7 +17,7 @@ var ClientSchema = new Schema({
     required: true
   },
   dob: {
-    type: Number,
+    type: Date,
     required: true
   },
   gender: {
