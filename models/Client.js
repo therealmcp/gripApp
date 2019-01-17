@@ -39,6 +39,9 @@ var ClientSchema = new Schema({
     type: Number,
     required: true
   },
+  image: {
+    type: String
+  },
   sessions: {
     type: Schema.Types.ObjectId,
     ref: "Sessions"
