@@ -2,6 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
+// var router = express.Router();
+// const multer = require('multer');
+// const upload = multer({ storage: storage });
 const PORT = process.env.PORT || 3001;
 
 // Configure body parsing for AJAX requests
@@ -28,3 +31,19 @@ mongoose.connect(
 app.listen(PORT, () =>
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`)
 );
+
+// Sets up where to store POST images
+// const storage = multer.diskStorage({
+//   destination: function (req, res, cb) {
+//       cb(null, 'uploads/')
+//   }
+// });
+
+// router.route('/img_data')
+// .post(upload.single('file'), function(req, res) {
+//   var new_img = new Img;
+//   new_img.img.data = fs.readFileSync(req.file.path)
+//   new_img.img.contentType = 'image/jpeg';
+//   new_img.save();
+//   res.json({ message: 'New image added to the db!' });
+// })
