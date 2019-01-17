@@ -15,8 +15,8 @@ export default class MyDatePicker extends React.Component {
           mode="date"
           placeholder="select date"
           format="MM-DD-YYYY"
-          minDate="05-01-2016"
-          maxDate="06-01-2016"
+          minDate="05-01-1970"
+          maxDate="06-01-2019"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{

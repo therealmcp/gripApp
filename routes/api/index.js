@@ -1,13 +1,21 @@
 const path = require("path");
 const router = require("express").Router();
-const bookRoutes = require("./books");
-const googleRoutes = require("./google");
+const clientRoutes = require("./clients");
+const trainerRoutes = require("./trainers");
+const workoutRoutes = require("./workouts");
+const sessionRoutes = require("./sessions");
 
-// Book routes
-router.use("/books", bookRoutes);
+// Client routes
+router.use("/clients", clientRoutes);
 
-// Google Routes
-router.use("/google", googleRoutes);
+// Trainer routes
+router.use("/trainers", trainerRoutes);
+
+// Workout routes
+router.use("/workouts", workoutRoutes);
+
+// Session Routes
+router.use("/sessions", sessionRoutes);
 
 // For anything else, render the html page
 router.use(function(req, res) {
