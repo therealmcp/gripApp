@@ -7,155 +7,163 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Button
 } from 'react-native';
-import { WebBrowser } from 'expo';
-import { Button } from 'native-base';
+import { WebBrowser, ImagePicker, Permissions } from 'expo';
+import { Card } from 'native-base';
 
 import { MonoText } from '../components/StyledText';
 
-import TestButton from '../components/TestButton';
+import PrimaryButton from '../components/PrimaryButton';
+import OutlineButton from '../components/OutlineButton';
+import GripHeader from '../components/GripHeader';
+import TextInput from '../components/TextInput';
 
 export default class SignUp extends React.Component {
-  static navigationOptions = {
-    header: null,
-  };
+  
+  static navigationOptions = ({navigation}) => {
+    return {
+      header: 
+        <GripHeader/>
+      }
+    };
+
+    state = {
+      image: null,
+    };
+
+    _pickImage = async () => {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        aspect: [4, 3],
+      });
+
+      if (!result.cancelled) {
+        this.setState({ image: result.uri });
+      }
+    }
+
+    async componentDidMount() {
+      const permission = await Permissions.getAsync(Permissions.CAMERA_ROLL);
+      if (permission.status !== 'granted') {
+          const newPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+          if (newPermission.status === 'granted') {
+            //it's granted.
+          }
+      } else {
+      }
+    } 
 
   render() {
+
+    let { image } = this.state;
+
     return (
+
       <View style={styles.container}>
-        <TestButton 
-            text='Back to Landing' 
-            onPress={() => this.props.navigation.navigate('Landing')}
-          />
-          <Button success style={styles.button}><Text>Test 2</Text></Button>
+        <ScrollView contentContainerStyle={styles.scrollView}>
+        
+
+          <Card style={styles.card}>
+            <Text style={styles.h1}>TRAINER SIGN-UP</Text>
+            <Text style={styles.h2}>Enter your information in the fields below.</Text>
+          </Card>
+          
+          <View style={styles.containerInline}>
+            <TextInput placeholder="First Name" style={styles.textInputHalf}/>
+            <TextInput placeholder="Last Name" style={styles.textInputHalf}/>
+          </View>
+
+            <TextInput placeholder="Email" style={styles.textInput}/>
+            <TextInput placeholder="Password" style={styles.textInput} secureTextEntry={true}/>
+            <TextInput placeholder="Repeat Password" style={styles.textInput} secureTextEntry={true}/>
+          
+
+          <OutlineButton
+              text='Choose a Profile Picture'
+              onPress={this._pickImage}
+              style={styles.button2}/>
+
+          {image &&
+            <Image source={{ uri: image }} style={{ width: 200, height: 200, margin: 20 }} />}
+          
+          <PrimaryButton 
+              text='Create Account' 
+              onPress={() => this.props.navigation.navigate('Home')}
+              style={styles.button}/>
+
+        </ScrollView>
       </View>
     );
   }
-
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
-        </Text>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
-    }
-  }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    );
-  };
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'yellow',
+    backgroundColor: 'mintcream',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  scrollView: {
+    /* flex: 1, */
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%'
+  },
+  containerInline: {
+    flexWrap: 'wrap', 
+    padding: 0,
+    justifyContent: 'space-between',
+    flexDirection:'row',
+    width: '82%',
+  },
+  textInput: {
+    width: '80%',
+    margin: 10, 
+    /* marginLeft: 15, */
+    backgroundColor: 'white'
+  },
+  textInputHalf: {
+    width: '46%',
+    margin: 10,
+    /* marginLeft: 15, */
+    padding: 0,
+    backgroundColor: 'white'
+  },
   button: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginTop: 20,
+    marginBottom: 30,
+    backgroundColor: 'blue'
   },
-  developmentModeText: {
+  button2: {
+    alignSelf: 'center',
+    marginTop: 20,
+    marginBottom: 10,
+    /* backgroundColor: 'green', */
+    /* width: '80%', */
+    /* justifyContent: 'center' */
+  },
+  card: {
     marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  welcomeContainer: {
+    width: '90%',
     alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+    backgroundColor: 'transparent',
+    shadowColor: 'transparent',
+    borderColor: 'transparent'
   },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
+  h1: {
+    fontWeight: 'bold',
+    fontSize: 28,
+    padding: 10,
+    color: 'blue'
   },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
+  h2: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    padding: 5,
+    color: 'blue'
+  }
 });
