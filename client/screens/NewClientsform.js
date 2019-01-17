@@ -6,7 +6,7 @@ import {
     TextInput,
     TouchableOpacity, 
 } from 'react-native';
-import MyDatePicker from './MyDatePicker'
+import MyDatePicker from '../components/MyDatePicker'
 
 
 
@@ -48,7 +48,7 @@ export default class NewClientsform extends React.Component {
     else if(field=='date')
     {
       this.setState({
-        dateofBirth:text,
+        dateofBirth:date,
       })
     }
     else
@@ -83,6 +83,13 @@ export default class NewClientsform extends React.Component {
     // }).then(res => res.json())
     // .then(response => console.log('Success:', JSON.stringify(response)))
     // .catch(error => console.error('Error:', error));
+
+
+   // 1st CORS do this for server file
+   // Fetch should target your server aka http://localhost:PORT###
+   // Creating a post route with payload = collection
+   // on your server side this should call the router
+   // ex api/clients => post route
 
   }
   render() {

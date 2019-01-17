@@ -5,13 +5,15 @@ import { createStackNavigator } from 'react-navigation';
 import LandingPage from '../screens/LandingPage';
 import SignUp from '../screens/SignUp';
 import Home from '../screens/Home';
+import NewClientsform from '../screens/NewClientsform';
 
 // This creates our app's "stack" of pages; the keys in the first object are the routes, values are the pages (found in "screens" folder)
 const RootStack = createStackNavigator(
     {
         Landing: LandingPage,
         SignUp: SignUp,
-        Home: Home
+        Home: Home,
+        NewClientsform: NewClientsform
     },
     {
         initialRouteName: 'Landing',
