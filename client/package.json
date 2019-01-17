@@ -18,7 +18,10 @@
     "native-base": "^2.10.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
-    "react-navigation": "^3.0.9"
+    "react-navigation": "^3.0.9",
+    "react-native-ui-xg": "0.0.6",
+    "react-native-datepicker": "^1.7.2",
+    "react-native-local-mongodb": "^2.2.4"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",

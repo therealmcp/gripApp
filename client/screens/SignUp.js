@@ -41,6 +41,7 @@ export default class SignUp extends React.Component {
       if (!result.cancelled) {
         this.setState({ image: result.uri });
       }
+      console.log("IMAGE RESULT", result.uri);
     }
 
     async componentDidMount() {
