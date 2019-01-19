@@ -17,7 +17,6 @@ const GripHeader = () => {
 
   styles = StyleSheet.create({
     header: {
-    
         // flex: 1,
         backgroundColor: 'blue'
     },

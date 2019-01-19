@@ -29,8 +29,15 @@ export default class SignUp extends React.Component {
     };
 
     state = {
-      image: null,
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      repeatPassword: '',
+      image: null
     };
+
+    
 
     _pickImage = async () => {
       let result = await ImagePicker.launchImageLibraryAsync({

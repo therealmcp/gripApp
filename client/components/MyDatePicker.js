@@ -35,5 +35,5 @@ export default class MyDatePicker extends React.Component {
         />
       )
     }
-  }
+}
   
