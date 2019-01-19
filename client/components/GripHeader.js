@@ -17,12 +17,13 @@ const GripHeader = () => {
 
   styles = StyleSheet.create({
     header: {
-        flex: 1,
-        backgroundColor: 'blue',
-        zIndex: 1
+        // flex: 1,
+        backgroundColor: 'blue'
     },
     title: {
-        color: 'white'
+        color: 'white',
+ 
+        
     }
 });
 

@@ -10,11 +10,13 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import { Button } from 'native-base';
-
+import CardImage from '../components/CardImage';
 import { MonoText } from '../components/StyledText';
 
 import GripHeader from '../components/GripHeader';
 import PrimaryButton from '../components/PrimaryButton';
+import Link from '../components/Link';
+import Cards from '../components/Cards';
 
 export default class Home extends React.Component {
 
@@ -30,8 +32,12 @@ export default class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-
-        <Text>Welcome home!</Text>
+        <Text style={styles.titleText} >Welcome, Trainer Name!</Text>
+        <CardImage/>
+        <Link/>
+        <Text style={styles.subText} >Upcoming Sessions</Text>
+        <Cards style={styles.sessionCards}/>
+        <Cards/>
         <PrimaryButton 
             text='Back to Landing' 
             onPress={() => this.props.navigation.navigate('Landing')}
@@ -59,5 +65,25 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: 'center',
     backgroundColor: 'blue'
+  },
+  titleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  subText: {
+    fontSize: 17,
+
+  },
+  header: {
+    // flex: 1,
+    // zIndex: 1,
+  },
+  sessionCards: {
+    // padding: '15px',
+    // width: '100px',
+    // alignItems: 'center',
+    justifyContent: 'center',
+    // width: '80%',
+    // margin: 10,
   }
 });
