@@ -4,6 +4,7 @@ export default {
   getClient: function () {
     return axios.get('/api/clients')
   },
+
   getSession: function () {
     return axios.get('/api/sessions')
   },
@@ -14,3 +15,11 @@ export default {
     return axios.get('/api/workouts')
   }
 }
+
+// router.post("/client", (req, res) => {
+//   axios
+//     .get("http://localhost:3001", { params: req.query })
+//     .then(({ data: { results } }) => res.json(results))
+//     .catch(err => res.status(422).json(err));
+// });
+
