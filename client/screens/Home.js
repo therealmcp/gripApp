@@ -42,6 +42,11 @@ export default class Home extends React.Component {
             onPress={() => this.props.navigation.navigate('NewClientsform')}
             style={styles.button}
           />
+          <PrimaryButton 
+            text='New Session' 
+            onPress={() => this.props.navigation.navigate('NewSession')}
+            style={styles.button}
+          />
       </View>
 
       
