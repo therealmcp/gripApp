@@ -18,7 +18,7 @@ import PrimaryButton from '../components/PrimaryButton';
 import OutlineButton from '../components/OutlineButton';
 import GripHeader from '../components/GripHeader';
 import TextInput from '../components/TextInput';
-import MyDatePicker from '../components/MyDatePicker';
+import DatePicker from '../components/DatePicker';
 
 export default class NewSession extends React.Component {
   
@@ -47,7 +47,7 @@ export default class NewSession extends React.Component {
 
         <Text style={styles.h1}>New Session</Text>
 
-        <MyDatePicker/>
+        <DatePicker/>
         <View style={styles.containerInline}>
             <TextInput placeholder="Weight" style={styles.textInputHalf}/>
             <TextInput placeholder="Body Fat %" style={styles.textInputHalf}/>

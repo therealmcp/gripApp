@@ -18,8 +18,8 @@ router.use("/workouts", workoutRoutes);
 router.use("/sessions", sessionRoutes);
 
 // For anything else, render the html page
-router.use(function(req, res) {
-  res.sendFile(path.join(__dirname, "../../client/build/index.html"));
-});
+// router.use(function(req, res) {
+//   res.sendFile(path.join(__dirname, "../../client/build/index.html"));
+// });
 
 module.exports = router;
