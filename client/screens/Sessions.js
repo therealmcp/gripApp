@@ -19,7 +19,7 @@ import Link from '../components/Link';
 import Cards from '../components/Cards';
 import PlusButton from '../components/PlusButton';
 
-export default class ClientsPage extends React.Component {
+export default class Sessions extends React.Component {
 
     static navigationOptions = ({navigation}) => {
         return {
@@ -33,9 +33,10 @@ export default class ClientsPage extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.titleText} >Clients</Text>
+        <Text style={styles.titleText} >Sessions</Text>
+        {/* Needs a place for React Native to take it to set up a Session */}
         <PlusButton
-        text='Add a Client'
+        text='Add a Session'
         onPress={() => this.props.navigation.navigate('NewClientsform')}
          style={styles.button}/>
         {/* <PrimaryButton 
