@@ -14,8 +14,7 @@ const Cards = () => {
             <CardItem>
               <Body>
                 <Text>
-                   Card 1 with info
-                   What about 2 lines
+                  
                 </Text>
               </Body>
             </CardItem>
