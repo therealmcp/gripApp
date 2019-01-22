@@ -17,8 +17,9 @@ import GripHeader from '../components/GripHeader';
 import PrimaryButton from '../components/PrimaryButton';
 import Link from '../components/Link';
 import Cards from '../components/Cards';
+import PlusButton from '../components/PlusButton';
 
-export default class Home extends React.Component {
+export default class ClientsPage extends React.Component {
 
     static navigationOptions = ({navigation}) => {
         return {
@@ -32,32 +33,25 @@ export default class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.titleText} >Welcome, Trainer Name!</Text>
-        <CardImage/>
-        <Link/>
-        <Text style={styles.subText} >Upcoming Sessions</Text>
+        <Text style={styles.titleText} >Clients</Text>
+        <PlusButton
+        text='Add a Client'
+        onPress={() => this.props.navigation.navigate('NewClientsform')}
+         style={styles.button}/>
+        {/* <PrimaryButton 
+            text='Add a Client' 
+            onPress={() => this.props.navigation.navigate('NewClientsForm')}
+            style={styles.button}
+          />
+          <PlusButton/> */}
         <Cards style={styles.sessionCards}/>
-        <Cards/>
-        <PrimaryButton 
-            text='Back to Landing' 
-            onPress={() => this.props.navigation.navigate('Landing')}
-            style={styles.button}
-          />
+        <Cards style={styles.sessionCards}/>
+        <Cards style={styles.sessionCards}/>
+
+        
           <PrimaryButton 
-            text='New Client' 
-            onPress={() => this.props.navigation.navigate('NewClientsform')}
-            style={styles.button}
-          />
-          <PrimaryButton 
-            text='Clients Page' 
-            onPress={() => this.props.navigation.navigate('ClientsPage')}
-            text='New Session' 
-            onPress={() => this.props.navigation.navigate('NewSession')}
-            style={styles.button}
-          />
-           <PrimaryButton 
-            text='Sessions Page' 
-            onPress={() => this.props.navigation.navigate('Sessions')}
+            text='Back to Home' 
+            onPress={() => this.props.navigation.navigate('Home')}
             style={styles.button}
           />
       </View>
@@ -79,7 +73,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue'
   },
   titleText: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
   },
   subText: {

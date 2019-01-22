@@ -1,278 +1,223 @@
-
 import React from 'react';
-import { 
-    StyleSheet, 
-    ScrollView,
-    Text, 
-    View,
-    TextInput,
-    TouchableOpacity, 
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import MyDatePicker from '../components/MyDatePicker'
-import TextArea from '../components/TextArea';
-import PrimaryButton from '../components/PrimaryButton';
 import { Card } from 'native-base';
+import TextArea from '../components/TextArea';
 
-
+import GripHeader from '../components/GripHeader';
+import TextInput from '../components/TextInput';
+import DatePicker from '../components/DatePicker';
 
 export default class NewClientsform extends React.Component {
-
-  constructor()
-  {
-    super();
-    this.state={
-      firstName:'',
-      lastName:'',
-      email:'',
-      gender: '',
-      height: '',
-      weight: '',
-      bodyFat: '',
-      dob:'',
-      note:''
-    }
-  }
-//   handleInputChange = event => {
-//     // Destructure the name and value properties off of event.target
-//     // Update the appropriate state
-//     const { name, value } = event.target;
-//     this.setState({
-//       [name]: value
-//     });
-//   };
-
-//   handleFormSubmit = event => {
-//     // When the form is submitted, prevent its default behavior, get recipes update the recipes state
-//     event.preventDefault();
-//    //recipe search forexample:chicken
-//     API.getClient(this.state.clientSearch)
-//       .then(res => {
-//         console.log(res.data);
-//         this.setState({ recipes: res.data });
-//       })
-//       .catch(err => console.log(err));
-//   };
-
-
-
   
+  static navigationOptions = ({navigation}) => {
+    return {
+      header: 
+        <GripHeader/>
+      }
+    };
 
-  updateValue(text, field) {
-    // console.warn(text)
-    if(field=='first Name')
+    constructor()
     {
-      this.setState({
-        firstName:text,
-      })
-    }
-    else if(field=='last Name')
-    {
-      this.setState({
-        lastName:text,
-      })
-    }
-    else if(field=='email')
-    {
-      this.setState({
-        email:text,
-      })
-    }
-    else if(field=='gender')
-    {
-      this.setState({
-        gender:text,
-      })
-    }
-    else if(field=='height')
-    {
-      this.setState({
-        height:text,
-      })
-    }
-    else if(field=='weight')
-    {
-      this.setState({
-        weight:text,
-      })
-    }
-    else if(field=='body fat')
-    {
-      this.setState({
-        bodyFat:text,
-      })
-    }
-    else if(field=='date')
-    {
-      this.setState({
-        dob:text,
-      })
-    }
-    else
-    {
-      this.setState({
-        note:text,
-      })
-    }
-  }
+      super();
+      this.state={
+        firstName:'',
+        lastName:'',
+        email:'',
+        dob: '',
+        sex: '',
+        height: '',
+        notes: '',
+        emergencyContact: '',
+        emergencyNumber: '',
 
-  submit()
+      }
+    }
+
+    updateValue(text, field) {
+      // console.warn(text)
+      if(field=='first Name')
+      {
+        this.setState({
+          firstName:text,
+        })
+      }
+      else if(field=='last Name')
+      {
+        this.setState({
+          lastName:text,
+        })
+      }
+      else if(field=='email')
+      {
+        this.setState({
+          email:text,
+        })
+      }
+      else if(field=='sex')
+      {
+        this.setState({
+          sex:text,
+        })
+      }
+      else if(field=='height')
+      {
+        this.setState({
+          height:text,
+        })
+      }
+      else if(field=='date')
+      {
+        this.setState({
+          dob:text,
+        })
+      }
+      else if(field=='emergency contact')
+      {
+        this.setState({
+          emergencyContact:text,
+        })
+      }
+      else if(field=='emergency number')
+      {
+        this.setState({
+          emergencyNumber:text,
+        })
+      }
+      else
+      {
+        this.setState({
+          note:text,
+        })
+      }
+    }
+
+    submit()
   {
     let collection={}
     collection.firstName=this.state.firstName,
     collection.lastName=this.state.lastName,
     collection.email=this.state.email,
-    collection.gender=this.state.gender,
+    collection.sex=this.state.sex,
     collection.height=this.state.height,
-    collection.weight=this.state.weight,
-    collection.bodyFat=this.state.bodyFat,
     collection.dob=this.state.dob,
-    console.warn(this.state.dob);
+    collection.emergencyContact=this.state.emergencyContact,
+    collection.emergencyNumber=this.state.emergencyNumber,
     collection.note=this.state.note,
 
     console.warn(collection);
-
-    //1 we should define our own URL
-    // var url = 'own-url';
-
-    // fetch(url, {
-    //   method: 'POST', // or 'PUT'
-    //   body: JSON.stringify(collection), // data can be `string` or {object}!
-    //   headers:{
-    //     'Content-Type': 'application/json'
+    // axios({
+    //   method: 'POST',
+    //   url: 'http://10.0.0.2:3001/api/clients',
+    //   data: {
+    //       collection
     //   }
-    // }).then(res => res.json())
-    // .then(response => console.log('Success:', JSON.stringify(response)))
-    // .catch(error => console.error('Error:', error));
-
-    //2 axios({
-    //     method: 'post',
-    //     url: 'http://localhost:3001/',
-    //     data: {
-    //         collection
-    //     }
-    // });
-
-    // 3 router.get("/recipes", (req, res) => {
-    //     axios
-    //       .get("http://www.recipepuppy.com/api/", { params: req.query })
-    //       .then(({ data: { results } }) => res.json(results))
-    //       .catch(err => res.status(422).json(err));
-    // });
-      
-
-
+    // }).catch(err=>{throw err});
+  
   }
+
   render() {
+
     return (
-      <View style={styles.newClientsform}>
-       <ScrollView contentContainerStyle={styles.scrollView}>
 
-        <Card style={styles.card}>
-         <Text style={styles.header}>Add New Client</Text>
-        </Card>
+      <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.scrollView}>
+        
 
-         <TextInput 
-           style={styles.TextInput} 
-           placeholder='First Name' 
-           onChangeText={(text) => this.updateValue(text, 'first Name')}/>
+          <Card style={styles.card}>
+            <Text style={styles.h1}>Add New Client</Text>
+          </Card>
+          
+          <View style={styles.containerInline}>
+            <TextInput placeholder="First Name" style={styles.textInputHalf}/>
+            <TextInput placeholder="Last Name" style={styles.textInputHalf}/>
+          </View>
 
-         <TextInput 
-           style={styles.TextInput} 
-           placeholder='Last Name'
-           onChangeText={(text) => this.updateValue(text, 'last Name')}/>
+          <TextInput placeholder="Email" style={styles.textInput}/>
 
-         <TextInput 
-           style={styles.TextInput} 
-           placeholder='email'
-           onChangeText={(text) => this.updateValue(text, 'email')}/>
+          <View style={styles.containerInline}>
+            <TextInput placeholder="Height" style={styles.textInputHalf}/>
+            <TextInput placeholder="Sex" style={styles.textInputHalf}/>
+          </View>
+        
+          <View style={styles.containerInline}>
+          <DatePicker 
+            placeholder="date of birth"
+          />
+          </View>
+          
 
-         <TextInput 
-           style={styles.TextInput} 
-           placeholder='Gender'
-           onChangeText={(text) => this.updateValue(text, 'gender')}/>
+          <TextInput placeholder="Emergency Contact" style={styles.textInput}/>
+          <TextInput placeholder="Emergency #" style={styles.textInput}/>
 
-        <TextInput 
-           style={styles.TextInput} 
-           placeholder='Height'
-           onChangeText={(text) => this.updateValue(text, 'height')}/>
+          <View style={styles.textArea}>
+            <TextArea 
+              numberOfLines={10}
+              multiline={true}
+              onChangeText={(text) => this.updateValue(text, 'Notes')}/> 
+          </View>
 
-        <TextInput 
-           style={styles.TextInput} 
-           placeholder='Weight'
-           onChangeText={(text) => this.updateValue(text, 'weight')}/>
-
-        <TextInput 
-           style={styles.TextInput} 
-           placeholder='Body Fat'
-           onChangeText={(text) => this.updateValue(text, 'body fat')}/>
-
-         <Text>date of Birth:</Text>
-         <MyDatePicker />
-         <TextArea 
-         style={styles.TextArea}
-         numberOfLines={10}
-         multiline={true}
-         onChangeText={(text) => this.updateValue(text, 'Note')}/> 
-
-         
-         <PrimaryButton 
-            text='Progress Report' 
-            onPress={() => this.props.navigation.navigate('Home')}
-            style={styles.button}/>
-
-         <PrimaryButton 
-            text='Sessions' 
-            onPress={() => this.props.navigation.navigate('Home')}
-            style={styles.button}/>
-
-         <TouchableOpacity
+          <TouchableOpacity
           onPress={()=>this.submit()} 
+          // onPress={() => this.props.navigation.navigate('Home')}
           style={styles.button} >
            <Text style={styles.btntext}>create Client</Text>
-         </TouchableOpacity>
+          </TouchableOpacity>
 
-        
-       </ScrollView>  
+        </ScrollView>
       </View>
     );
   }
 }
 
-
 const styles = StyleSheet.create({
   container: {
-    alignSelf: 'stretch',
+    flex: 1,
+    backgroundColor: 'mintcream',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  header: {
-    fontSize: 24,
-    color: 'black',
-    paddingBottom: 10,
-    marginBottom: 40,
-    borderBottomColor: '#199187',
-    borderBottomWidth: 1, 
+  scrollView: {
+    /* flex: 1, */
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%'
   },
-  TextInput: {
-    alignSelf: 'stretch',
-    height: 40,
-    marginBottom: 30,
-    color: '#fff',
-    borderBottomColor: '#f8f8f8',
-    borderBottomWidth: 1,
+  containerInline: {
+    flexWrap: 'wrap', 
+    padding: 0,
+    justifyContent: 'space-between',
+    flexDirection:'row',
+    width: '82%',
   },
-  TextArea: {
-    height: 150,
-    justifyContent: "flex-start",
+  textInput: {
+    width: '80%',
+    margin: 10, 
+    backgroundColor: 'white'
+  },
+  textInputHalf: {
+    width: '46%',
+    margin: 10,
+    padding: 0,
+    backgroundColor: 'white'
   },
   button: {
     alignSelf:'stretch',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#59cbbd',
-    marginTop: 30,
+    marginBottom: 100,
+    backgroundColor: 'blue'
   },
-  btntext: {
-    color: '#fff',
-    fontWeight: 'bold',
+  button2: {
+    alignSelf: 'center',
+    marginTop: 20,
+    marginBottom: 10,
   },
   card: {
     marginBottom: 20,
@@ -281,6 +226,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     shadowColor: 'transparent',
     borderColor: 'transparent'
+  },
+  h1: {
+    fontWeight: 'bold',
+    fontSize: 28,
+    padding: 10,
+    color: 'blue'
+  },
+  textArea: {
+    height: 300,
+    width: 300,
+    justifyContent: "flex-start",
   },
 
 });

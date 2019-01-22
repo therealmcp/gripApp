@@ -4,7 +4,12 @@ const clientController = require("../../controllers/clientController");
 // Matches with "/api/clients"
 router.route("/")
   .get(clientController.findAll)
-  .post(clientController.create);
+  .post(function(req, res){
+    console.log(req.body)
+    res.send("post");
+  });
+  
+  
 
 // Matches with "/api/clients/:id"
 router

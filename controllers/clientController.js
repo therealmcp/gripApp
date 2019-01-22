@@ -16,7 +16,9 @@ module.exports = {
     db.Client.create(req.body)
       .then(dbClient => res.json(dbClient))
       .catch(err => res.status(422).json(err));
+      console.log(req.body);
   },
+  
   update: function(req, res) {
     db.Client.findOneAndUpdate({ id: req.params.id }, req.body)
       .then(dbClient => res.json(dbClient))
