@@ -36,7 +36,7 @@ export default class ClientsPage extends React.Component {
         <Text style={styles.titleText} >Clients</Text>
         <PlusButton
         text='Add a Client'
-        onPress={() => this.props.navigation.navigate('NewClientsForm')}
+        onPress={() => this.props.navigation.navigate('NewClientsform')}
          style={styles.button}/>
         {/* <PrimaryButton 
             text='Add a Client' 
