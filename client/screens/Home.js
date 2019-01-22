@@ -60,6 +60,11 @@ export default class Home extends React.Component {
             onPress={() => this.props.navigation.navigate('Sessions')}
             style={styles.button}
           />
+          <PrimaryButton 
+            text='Add Workout Page' 
+            onPress={() => this.props.navigation.navigate('AddWorkout')}
+            style={styles.button}
+          />
       </View>
 
       
