@@ -2,8 +2,8 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
-import LandingPage from '../screens/LandingPage';
-import SignUp from '../screens/SignUp';
+import LandingPage from '../screens/auth/Login';
+// import SignUp from '../screens/SignUp';
 import Home from '../screens/Home';
 import NewClientsform from '../screens/NewClientsform';
 
@@ -11,7 +11,7 @@ import NewClientsform from '../screens/NewClientsform';
 const RootStack = createStackNavigator(
     {
         Landing: LandingPage,
-        SignUp: SignUp,
+        // SignUp: SignUp,
         Home: Home,
         NewClientsform: NewClientsform
     },

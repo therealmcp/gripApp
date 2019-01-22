@@ -11,16 +11,41 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import { Card } from 'native-base';
+import { NavigationActions } from "react-navigation";
 
-import { MonoText } from '../components/StyledText';
-import TextInput from '../components/TextInput';
-import PrimaryButton from '../components/PrimaryButton';
+import { MonoText } from '../../components/StyledText';
+import TextInput from '../../components/TextInput';
+import PrimaryButton from '../../components/PrimaryButton';
+import API from "../../utils/API";
 
 
 export default class LandingPage extends React.Component {
   static navigationOptions = {
     header: null,
-  };
+  }
+
+  goToMain = (userObj) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "HomeScreen",
+      params: { data: userObj }
+    });
+    this.props.navigation.dispatch(navigateAction);
+    // this.props.navigation.goBack();
+  }
+
+  signUp = () => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "SignUp",
+    });
+    this.props.navigation.dispatch(navigateAction);
+    // this.props.navigation.goBack();
+  }
+
+  login = () => {
+    API.login(this.state)
+      .then(res => this.goToMain(res.data))
+      .catch(err => console.log(err))
+  }
 
   render() {
     return (
@@ -32,20 +57,28 @@ export default class LandingPage extends React.Component {
         </Card>
 
 
-        <TextInput placeholder="Email" style={styles.textInput}/>
-        <TextInput placeholder="Password" style={styles.textInput} secureTextEntry={true}/>
+        <TextInput placeholder="Email" style={styles.textInput} />
+        <TextInput placeholder="Password" style={styles.textInput} secureTextEntry={true} />
 
-        <PrimaryButton 
-          text="Log In" style={styles.button} 
-          onPress={() => this.props.navigation.navigate('Home')}/> 
+        <PrimaryButton
+          text="Log In" style={styles.button}
+          onPress={() => this.login()} />
 
-        <Button title='Sign Up' onPress={() => this.props.navigation.navigate('SignUp')} />
+        <Button
+          title="Login"
+          onPress={() => this.login()}
+        />
+
+        <Button
+          title="Register"
+          onPress={() => this.signUp()}
+        />
 
       </View>
     );
   }
 
-  
+
 }
 
 const styles = StyleSheet.create({

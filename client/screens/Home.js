@@ -20,37 +20,37 @@ import Cards from '../components/Cards';
 
 export default class Home extends React.Component {
 
-    static navigationOptions = ({navigation}) => {
-        return {
-          header: 
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-              <GripHeader/>
-            </TouchableOpacity>
-          }
-        };
+  static navigationOptions = ({ navigation }) => {
+    return {
+      header:
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <GripHeader />
+        </TouchableOpacity>
+    }
+  };
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.titleText} >Welcome, Trainer Name!</Text>
-        <CardImage/>
-        <Link/>
+        <CardImage />
+        <Link />
         <Text style={styles.subText} >Upcoming Sessions</Text>
-        <Cards style={styles.sessionCards}/>
-        <Cards/>
-        <PrimaryButton 
-            text='Back to Landing' 
-            onPress={() => this.props.navigation.navigate('Landing')}
-            style={styles.button}
-          />
-          <PrimaryButton 
-            text='New Client' 
-            onPress={() => this.props.navigation.navigate('NewClientsform')}
-            style={styles.button}
-          />
+        <Cards style={styles.sessionCards} />
+        <Cards />
+        <PrimaryButton
+          text='Back to Landing'
+          onPress={() => this.props.navigation.navigate('Landing')}
+          style={styles.button}
+        />
+        <PrimaryButton
+          text='New Client'
+          onPress={() => this.props.navigation.navigate('NewClientsform')}
+          style={styles.button}
+        />
       </View>
 
-      
+
     );
   }
 }
