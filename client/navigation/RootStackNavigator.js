@@ -9,6 +9,7 @@ import NewClientsform from '../screens/NewClientsform';
 import ClientsPage from '../screens/ClientsPage';
 import Sessions from '../screens/Sessions';
 import NewSession from '../screens/NewSession';
+import ClientProfile from '../screens/ClientProfile';
 
 // This creates our app's "stack" of pages; the keys in the first object are the routes, values are the pages (found in "screens" folder)
 const RootStack = createStackNavigator(
@@ -18,7 +19,8 @@ const RootStack = createStackNavigator(
         Home: Home,
         NewClientsform: NewClientsform,
         ClientsPage: ClientsPage,
-        Sessions: Sessions
+        Sessions: Sessions,
+        ClientProfile: ClientProfile,
         NewSession: NewSession
     },
     {

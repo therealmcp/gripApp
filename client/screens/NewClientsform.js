@@ -17,8 +17,10 @@ export default class NewClientsform extends React.Component {
   
   static navigationOptions = ({navigation}) => {
     return {
-      header: 
-        <GripHeader/>
+      header:
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <GripHeader/>
+        </TouchableOpacity>
       }
     };
 
