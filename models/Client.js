@@ -38,23 +38,22 @@ var ClientSchema = new Schema({
   bodyFat: {
     type: Number,
     required: true
-  }
-  
-  // emergencyContact: {
-  //   type: String,
-  //   required: true
-  // },
-  // emergencyNumber: {
-  //   type: Number,
-  //   required: true
-  // },
-  // image: {
-  //   type: String
-  // },
-  // sessions: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: "Sessions"
-  // }
+  },
+  emergencyContact: {
+     type: String,
+     required: true
+   },
+   emergencyNumber: {
+     type: Number,
+     required: true
+   },
+   image: {
+     type: String
+   },
+   sessions: {
+     type: Schema.Types.ObjectId,
+     ref: "Sessions"
+   }
 });
 
 // This creates our model from the above schema, using mongoose's model method

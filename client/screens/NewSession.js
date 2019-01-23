@@ -18,7 +18,7 @@ import PrimaryButton from '../components/PrimaryButton';
 import OutlineButton from '../components/OutlineButton';
 import GripHeader from '../components/GripHeader';
 import TextInput from '../components/TextInput';
-import DatePicker from '../components/DatePicker';
+import DatePicker from '../components/GripDatePicker';
 
 export default class NewSession extends React.Component {
   

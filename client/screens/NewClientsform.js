@@ -7,11 +7,13 @@ import {
   View,
 } from 'react-native';
 import { Card } from 'native-base';
-import TextArea from '../components/TextArea';
+import { NavigationActions } from "react-navigation";
 
+import API from '../API.js';
+import TextArea from '../components/TextArea';
 import GripHeader from '../components/GripHeader';
 import TextInput from '../components/TextInput';
-import DatePicker from '../components/DatePicker';
+import GripDatePicker from '../components/GripDatePicker';
 
 export default class NewClientsform extends React.Component {
   
@@ -28,6 +30,7 @@ export default class NewClientsform extends React.Component {
     {
       super();
       this.state={
+        user: null,
         firstName:'',
         lastName:'',
         email:'',
@@ -37,19 +40,41 @@ export default class NewClientsform extends React.Component {
         notes: '',
         emergencyContact: '',
         emergencyNumber: '',
-
       }
     }
 
-    updateValue(text, field) {
+    componentDidMount(){
+      // console.log(this.props.navigation.state.params.data.user)
+      const user = {
+        _id: "5c47af84e7b746002ae89c37",
+        firstName: "Derek",
+        lastName: "Rutter",
+        email: "rutterer@gmail.com",
+        photo: "image",
+        __v: 0
+      };
+      // this.props.navigation.setParams({ user })
+      const navigateAction = NavigationActions.setParams({
+          key: "id-1547683730508-2",
+          params: { user: user }
+        });
+
+      this.props.navigation.dispatch(navigateAction);
+      console.log("params set")
+        // this.props.navigation.goBack();
+      
+      this.setState({user})
+    }
+
+    /* updateValue(text, field) {
       // console.warn(text)
-      if(field=='first Name')
+      if(field=='firstName')
       {
         this.setState({
           firstName:text,
         })
       }
-      else if(field=='last Name')
+      else if(field=='lastName')
       {
         this.setState({
           lastName:text,
@@ -79,13 +104,13 @@ export default class NewClientsform extends React.Component {
           dob:text,
         })
       }
-      else if(field=='emergency contact')
+      else if(field=='emergencyContact')
       {
         this.setState({
           emergencyContact:text,
         })
       }
-      else if(field=='emergency number')
+      else if(field=='emergencyNumber')
       {
         this.setState({
           emergencyNumber:text,
@@ -97,7 +122,7 @@ export default class NewClientsform extends React.Component {
           note:text,
         })
       }
-    }
+    } */
 
     submit()
   {
@@ -110,9 +135,13 @@ export default class NewClientsform extends React.Component {
     collection.dob=this.state.dob,
     collection.emergencyContact=this.state.emergencyContact,
     collection.emergencyNumber=this.state.emergencyNumber,
-    collection.note=this.state.note,
+    collection.note=this.state.notes,
 
     console.warn(collection);
+
+    API.saveClient(collection, this.state.user._id)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
     // axios({
     //   method: 'POST',
     //   url: 'http://10.0.0.2:3001/api/clients',
@@ -136,39 +165,40 @@ export default class NewClientsform extends React.Component {
           </Card>
           
           <View style={styles.containerInline}>
-            <TextInput placeholder="First Name" style={styles.textInputHalf}/>
-            <TextInput placeholder="Last Name" style={styles.textInputHalf}/>
+            <TextInput placeholder="First Name" style={styles.textInputHalf} onChangeText={(value) => this.setState({firstName: value})}/>
+            <TextInput placeholder="Last Name" style={styles.textInputHalf} onChangeText={(value) => this.setState({lastName: value})}/>
           </View>
 
-          <TextInput placeholder="Email" style={styles.textInput}/>
+          <TextInput placeholder="Email" style={styles.textInput} onChangeText={(value) => this.setState({email: value})}/>
 
           <View style={styles.containerInline}>
-            <TextInput placeholder="Height" style={styles.textInputHalf}/>
-            <TextInput placeholder="Sex" style={styles.textInputHalf}/>
+            <TextInput placeholder="Height" style={styles.textInputHalf} onChangeText={(value) => this.setState({height: value})}/>
+            <TextInput placeholder="Sex" style={styles.textInputHalf} onChangeText={(value) => this.setState({sex: value})}/>
           </View>
         
           <View style={styles.containerInline}>
-          <DatePicker 
-            placeholder="date of birth"
+          <GripDatePicker 
+            placeholder="Date of Birth"
+            onDateChange={(date) => this.setState({dob: date})}
           />
           </View>
           
 
-          <TextInput placeholder="Emergency Contact" style={styles.textInput}/>
-          <TextInput placeholder="Emergency #" style={styles.textInput}/>
+          <TextInput placeholder="Emergency Contact" style={styles.textInput} onChangeText={(value) => this.setState({emergencyContact: value})}/>
+          <TextInput placeholder="Emergency #" style={styles.textInput} onChangeText={(value) => this.setState({emergencyNumber: value})}/>
 
           <View style={styles.textArea}>
             <TextArea 
               numberOfLines={10}
               multiline={true}
-              onChangeText={(text) => this.updateValue(text, 'Notes')}/> 
+              onChangeText={(value) => this.setState({notes: value})}/> 
           </View>
 
           <TouchableOpacity
           onPress={()=>this.submit()} 
           // onPress={() => this.props.navigation.navigate('Home')}
           style={styles.button} >
-           <Text style={styles.btntext}>create Client</Text>
+           <Text style={styles.btntext}>Create Client</Text>
           </TouchableOpacity>
 
         </ScrollView>

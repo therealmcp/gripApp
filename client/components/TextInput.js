@@ -10,7 +10,8 @@ const TextInput = (props) => {
           <Item regular style={props.style}>
             <Input 
                 placeholder={props.placeholder}
-                secureTextEntry={props.secureTextEntry}/>
+                secureTextEntry={props.secureTextEntry}
+                onChangeText={props.onChangeText}/>
           </Item>
         
      
