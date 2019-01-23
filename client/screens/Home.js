@@ -20,14 +20,14 @@ import Cards from '../components/Cards';
 
 export default class Home extends React.Component {
 
-    static navigationOptions = ({navigation}) => {
-        return {
-          header: 
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-              <GripHeader/>
-            </TouchableOpacity>
-          }
-        };
+  static navigationOptions = ({navigation}) => {
+      return {
+        header: 
+          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <GripHeader/>
+          </TouchableOpacity>
+        }
+      };
 
   render() {
     return (

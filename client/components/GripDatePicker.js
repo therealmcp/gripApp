@@ -2,17 +2,8 @@ import React, { Component } from 'react';
 import { Container, Header, Content, DatePicker, Text } from 'native-base';
 
 
-export default class DatePickerExample extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { chosenDate: new Date() };
-    this.setDate = this.setDate.bind(this);
-    this.state = { text: 'date of birth'};
-  }
-  setDate(newDate) {
-    this.setState({ chosenDate: newDate });
-  }
-  render() {
+const GripDatePicker = (props) => {
+  
     return (
         <Content>
           <DatePicker
@@ -24,10 +15,10 @@ export default class DatePickerExample extends Component {
             modalTransparent={false}
             animationType={"fade"}
             androidMode={"default"}
-            placeHolderText={this.props.placeholder}
+            placeHolderText={props.placeholder}
             textStyle={{ color: "black" }}
             placeHolderTextStyle={{ color: "black" }}
-            onDateChange={this.setDate}
+            onDateChange={props.onDateChange}
             disabled={false}
             />
             {/* <Text>
@@ -36,4 +27,5 @@ export default class DatePickerExample extends Component {
         </Content>
     );
   }
-}
+
+  export default GripDatePicker;
