@@ -26,12 +26,15 @@ const userSchema = new Schema({
     type: String,
     unique: false
   },
-  google: {
-    googleId: {
-      type: String,
-      required: false
-    }
-  },
+  // userType: {
+  //   user: Boolean
+  // },
+  // google: {
+  //   googleId: {
+  //     type: String,
+  //     required: false
+  //   }
+  // },
   photo: {
     type: String,
     required: false
@@ -48,7 +51,7 @@ const userSchema = new Schema({
   // lastName: { type: String }
   client: [{
     type: Schema.Types.ObjectId,
-    ref: "Client"
+    ref: "Clients"
   }]
 })
 

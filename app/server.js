@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3001
 app.use(morgan('dev'))
 app.use(
   bodyParser.urlencoded({
-    extended: false
+    extended: true
   })
 )
 app.use(bodyParser.json())
@@ -39,13 +39,13 @@ app.use(passport.initialize())
 app.use(passport.session()) // will call the deserializeUser
 
 // ===== testing middleware =====
-app.use(function (req, res, next) {
-  console.log('===== passport user =======')
-  console.log(req.session)
-  console.log(req.user)
-  console.log('===== END =======')
-  next()
-})
+// app.use(function (req, res, next) {
+//   console.log('===== passport user =======')
+//   console.log(req.session)
+//   console.log(req.user)
+//   console.log('===== END =======')
+//   next()
+// })
 // testing
 app.get(
   '/auth/google/callback',
@@ -61,8 +61,8 @@ app.get(
 )
 
 /* Express app ROUTING */
-app.use('/auth', require('./routes/api/auth'))
-app.use('/api', require('./routes/api/client'))
+app.use('/auth', require('./routes/auth'))
+// app.use('/auth', require('./routes/client'))
 
 
 // ====== Error handler ====

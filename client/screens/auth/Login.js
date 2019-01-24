@@ -20,13 +20,17 @@ import API from "../../utils/API";
 
 
 export default class LandingPage extends React.Component {
-  static navigationOptions = {
-    header: null,
+  // static navigationOptions = {
+  //   header: null,
+  // }
+  state = {
+    email: '',
+    password: ''
   }
 
   goToMain = (userObj) => {
     const navigateAction = NavigationActions.navigate({
-      routeName: "HomeScreen",
+      routeName: "Home",
       params: { data: userObj }
     });
     this.props.navigation.dispatch(navigateAction);
@@ -41,9 +45,14 @@ export default class LandingPage extends React.Component {
     // this.props.navigation.goBack();
   }
 
-  login = () => {
+  login = (event) => {
+    event.preventDefault();
+    console.log("Pre login", this.state)
     API.login(this.state)
-      .then(res => this.goToMain(res.data))
+      .then(res => {
+        // console.log("Login Successful")
+        this.goToMain(res.data)
+      })
       .catch(err => console.log(err))
   }
 
@@ -57,17 +66,18 @@ export default class LandingPage extends React.Component {
         </Card>
 
 
-        <TextInput placeholder="Email" style={styles.textInput} />
-        <TextInput placeholder="Password" style={styles.textInput} secureTextEntry={true} />
+        <TextInput
+          placeholder="Email"
+          style={styles.textInput}
+          onChangeText={(value) => {
+            this.setState({ email: value })
+          }
+          } />
+        <TextInput placeholder="Password" style={styles.textInput} secureTextEntry={true} onChangeText={(value) => this.setState({ password: value })} />
 
         <PrimaryButton
           text="Log In" style={styles.button}
-          onPress={() => this.login()} />
-
-        <Button
-          title="Login"
-          onPress={() => this.login()}
-        />
+          onPress={this.login} />
 
         <Button
           title="Register"

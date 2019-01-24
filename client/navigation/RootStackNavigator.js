@@ -2,22 +2,22 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
-import LandingPage from '../screens/auth/Login';
-// import SignUp from '../screens/SignUp';
+import Login from '../screens/auth/Login';
+import SignUp from '../screens/auth/SignUp';
 import Home from '../screens/Home';
 import NewClientsform from '../screens/NewClientsform';
 
 // This creates our app's "stack" of pages; the keys in the first object are the routes, values are the pages (found in "screens" folder)
 const RootStack = createStackNavigator(
-    {
-        Landing: LandingPage,
-        // SignUp: SignUp,
-        Home: Home,
-        NewClientsform: NewClientsform
-    },
-    {
-        initialRouteName: 'Landing',
-    }
+  {
+    Landing: Login,
+    SignUp: SignUp,
+    Home: Home,
+    NewClientsform: NewClientsform
+  },
+  {
+    initialRouteName: 'Landing',
+  }
 );
 
 /* RootStack.navigationOptions = {

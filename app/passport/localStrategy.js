@@ -1,13 +1,15 @@
-const User = require('../db/models/User')
+const Trainer = require('../db/models/User')
 const LocalStrategy = require('passport-local').Strategy
 
 const strategy = new LocalStrategy(
-	{
-		emailField: 'email' // not necessary, DEFAULT
-	},
+	// {
+	// 	emailField: 'email' // not necessary, DEFAULT
+	// },
 	function (email, password, done) {
-		User.findOne({ 'local.email': email }, (err, userMatch) => {
+		console.log('FETCHING USER FROM DB')
+		Trainer.findOne({ 'local.email': email }, (err, userMatch) => {
 			if (err) {
+				console.log(err)
 				return done(err)
 			}
 			if (!userMatch) {

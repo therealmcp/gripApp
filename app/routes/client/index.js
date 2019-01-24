@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const db = require('../../../db/models')
+const db = require('../../db/models')
 
 // router.get('/recipe/:id', (req, res, next) => {
 // 	console.log('===== user!!======')

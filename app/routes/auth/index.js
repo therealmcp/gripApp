@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const User = require('../../../db/models/User')
-const passport = require('../../../passport')
+const User = require('../../db/models/User')
+const passport = require('../../passport')
 
 // router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
 
@@ -36,24 +36,37 @@ router.get('/user/:id', (req, res, next) => {
 	})
 })
 
-router.post(
-	'/login',
-	function (req, res, next) {
-		console.log(req.body)
-		console.log('================')
-		next()
-	},
-	passport.authenticate('local'),
+router.post('/login',
+	// passport.authenticate('local'),
 	(req, res) => {
 		console.log('POST to /login')
-		const user = JSON.parse(JSON.stringify(req.user)) // hack
-		const cleanUser = Object.assign({}, user)
-		if (cleanUser.local) {
-			console.log(`Deleting ${cleanUser.local.password}`)
-			delete cleanUser.local.password
-		}
-		console.log(cleanUser)
-		res.json({ user: cleanUser })
+		// console.log('REQ OBJECT', req)
+
+		// const user = JSON.parse(JSON.stringify(req.user)) // hack
+		// const cleanUser = Object.assign({}, user)
+		// if (cleanUser.local) {
+		// 	console.log(`Deleting ${cleanUser.local.password}`)
+		// 	delete cleanUser.local.password
+		// }
+		// console.log(cleanUser)
+		User.findOne({ 'local.email': req.body.email }, (err, userMatch) => {
+			if (err) {
+				console.log(err)
+				return done(err)
+			}
+			if (!userMatch) {
+				return done(null, false, { message: 'Incorrect email' })
+			}
+			if (!userMatch.checkPassword(req.body.password)) {
+				return done(null, false, { message: 'Incorrect password' })
+			}
+			console.log(`Deleting ${userMatch.local.password}`)
+			delete userMatch.local.password
+			// return done(null, userMatch)
+			res.json({ user: userMatch })
+		})
+
+
 	}
 )
 
