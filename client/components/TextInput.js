@@ -11,11 +11,10 @@ const TextInput = (props) => {
             <Input
                 placeholder={props.placeholder}
                 secureTextEntry={props.secureTextEntry}
-                onChangeText={props.onChangeText}
-            />
-        </Item>
-
-
+                onChangeText={props.onChangeText}/>
+          </Item>
+        
+     
     );
 
 }

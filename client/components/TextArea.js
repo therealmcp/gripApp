@@ -1,15 +1,18 @@
 import React, {Component} from "react";
 import { Container, Header, Content, Textarea, Form } from "native-base";
 
-export default class TextArea extends Component {
-  render() {
+const TextArea = (props) => {
+  
     return (
-        <Content padder>
           <Form>
-            <Textarea rowSpan={5} bordered placeholder="Notes" />
+            <Textarea rowSpan={5} bordered placeholder="Notes:" 
+            placeholder={props.placeholder}
+            onChangeText={props.onChangeText}
+            numberOfLines={props.numberOfLines}
+            multiline={props.multiline}/>
           </Form>
-        </Content>
     );
   }
-}
+
+  export default TextArea;
 

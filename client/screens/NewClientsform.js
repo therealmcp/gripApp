@@ -1,225 +1,205 @@
-
 import React from 'react';
 import {
-  StyleSheet,
   ScrollView,
+  StyleSheet,
   Text,
-  View,
-  TextInput,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import MyDatePicker from '../components/MyDatePicker'
-import TextArea from '../components/TextArea';
-import PrimaryButton from '../components/PrimaryButton';
 import { Card } from 'native-base';
+import { NavigationActions } from "react-navigation";
 
-
+import API from '../API.js';
+import TextArea from '../components/TextArea';
+import GripHeader from '../components/GripHeader';
+import TextInput from '../components/TextInput';
+import GripDatePicker from '../components/GripDatePicker';
 
 export default class NewClientsform extends React.Component {
+  
+  static navigationOptions = ({navigation}) => {
+    return {
+      header:
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <GripHeader/>
+        </TouchableOpacity>
+      }
+    };
 
-  constructor() {
-    super();
-    this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      gender: '',
-      height: '',
-      weight: '',
-      bodyFat: '',
-      dob: '',
-      note: ''
+    constructor()
+    {
+      super();
+      this.state={
+        user: null,
+        firstName:'',
+        lastName:'',
+        email:'',
+        dob: '',
+        sex: '',
+        height: '',
+        notes: '',
+        emergencyContact: '',
+        emergencyNumber: '',
+      }
     }
-  }
-  //   handleInputChange = event => {
-  //     // Destructure the name and value properties off of event.target
-  //     // Update the appropriate state
-  //     const { name, value } = event.target;
-  //     this.setState({
-  //       [name]: value
-  //     });
-  //   };
 
-  //   handleFormSubmit = event => {
-  //     // When the form is submitted, prevent its default behavior, get recipes update the recipes state
-  //     event.preventDefault();
-  //    //recipe search forexample:chicken
-  //     API.getClient(this.state.clientSearch)
-  //       .then(res => {
-  //         console.log(res.data);
-  //         this.setState({ recipes: res.data });
-  //       })
-  //       .catch(err => console.log(err));
-  //   };
+    componentDidMount(){
+      // console.log(this.props.navigation.state.params.data.user)
+      const user = {
+        _id: "5c47af84e7b746002ae89c37",
+        firstName: "Derek",
+        lastName: "Rutter",
+        email: "rutterer@gmail.com",
+        photo: "image",
+        __v: 0
+      };
+      // this.props.navigation.setParams({ user })
+      const navigateAction = NavigationActions.setParams({
+          key: "id-1547683730508-2",
+          params: { user: user }
+        });
 
-
-
-
-
-  updateValue(text, field) {
-    // console.warn(text)
-    if (field == 'first Name') {
-      this.setState({
-        firstName: text,
-      })
+      this.props.navigation.dispatch(navigateAction);
+      console.log("params set")
+        // this.props.navigation.goBack();
+      
+      this.setState({user})
     }
-    else if (field == 'last Name') {
-      this.setState({
-        lastName: text,
-      })
-    }
-    else if (field == 'email') {
-      this.setState({
-        email: text,
-      })
-    }
-    else if (field == 'gender') {
-      this.setState({
-        gender: text,
-      })
-    }
-    else if (field == 'height') {
-      this.setState({
-        height: text,
-      })
-    }
-    else if (field == 'weight') {
-      this.setState({
-        weight: text,
-      })
-    }
-    else if (field == 'body fat') {
-      this.setState({
-        bodyFat: text,
-      })
-    }
-    else if (field == 'date') {
-      this.setState({
-        dob: text,
-      })
-    }
-    else {
-      this.setState({
-        note: text,
-      })
-    }
-  }
 
-  submit() {
-    let collection = {}
-    collection.firstName = this.state.firstName,
-      collection.lastName = this.state.lastName,
-      collection.email = this.state.email,
-      collection.gender = this.state.gender,
-      collection.height = this.state.height,
-      collection.weight = this.state.weight,
-      collection.bodyFat = this.state.bodyFat,
-      collection.dob = this.state.dob,
-      console.warn(this.state.dob);
-    collection.note = this.state.note,
+    /* updateValue(text, field) {
+      // console.warn(text)
+      if(field=='firstName')
+      {
+        this.setState({
+          firstName:text,
+        })
+      }
+      else if(field=='lastName')
+      {
+        this.setState({
+          lastName:text,
+        })
+      }
+      else if(field=='email')
+      {
+        this.setState({
+          email:text,
+        })
+      }
+      else if(field=='sex')
+      {
+        this.setState({
+          sex:text,
+        })
+      }
+      else if(field=='height')
+      {
+        this.setState({
+          height:text,
+        })
+      }
+      else if(field=='date')
+      {
+        this.setState({
+          dob:text,
+        })
+      }
+      else if(field=='emergencyContact')
+      {
+        this.setState({
+          emergencyContact:text,
+        })
+      }
+      else if(field=='emergencyNumber')
+      {
+        this.setState({
+          emergencyNumber:text,
+        })
+      }
+      else
+      {
+        this.setState({
+          note:text,
+        })
+      }
+    } */
 
-      console.warn(collection);
+    submit()
+  {
+    let collection={}
+    collection.firstName=this.state.firstName,
+    collection.lastName=this.state.lastName,
+    collection.email=this.state.email,
+    collection.sex=this.state.sex,
+    collection.height=this.state.height,
+    collection.dob=this.state.dob,
+    collection.emergencyContact=this.state.emergencyContact,
+    collection.emergencyNumber=this.state.emergencyNumber,
+    collection.note=this.state.notes,
 
-    //1 we should define our own URL
-    // var url = 'own-url';
+    console.warn(collection);
 
-    // fetch(url, {
-    //   method: 'POST', // or 'PUT'
-    //   body: JSON.stringify(collection), // data can be `string` or {object}!
-    //   headers:{
-    //     'Content-Type': 'application/json'
+    API.saveClient(collection, this.state.user._id)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+    // axios({
+    //   method: 'POST',
+    //   url: 'http://10.0.0.2:3001/api/clients',
+    //   data: {
+    //       collection
     //   }
-    // }).then(res => res.json())
-    // .then(response => console.log('Success:', JSON.stringify(response)))
-    // .catch(error => console.error('Error:', error));
-
-    //2 axios({
-    //     method: 'post',
-    //     url: 'http://localhost:3001/',
-    //     data: {
-    //         collection
-    //     }
-    // });
-
-    // 3 router.get("/recipes", (req, res) => {
-    //     axios
-    //       .get("http://www.recipepuppy.com/api/", { params: req.query })
-    //       .then(({ data: { results } }) => res.json(results))
-    //       .catch(err => res.status(422).json(err));
-    // });
-
-
-
+    // }).catch(err=>{throw err});
+  
   }
+
   render() {
+
     return (
-      <View style={styles.newClientsform}>
+
+      <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollView}>
+        
 
           <Card style={styles.card}>
-            <Text style={styles.header}>Add New Client</Text>
+            <Text style={styles.h1}>Add New Client</Text>
           </Card>
+          
+          <View style={styles.containerInline}>
+            <TextInput placeholder="First Name" style={styles.textInputHalf} onChangeText={(value) => this.setState({firstName: value})}/>
+            <TextInput placeholder="Last Name" style={styles.textInputHalf} onChangeText={(value) => this.setState({lastName: value})}/>
+          </View>
 
-          <TextInput
-            style={styles.TextInput}
-            placeholder='First Name'
-            onChangeText={(text) => this.updateValue(text, 'first Name')} />
+          <TextInput placeholder="Email" style={styles.textInput} onChangeText={(value) => this.setState({email: value})}/>
 
-          <TextInput
-            style={styles.TextInput}
-            placeholder='Last Name'
-            onChangeText={(text) => this.updateValue(text, 'last Name')} />
+          <View style={styles.containerInline}>
+            <TextInput placeholder="Height" style={styles.textInputHalf} onChangeText={(value) => this.setState({height: value})}/>
+            <TextInput placeholder="Sex" style={styles.textInputHalf} onChangeText={(value) => this.setState({sex: value})}/>
+          </View>
+        
+          <View style={styles.containerInline}>
+          <GripDatePicker 
+            placeholder="Date of Birth"
+            onDateChange={(date) => this.setState({dob: date})}
+          />
+          </View>
+          
 
-          <TextInput
-            style={styles.TextInput}
-            placeholder='email'
-            onChangeText={(text) => this.updateValue(text, 'email')} />
+          <TextInput placeholder="Emergency Contact" style={styles.textInput} onChangeText={(value) => this.setState({emergencyContact: value})}/>
+          <TextInput placeholder="Emergency #" style={styles.textInput} onChangeText={(value) => this.setState({emergencyNumber: value})}/>
 
-          <TextInput
-            style={styles.TextInput}
-            placeholder='Gender'
-            onChangeText={(text) => this.updateValue(text, 'gender')} />
-
-          <TextInput
-            style={styles.TextInput}
-            placeholder='Height'
-            onChangeText={(text) => this.updateValue(text, 'height')} />
-
-          <TextInput
-            style={styles.TextInput}
-            placeholder='Weight'
-            onChangeText={(text) => this.updateValue(text, 'weight')} />
-
-          <TextInput
-            style={styles.TextInput}
-            placeholder='Body Fat'
-            onChangeText={(text) => this.updateValue(text, 'body fat')} />
-
-          <Text>Date of Birth:</Text>
-          <MyDatePicker />
-          <TextArea
-            style={styles.TextArea}
-            numberOfLines={10}
-            multiline={true}
-            onChangeText={(text) => this.updateValue(text, 'Note')} />
-
-
-          <PrimaryButton
-            text='Progress Report'
-            onPress={() => this.props.navigation.navigate('Home')}
-            style={styles.button} />
-
-          <PrimaryButton
-            text='Sessions'
-            onPress={() => this.props.navigation.navigate('Home')}
-            style={styles.button} />
+          <View style={styles.textArea}>
+            <TextArea 
+              numberOfLines={10}
+              multiline={true}
+              onChangeText={(value) => this.setState({notes: value})}/> 
+          </View>
 
           <TouchableOpacity
-            onPress={() => this.submit()}
-            style={styles.button} >
-            <Text style={styles.btntext}>create Client</Text>
+          onPress={()=>this.submit()} 
+          // onPress={() => this.props.navigation.navigate('Home')}
+          style={styles.button} >
+           <Text style={styles.btntext}>Create Client</Text>
           </TouchableOpacity>
-
 
         </ScrollView>
       </View>
@@ -227,41 +207,49 @@ export default class NewClientsform extends React.Component {
   }
 }
 
-
 const styles = StyleSheet.create({
   container: {
-    alignSelf: 'stretch',
+    flex: 1,
+    backgroundColor: 'mintcream',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  header: {
-    fontSize: 24,
-    color: 'black',
-    paddingBottom: 10,
-    marginBottom: 40,
-    borderBottomColor: '#199187',
-    borderBottomWidth: 1,
+  scrollView: {
+    /* flex: 1, */
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%'
   },
-  TextInput: {
-    alignSelf: 'stretch',
-    height: 40,
-    marginBottom: 30,
-    color: '#fff',
-    borderBottomColor: '#f8f8f8',
-    borderBottomWidth: 1,
+  containerInline: {
+    flexWrap: 'wrap', 
+    padding: 0,
+    justifyContent: 'space-between',
+    flexDirection:'row',
+    width: '82%',
   },
-  TextArea: {
-    height: 150,
-    justifyContent: "flex-start",
+  textInput: {
+    width: '80%',
+    margin: 10, 
+    backgroundColor: 'white'
+  },
+  textInputHalf: {
+    width: '46%',
+    margin: 10,
+    padding: 0,
+    backgroundColor: 'white'
   },
   button: {
     alignSelf: 'stretch',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#59cbbd',
-    marginTop: 30,
+    marginBottom: 100,
+    backgroundColor: 'blue'
   },
-  btntext: {
-    color: '#fff',
-    fontWeight: 'bold',
+  button2: {
+    alignSelf: 'center',
+    marginTop: 20,
+    marginBottom: 10,
   },
   card: {
     marginBottom: 20,
@@ -270,6 +258,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     shadowColor: 'transparent',
     borderColor: 'transparent'
+  },
+  h1: {
+    fontWeight: 'bold',
+    fontSize: 28,
+    padding: 10,
+    color: 'blue'
+  },
+  textArea: {
+    height: 300,
+    width: 300,
+    justifyContent: "flex-start",
   },
 
 });

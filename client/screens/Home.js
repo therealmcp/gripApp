@@ -36,18 +36,35 @@ export default class Home extends React.Component {
         <CardImage />
         <Link />
         <Text style={styles.subText} >Upcoming Sessions</Text>
-        <Cards style={styles.sessionCards} />
-        <Cards />
-        <PrimaryButton
-          text='Back to Landing'
-          onPress={() => this.props.navigation.navigate('Landing')}
-          style={styles.button}
-        />
-        <PrimaryButton
-          text='New Client'
-          onPress={() => this.props.navigation.navigate('NewClientsform')}
-          style={styles.button}
-        />
+        <Cards style={styles.sessionCards}/>
+        <Cards/>
+        <PrimaryButton 
+            text='Back to Landing' 
+            onPress={() => this.props.navigation.navigate('Landing')}
+            style={styles.button}
+          />
+          <PrimaryButton 
+            text='New Client' 
+            onPress={() => this.props.navigation.navigate('NewClientsform')}
+            style={styles.button}
+          />
+          <PrimaryButton 
+            text='Clients Page' 
+            onPress={() => this.props.navigation.navigate('ClientsPage')}
+            text='New Session' 
+            onPress={() => this.props.navigation.navigate('NewSession')}
+            style={styles.button}
+          />
+           <PrimaryButton 
+            text='Sessions Page' 
+            onPress={() => this.props.navigation.navigate('Sessions')}
+            style={styles.button}
+          />
+            <PrimaryButton 
+            text='Client Profile' 
+            onPress={() => this.props.navigation.navigate('ClientProfile')}
+            style={styles.button}
+          />
       </View>
 
 
