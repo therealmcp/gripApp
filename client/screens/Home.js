@@ -20,21 +20,21 @@ import Cards from '../components/Cards';
 
 export default class Home extends React.Component {
 
-  static navigationOptions = ({navigation}) => {
-      return {
-        header: 
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <GripHeader/>
-          </TouchableOpacity>
-        }
-      };
+  static navigationOptions = ({ navigation }) => {
+    return {
+      header:
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <GripHeader />
+        </TouchableOpacity>
+    }
+  };
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.titleText} >Welcome, Trainer Name!</Text>
-        <CardImage/>
-        <Link/>
+        <CardImage />
+        <Link />
         <Text style={styles.subText} >Upcoming Sessions</Text>
         <Cards style={styles.sessionCards}/>
         <Cards/>
@@ -67,7 +67,7 @@ export default class Home extends React.Component {
           />
       </View>
 
-      
+
     );
   }
 }

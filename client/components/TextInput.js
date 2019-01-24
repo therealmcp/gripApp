@@ -3,12 +3,12 @@ import { Container, Header, Content, Input, Item } from 'native-base';
 
 
 const TextInput = (props) => {
-  
+
     return (
-      
-        
-          <Item regular style={props.style}>
-            <Input 
+
+
+        <Item regular style={props.style}>
+            <Input
                 placeholder={props.placeholder}
                 secureTextEntry={props.secureTextEntry}
                 onChangeText={props.onChangeText}/>

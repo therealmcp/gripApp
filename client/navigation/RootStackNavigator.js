@@ -2,8 +2,8 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
-import LandingPage from '../screens/LandingPage';
-import SignUp from '../screens/SignUp';
+import Login from '../screens/auth/Login';
+import SignUp from '../screens/auth/SignUp';
 import Home from '../screens/Home';
 import NewClientsform from '../screens/NewClientsform';
 import ClientsPage from '../screens/ClientsPage';

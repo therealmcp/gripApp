@@ -1,5 +1,5 @@
 import React from 'react';
-import API from './API';
+// import API from './API';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import Expo, { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
@@ -10,7 +10,7 @@ export default class App extends React.Component {
     isLoadingComplete: false,
   };
 
-  
+
   // async componentWillMount() {
   //   await Font.loadAsync({
   //     Roboto: require("native-base/Fonts/Roboto.ttf"),
@@ -31,7 +31,7 @@ export default class App extends React.Component {
     } else {
       return (
         <View style={styles.container}>
-           <StatusBar barStyle="default" />
+          <StatusBar barStyle="default" />
           {/* This is what normally loads when the app starts up; it's the navigator found in AppNavigator.js. */}
           <AppNavigator />
         </View>

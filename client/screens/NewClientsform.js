@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   button: {
-    alignSelf:'stretch',
+    alignSelf: 'stretch',
     alignItems: 'center',
     padding: 20,
     marginBottom: 100,
