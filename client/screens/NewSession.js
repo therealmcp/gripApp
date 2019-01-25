@@ -18,7 +18,7 @@ import PrimaryButton from '../components/PrimaryButton';
 import OutlineButton from '../components/OutlineButton';
 import GripHeader from '../components/GripHeader';
 import TextInput from '../components/TextInput';
-import DatePicker from '../components/GripDatePicker';
+import GripDatePicker from '../components/GripDatePicker';
 
 export default class NewSession extends React.Component {
   
@@ -32,12 +32,30 @@ export default class NewSession extends React.Component {
         };
 
     state = {
-      sessionDate: '',
-      weight: '',
-      bodyFat: '',
-      caloric: '',
-      sessionNotes: ''
+      client: '',
+      date: '',
+      clientWeight: '',
+      clientBodyFat: '',
+      calories: '',
+      notes: '',
+      workouts: []
     };
+
+    saveSession = () => {
+
+        const newSession = {
+          client: this.state.client,
+          date: this.state.date,
+          clientWeight: this.state.clientWeight,
+          clientBodyFat: this.state.clientBodyFat,
+          calories: this.state.calories,
+          notes: this.state.notes
+        }
+    
+        API.saveSession(newSession)
+          .then(res => console.log(res))
+          .catch(err => console.log(err))
+      }
 
   render() {
 
@@ -47,12 +65,22 @@ export default class NewSession extends React.Component {
 
         <Text style={styles.h1}>New Session</Text>
 
-        <DatePicker/>
+        <GripDatePicker 
+            placeholder="Date of Birth"
+            onDateChange={(date) => this.setState({date: date})}/>
+
         <View style={styles.containerInline}>
-            <TextInput placeholder="Weight" style={styles.textInputHalf}/>
-            <TextInput placeholder="Body Fat %" style={styles.textInputHalf}/>
+            <TextInput placeholder="Weight" style={styles.textInputHalf} onChangeText={(value) => this.setState({clientWeight: value})}/>
+            <TextInput placeholder="Body Fat %" style={styles.textInputHalf} onChangeText={(value) => this.setState({clientBodyFat: value})}/>
         </View>
-        <TextInput placeholder="Caloric Intake" style={styles.textInputHalf}/>
+        <TextInput placeholder="Caloric Intake" style={styles.textInputHalf} onChangeText={(value) => this.setState({calories: value})}/>
+
+        <View style={styles.textArea}>
+            <TextArea 
+              numberOfLines={5}
+              multiline={true}
+              onChangeText={(value) => this.setState({notes: value})}/> 
+        </View>
         
         <PrimaryButton 
             text='Add New Workout' 
@@ -136,5 +164,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     padding: 5,
     color: 'blue'
-  }
+  },
+  textArea: {
+    height: 300,
+    width: 300,
+    justifyContent: "flex-start",
+  },
 });

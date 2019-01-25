@@ -44,26 +44,26 @@ export default class NewClientsform extends React.Component {
     }
 
     componentDidMount(){
-      // console.log(this.props.navigation.state.params.data.user)
-      const user = {
-        _id: "5c47af84e7b746002ae89c37",
-        firstName: "Derek",
-        lastName: "Rutter",
-        email: "rutterer@gmail.com",
-        photo: "image",
+      // console.log(this.props.navigation.state.params.data.trainer)
+      const trainer = {
+        _id: "5c47b315e7b746002ae89c38",
+        firstName: "Colin",
+        lastName: "McPike",
+        email: "cp.mcpike@gmail.com",
+        photo: "image2",
         __v: 0
       };
-      // this.props.navigation.setParams({ user })
+      // this.props.navigation.setParams({ trainer })
       const navigateAction = NavigationActions.setParams({
           key: "id-1547683730508-2",
-          params: { user: user }
+          params: { trainer: trainer }
         });
 
       this.props.navigation.dispatch(navigateAction);
       console.log("params set")
         // this.props.navigation.goBack();
       
-      this.setState({user})
+      this.setState({trainer})
     }
 
     /* updateValue(text, field) {
@@ -127,6 +127,7 @@ export default class NewClientsform extends React.Component {
     submit()
   {
     let collection={}
+    collection.trainer=this.state.trainer._id,
     collection.firstName=this.state.firstName,
     collection.lastName=this.state.lastName,
     collection.email=this.state.email,
@@ -135,11 +136,13 @@ export default class NewClientsform extends React.Component {
     collection.dob=this.state.dob,
     collection.emergencyContact=this.state.emergencyContact,
     collection.emergencyNumber=this.state.emergencyNumber,
-    collection.note=this.state.notes,
+    collection.notes=this.state.notes,
+    collection.bodyFat="2",
+    collection.weight=175;
 
-    console.warn(collection);
+    //console.warn(collection);
 
-    API.saveClient(collection, this.state.user._id)
+    API.saveClient(collection)
       .then(res => console.log(res))
       .catch(err => console.log(err))
     // axios({

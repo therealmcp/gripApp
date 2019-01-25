@@ -4,11 +4,17 @@ export default {
   getClient: function () {
     return axios.get('/api/clients')
   },
-  saveClient: (clientObj, userId) => {
-    return axios.post("https://heroku-grip-app.herokuapp.com/api/clients/" + userId, clientObj)
+  getClients: function (trainerID) {
+    return axios.get('https://heroku-grip-app.herokuapp.com/api/clients/' + trainerID)
+  },
+  saveClient: (clientObj) => {
+    return axios.post("https://heroku-grip-app.herokuapp.com/api/clients/", clientObj)
   },
   getSession: function () {
     return axios.get('/api/sessions')
+  },
+  saveSession: (sessionObj) => {
+    return axios.post("https://heroku-grip-app.herokuapp.com/api/sessions/", sessionObj)
   },
   registerUser: (userObj) => {
     return axios.post("https://heroku-grip-app.herokuapp.com/auth/signup", userObj)
