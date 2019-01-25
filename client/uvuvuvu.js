@@ -13,8 +13,8 @@ export default {
   registerUser: (userObj) => {
     return axios.post("https://heroku-grip-app.herokuapp.com/auth/signup", userObj)
   },
-  getTrainer: function () {
-    return axios.get('/api/trainers')
+  getUser: function () {
+    return axios.get('/api/users')
   },
   getWorkout: function () {
     return axios.get('/api/workouts')

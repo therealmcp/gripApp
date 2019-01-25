@@ -10,10 +10,10 @@ var SessionSchema = new Schema({
     type: Date,
     required: true
   },
-  clientWeight: {
+  weight: {
     type: Number,
   },
-  clientBodyFat: {
+  bodyFat: {
     type: Number,
   },
   calories: {

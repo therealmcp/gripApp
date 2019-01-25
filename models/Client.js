@@ -28,16 +28,8 @@ var ClientSchema = new Schema({
     type: Number,
     required: true
   },
-  weight: {
-    type: Number,
-    required: true
-  },
   notes: {
     type: String
-  },
-  bodyFat: {
-    type: Number,
-    required: true
   },
   emergencyContact: {
      type: String,

@@ -8,8 +8,8 @@ export default {
   getSession: function () {
     return axios.get('/api/sessions')
   },
-  getTrainer: function () {
-    return axios.get('/api/trainers')
+  getUser: function () {
+    return axios.get('/api/users')
   },
   getWorkout: function () {
     return axios.get('/api/workouts')
