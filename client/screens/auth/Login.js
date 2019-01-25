@@ -19,7 +19,7 @@ import PrimaryButton from '../../components/PrimaryButton';
 import API from "../../utils/API";
 
 
-export default class LandingPage extends React.Component {
+export default class Login extends React.Component {
   // static navigationOptions = {
   //   header: null,
   // }

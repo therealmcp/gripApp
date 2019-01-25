@@ -14,7 +14,7 @@ import ClientProfile from '../screens/ClientProfile';
 // This creates our app's "stack" of pages; the keys in the first object are the routes, values are the pages (found in "screens" folder)
 const RootStack = createStackNavigator(
     {
-        Landing: LandingPage,
+        Login: Login,
         SignUp: SignUp,
         Home: Home,
         NewClientsform: NewClientsform,
@@ -24,7 +24,7 @@ const RootStack = createStackNavigator(
         NewSession: NewSession
     },
     {
-        initialRouteName: 'Landing',
+        initialRouteName: 'Login',
     }
 );
 

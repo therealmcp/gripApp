@@ -39,8 +39,8 @@ export default class Home extends React.Component {
         <Cards style={styles.sessionCards}/>
         <Cards/>
         <PrimaryButton 
-            text='Back to Landing' 
-            onPress={() => this.props.navigation.navigate('Landing')}
+            text='Back to Login' 
+            onPress={() => this.props.navigation.navigate('Login')}
             style={styles.button}
           />
           <PrimaryButton 
