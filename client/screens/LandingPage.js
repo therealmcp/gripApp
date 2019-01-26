@@ -7,10 +7,13 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Button
+  Button,
+  ImageBackground
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import { Card } from 'native-base';
+import { Font } from 'expo';
+
 
 import { MonoText } from '../components/StyledText';
 import TextInput from '../components/TextInput';
@@ -18,17 +21,36 @@ import PrimaryButton from '../components/PrimaryButton';
 
 
 export default class LandingPage extends React.Component {
+  
+  componentDidMount() {
+    Font.loadAsync({
+      'Staatliches-Regular': require('../assets/fonts/Staatliches-Regular.ttf/'),
+    });
+  };
+
+
+
+
+
   static navigationOptions = {
     header: null,
   };
 
   render() {
     return (
+      <ImageBackground
+      source={require('../assets/images/athletes.jpg')}    
+      style={{  flex: 1,
+      width: '100%', // applied to Image
+      height: '100%' 
+    }}
+    >
+   
       <View style={styles.container}>
 
         <Card style={styles.card}>
-          <Text style={styles.h1}>GRIP</Text>
-          <Text style={styles.h2}>for Personal Trainers</Text>
+          <Text style={styles.h1}>grip</Text>
+          <Text style={styles.h2}>Your Clients, Their Progress</Text>
         </Card>
 
 
@@ -42,6 +64,7 @@ export default class LandingPage extends React.Component {
         <Button title='Sign Up' onPress={() => this.props.navigation.navigate('SignUp')} />
 
       </View>
+      </ImageBackground>
     );
   }
 
@@ -51,7 +74,7 @@ export default class LandingPage extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'mintcream',
+    // backgroundColor: 'mintcream',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -67,24 +90,33 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue'
   },
   card: {
-    marginBottom: 50,
+    marginBottom: '30%',
     width: '80%',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'transparent',
-    shadowColor: 'transparent',
-    borderColor: 'transparent'
+    // shadowColor: 'transparent',
+    // borderColor: 'transparent'
   },
   h1: {
+    // fontFamily: 'Staatliches-Regular',
     fontWeight: 'bold',
     fontSize: 52,
     padding: 5,
-    color: 'blue'
+    color: 'royalblue',
+    textShadowColor: '#000000',
+    textShadowOffset: {width: 1, height:1}
   },
   h2: {
     fontWeight: 'bold',
     fontSize: 28,
     padding: 5,
-    color: 'blue'
+    color: 'royalblue',
+    textAlign: 'center',
+    textShadowColor:'#000000',
+    textShadowOffset:{width: 1, height: 1},
+
+    
+
   }
 });
