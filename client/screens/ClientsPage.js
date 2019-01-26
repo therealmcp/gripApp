@@ -30,6 +30,104 @@ export default class ClientsPage extends React.Component {
           }
         };
 
+  state = {
+    user: {
+      _id: "5c47af84e7b746002ae89c37",
+      firstName: "Derek",
+      lastName: "Rutter",
+      email: "rutterer@gmail.com",
+      photo: "image",
+      __v: 0
+    },
+    clients: [
+      {
+        "sessions": [],
+        "_id": "5c4a279d98701f002a6e4947",
+        "firstName": "Test",
+        "lastName": "Testy",
+        "email": "email@email.com",
+        "height": 7,
+        "sex": "M",
+        "dob": "1095-01-02T00:00:00.000Z",
+        "emergencyContact": "Mom",
+        "emergencyNumber": 5555555,
+        "notes": "note note note",
+        "weight": 166,
+        "bodyFat": 2,
+        "trainer": "5c47b315e7b746002ae89c38",
+        "__v": 0
+    },
+    {
+        "sessions": [],
+        "_id": "5c4a29dd98701f002a6e4948",
+        "trainer": "5c47b315e7b746002ae89c38",
+        "firstName": "Andy",
+        "lastName": "Richter",
+        "email": "andy@hmail.com",
+        "sex": "M",
+        "height": 8,
+        "dob": "1971-02-20T08:00:00.000Z",
+        "emergencyContact": "Conan",
+        "emergencyNumber": 5555555,
+        "notes": "Tryna get fit!",
+        "bodyFat": 2,
+        "weight": 175,
+        "__v": 0
+    },
+    {
+        "sessions": [],
+        "_id": "5c4a2bdd98701f002a6e4949",
+        "trainer": "5c47b315e7b746002ae89c38",
+        "firstName": "Toby",
+        "lastName": "McGuire",
+        "email": "toby@hmail.com",
+        "sex": "M",
+        "height": 6,
+        "dob": "1986-02-20T08:00:00.000Z",
+        "emergencyContact": "Aunt May",
+        "emergencyNumber": 66666666,
+        "notes": "I’m Spider-Man!",
+        "bodyFat": 2,
+        "weight": 175,
+        "__v": 0
+    },
+    {
+        "sessions": [],
+        "_id": "5c4a2c6798701f002a6e494a",
+        "trainer": "5c47b315e7b746002ae89c38",
+        "firstName": "Another",
+        "lastName": "One",
+        "email": "Try@gmail.com",
+        "sex": "F",
+        "height": 7,
+        "dob": "1976-02-20T08:00:00.000Z",
+        "emergencyContact": "Dad",
+        "emergencyNumber": 4444444,
+        "notes": "Just so.",
+        "bodyFat": 2,
+        "weight": 175,
+        "__v": 0
+    },
+    {
+        "sessions": [],
+        "_id": "5c4a543e0de58b002aceccb3",
+        "firstName": "New",
+        "lastName": "Guy",
+        "email": "new@email.com",
+        "height": 7,
+        "sex": "M",
+        "dob": "1995-01-02T00:00:00.000Z",
+        "emergencyContact": "Mommy",
+        "emergencyNumber": 5555555,
+        "notes": "note note notes",
+        "weight": 177,
+        "bodyFat": 2,
+        "trainer": "5c47b315e7b746002ae89c38",
+        "__v": 0
+    }
+    ]
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -44,9 +142,25 @@ export default class ClientsPage extends React.Component {
             style={styles.button}
           />
           <PlusButton/> */}
-        <Cards style={styles.sessionCards}/>
-        <Cards style={styles.sessionCards}/>
-        <Cards style={styles.sessionCards}/>
+
+          {this.state.clients.map(client => {
+              return (
+                <Cards key={client._id} style={styles.sessionCards}/>
+              )}
+          )}
+
+        <ScrollView contentContainerStyle={styles.scrollView}>
+
+          {this.state.clients.map(client => {
+                return (
+                  <Cards key={this.state.client._id} 
+                  style={styles.sessionCards} 
+                  text1={this.state.client.firstName}
+                  text2={this.state.client.notes}/>
+                )}
+            )}
+
+        </ScrollView>
 
         
           <PrimaryButton 
@@ -91,5 +205,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // width: '80%',
     // margin: 10,
+  },
+  scrollView: {
+    /* flex: 1, */
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%'
   }
 });

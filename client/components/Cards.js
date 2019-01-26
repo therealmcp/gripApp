@@ -3,7 +3,7 @@ import { Container, Header, Content, Card, CardItem, Body, Text } from 'native-b
 
 
 
-const Cards = () => {
+const Cards = (props) => {
 
 
     return (
@@ -14,7 +14,10 @@ const Cards = () => {
             <CardItem>
               <Body>
                 <Text>
-                  
+                  {props.text1}
+                </Text>
+                <Text>
+                  {props.text2}
                 </Text>
               </Body>
             </CardItem>
