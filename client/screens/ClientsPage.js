@@ -41,9 +41,9 @@ export default class ClientsPage extends React.Component {
     },
     clients: [
       {
-        "sessions": [],
-        "_id": "5c4a279d98701f002a6e4947",
-        "firstName": "Test",
+        sessions: [],
+        _id: "5c4a279d98701f002a6e4947",
+        firstName: "Test",
         "lastName": "Testy",
         "email": "email@email.com",
         "height": 7,
@@ -51,7 +51,7 @@ export default class ClientsPage extends React.Component {
         "dob": "1095-01-02T00:00:00.000Z",
         "emergencyContact": "Mom",
         "emergencyNumber": 5555555,
-        "notes": "note note note",
+        notes: "note note note",
         "weight": 166,
         "bodyFat": 2,
         "trainer": "5c47b315e7b746002ae89c38",
@@ -59,9 +59,9 @@ export default class ClientsPage extends React.Component {
     },
     {
         "sessions": [],
-        "_id": "5c4a29dd98701f002a6e4948",
+        _id: "5c4a29dd98701f002a6e4948",
         "trainer": "5c47b315e7b746002ae89c38",
-        "firstName": "Andy",
+        firstName: "Andy",
         "lastName": "Richter",
         "email": "andy@hmail.com",
         "sex": "M",
@@ -69,7 +69,7 @@ export default class ClientsPage extends React.Component {
         "dob": "1971-02-20T08:00:00.000Z",
         "emergencyContact": "Conan",
         "emergencyNumber": 5555555,
-        "notes": "Tryna get fit!",
+        notes: "Tryna get fit!",
         "bodyFat": 2,
         "weight": 175,
         "__v": 0
@@ -143,20 +143,14 @@ export default class ClientsPage extends React.Component {
           />
           <PlusButton/> */}
 
-          {this.state.clients.map(client => {
-              return (
-                <Cards key={client._id} style={styles.sessionCards}/>
-              )}
-          )}
-
         <ScrollView contentContainerStyle={styles.scrollView}>
 
           {this.state.clients.map(client => {
                 return (
-                  <Cards key={this.state.client._id} 
+                  <Cards key={client._id} 
                   style={styles.sessionCards} 
-                  text1={this.state.client.firstName}
-                  text2={this.state.client.notes}/>
+                  text1={client.firstName + " " + client.lastName}
+                  text2={client.notes}/>
                 )}
             )}
 
@@ -182,6 +176,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  container2: {
+    flex: 1
+  },
   button: {
     alignSelf: 'center',
     backgroundColor: 'blue'
@@ -201,13 +198,15 @@ const styles = StyleSheet.create({
   sessionCards: {
     // padding: '15px',
     // width: '100px',
-    // alignItems: 'center',
-    justifyContent: 'center',
-    // width: '80%',
+     alignItems: 'center',
+     justifyContent: 'center',
+     width: '80%',
     // margin: 10,
+    // flex: 0
   },
   scrollView: {
     /* flex: 1, */
+    /* flexGrow: 1, */
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',

@@ -10,13 +10,17 @@ const Cards = (props) => {
        
       
     
-          <Card style={{width: '80%'}}>
+          <Card style={props.style}>
             <CardItem>
               <Body>
-                <Text>
+                <Text style={{alignSelf: "center"}}>
                   {props.text1}
                 </Text>
-                <Text>
+              </Body>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text style={{alignSelf: "center"}}>
                   {props.text2}
                 </Text>
               </Body>
