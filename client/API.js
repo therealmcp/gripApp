@@ -1,20 +1,20 @@
-import axios from "axios";
+// import axios from "axios";
 
-export default {
-  getClient: function () {
-    return axios.get('/api/clients')
-  },
+// export default {
+//   getClient: function () {
+//     return axios.get('/api/clients')
+//   },
 
-  getSession: function () {
-    return axios.get('/api/sessions')
-  },
-  getUser: function () {
-    return axios.get('/api/users')
-  },
-  getWorkout: function () {
-    return axios.get('/api/workouts')
-  }
-}
+//   getSession: function () {
+//     return axios.get('/api/sessions')
+//   },
+//   getUser: function () {
+//     return axios.get('/api/users')
+//   },
+//   getWorkout: function () {
+//     return axios.get('/api/workouts')
+//   }
+// }
 
 // router.post("/client", (req, res) => {
 //   axios
