@@ -3,18 +3,25 @@ import { Container, Header, Content, Card, CardItem, Body, Text } from 'native-b
 
 
 
-const Cards = () => {
+const Cards = (props) => {
 
 
     return (
        
       
     
-          <Card style={{width: '80%'}}>
+          <Card style={props.style}>
             <CardItem>
               <Body>
-                <Text>
-                  
+                <Text style={{alignSelf: "center"}}>
+                  {props.text1}
+                </Text>
+              </Body>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text style={{alignSelf: "center"}}>
+                  {props.text2}
                 </Text>
               </Body>
             </CardItem>

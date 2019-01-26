@@ -45,9 +45,12 @@ export default class Sessions extends React.Component {
             style={styles.button}
           />
           <PlusButton/> */}
-        <Cards style={styles.sessionCards}/>
-        <Cards style={styles.sessionCards}/>
-        <Cards style={styles.sessionCards}/>
+
+        <ScrollView contentContainerStyle={styles.scrollView}>  
+            <Cards style={styles.sessionCards}/>
+            <Cards style={styles.sessionCards}/>
+            <Cards style={styles.sessionCards}/>
+        </ScrollView>
 
         
           <PrimaryButton 
@@ -88,9 +91,16 @@ const styles = StyleSheet.create({
   sessionCards: {
     // padding: '15px',
     // width: '100px',
-    // alignItems: 'center',
+    alignItems: 'center',
     justifyContent: 'center',
-    // width: '80%',
+    width: '80%',
     // margin: 10,
+  },
+  scrollView: {
+    /* flex: 1, */
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%'
   }
 });
