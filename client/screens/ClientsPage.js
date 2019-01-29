@@ -137,25 +137,36 @@ export default class ClientsPage extends React.Component {
     console.log("params set")
     
     this.setState({user: user});
+
     API.getUser(user._id)
     .then(res => {
-      this.getUserClients(res.data.user._id);
-      console.log(res);
+      this.getUserStuff(res.data._id);
+      //console.log(res);
     })
 };
 
-getUserClients = (id) => {
-  API.getUserClients(id)
-  .then(res => this.setState({clients: res.data.client}))
+getUserStuff = (id) => {
+  API.getUserStuff(id)
+  .then(res => this.setState({clients: res.data.clients}))
 };
+
+goToNewClient = (userObj) => {
+  const navigateAction = NavigationActions.navigate({
+    routeName: "NewClientsform",
+    params: { data: userObj }
+  });
+  this.props.navigation.dispatch(navigateAction);
+  // this.props.navigation.goBack();
+}
+
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.titleText} >Clients</Text>
+        <Text style={styles.titleText}>Clients</Text>
         <PlusButton
         text='Add a Client'
-        onPress={() => this.props.navigation.navigate('NewClientsform')}
+        onPress={() => this.goToNewClient(this.state.user)}
          style={styles.button}/>
         {/* <PrimaryButton 
             text='Add a Client' 

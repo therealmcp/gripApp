@@ -11,7 +11,7 @@ export default {
         return axios.get("https://heroku-grip-app.herokuapp.com/auth/user/" + userID)
     },
     getUserStuff: (userID) => {
-        return axios.get("https://heroku-grip-app.herokuapp.com/api/user/" + userID)
+        return axios.get("https://heroku-grip-app.herokuapp.com/api/users/" + userID)
     },
     registerUser: (userObj) => {
         return axios.post("https://heroku-grip-app.herokuapp.com/auth/signup", userObj)
@@ -19,7 +19,7 @@ export default {
     saveClient: (clientObj) => {
         return axios.post("https://heroku-grip-app.herokuapp.com/api/clients/", clientObj)
     },
-    getUserClients: (userId) => {
+    /* getUserClients: (userId) => {
         return axios.get("https://heroku-grip-app.herokuapp.com/api/clients/" + userId)
-    }
+    } */
 }

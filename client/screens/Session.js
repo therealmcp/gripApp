@@ -9,7 +9,7 @@ import {
 import { Card } from 'native-base';
 import { NavigationActions } from "react-navigation";
 
-import API from '../API.js';
+import API from '../utils/API.js';
 import GripHeader from '../components/GripHeader';
 import PrimaryButton from '../components/PrimaryButton';
 import Cards from '../components/Cards';

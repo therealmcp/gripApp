@@ -68,15 +68,27 @@ export default class NewClientsform extends React.Component {
     collection.dob=this.state.dob,
     collection.emergencyContact=this.state.emergencyContact,
     collection.emergencyNumber=this.state.emergencyNumber,
-    collection.note=this.state.notes,
+    collection.notes=this.state.notes,
     collection.user=this.state.user._id
 
     //console.warn(collection);
 
-    API.saveClient(collection)
+    API.saveClient(collection);
       //.then(res => console.log(res))
       //.catch(err => console.log(err))
+    
+    this.goToClients(this.state.user);
+    
   };
+
+  goToClients = (userObj) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "ClientsPage",
+      params: { data: userObj }
+    });
+    this.props.navigation.dispatch(navigateAction);
+    // this.props.navigation.goBack();
+  }
 
   render() {
 
