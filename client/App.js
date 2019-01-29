@@ -5,6 +5,7 @@ import Expo, { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 
 
+
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
@@ -66,6 +67,7 @@ export default class App extends React.Component {
   _handleFinishLoading = () => {
     this.setState({ isLoadingComplete: true });
   };
+
 }
 
 const styles = StyleSheet.create({

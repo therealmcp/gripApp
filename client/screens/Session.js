@@ -13,6 +13,7 @@ import API from '../API.js';
 import GripHeader from '../components/GripHeader';
 import PrimaryButton from '../components/PrimaryButton';
 import Cards from '../components/Cards';
+import FooterTabsIcon from '../components/FooterWithText';
 
 
 
@@ -47,13 +48,20 @@ export default class NewClientsform extends React.Component {
             <Cards style={styles.sessionCards}/>
             <Cards style={styles.sessionCards}/>
             <Cards style={styles.sessionCards}/>
-          </ScrollView>
 
-           <PrimaryButton 
+             <PrimaryButton 
             text='Back to Client Sessions' 
             onPress={() => this.props.navigation.navigate('Sessions')}
             style={styles.button}
             />
+
+            <FooterTabsIcon />
+           
+          </ScrollView>
+
+          
+
+           
 
       </View>
     );
