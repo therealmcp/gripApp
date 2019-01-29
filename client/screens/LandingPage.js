@@ -48,12 +48,13 @@ export default class LandingPage extends React.Component {
    
       <View style={styles.container}>
 
-        <Card style={styles.card}>
+<View style={styles.titles}>
+        {/* <Card style={styles.card}> */}
           <Text style={styles.h1}>grip</Text>
           <Text style={styles.h2}>Your Clients, Their Progress</Text>
-        </Card>
+        {/* </Card> */}
 
-
+</View>
         <TextInput placeholder="Email" style={styles.textInput}/>
         <TextInput placeholder="Password" style={styles.textInput} secureTextEntry={true}/>
 
@@ -88,6 +89,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 10,
     backgroundColor: 'blue'
+    
   },
   card: {
     marginBottom: '30%',
@@ -100,12 +102,14 @@ const styles = StyleSheet.create({
   },
   h1: {
     // fontFamily: 'Staatliches-Regular',
+    textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 52,
     padding: 5,
     color: 'royalblue',
     textShadowColor: '#000000',
-    textShadowOffset: {width: 1, height:1}
+    textShadowOffset: {width: 2.5, height:2.5},
+    
   },
   h2: {
     fontWeight: 'bold',
@@ -114,9 +118,16 @@ const styles = StyleSheet.create({
     color: 'royalblue',
     textAlign: 'center',
     textShadowColor:'#000000',
-    textShadowOffset:{width: 1, height: 1},
+    textShadowOffset:{width: 2.5, height: 2.5},
+    
 
     
 
+  },
+  titles: {
+    marginBottom: 90,
+    zIndex: 5,
+
   }
+
 });
