@@ -78,6 +78,7 @@ export default class NewClientsform extends React.Component {
       //.catch(err => console.log(err))
     
     this.goToClients(this.state.user);
+    //this.props.navigation.navigate('ClientsPage');
     
   };
 
@@ -204,8 +205,8 @@ const styles = StyleSheet.create({
     color: 'blue'
   },
   textArea: {
-    height: 300,
-    width: 300,
+    //height: 300,
+    width: '80%',
     justifyContent: "flex-start",
   },
 
