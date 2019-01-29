@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import {
   Image,
   Platform,
@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { NavigationActions } from "react-navigation";
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
@@ -186,3 +187,4 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
 });
+ */

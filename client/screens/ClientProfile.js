@@ -67,8 +67,8 @@ export default class ClientProfile extends React.Component {
           <Card style={styles.card}>
             <Text style={styles.h1}>Date of Birth:</Text>
             <Text style={styles.h1}>Sex:</Text>
-            <Text style={styles.h1}>height:</Text>
-            <Text style={styles.h1}>weight:</Text>
+            <Text style={styles.h1}>Height:</Text>
+            <Text style={styles.h1}>Weight:</Text>
             <Text style={styles.h1}>Body Fat %:</Text>
             <Text style={styles.h1}>Caloric Intake:</Text>
           </Card>
