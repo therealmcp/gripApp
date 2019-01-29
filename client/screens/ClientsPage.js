@@ -12,6 +12,9 @@ import { WebBrowser } from 'expo';
 import { Button } from 'native-base';
 import CardImage from '../components/CardImage';
 import { MonoText } from '../components/StyledText';
+import { NavigationActions } from "react-navigation";
+
+import API from '../utils/API.js';
 
 import GripHeader from '../components/GripHeader';
 import PrimaryButton from '../components/PrimaryButton';
@@ -31,14 +34,7 @@ export default class ClientsPage extends React.Component {
         };
 
   state = {
-    user: {
-      _id: "5c47af84e7b746002ae89c37",
-      firstName: "Derek",
-      lastName: "Rutter",
-      email: "rutterer@gmail.com",
-      photo: "image",
-      __v: 0
-    },
+    user: null,
     clients: [
       {
         sessions: [],
@@ -127,6 +123,31 @@ export default class ClientsPage extends React.Component {
     }
     ]
   }
+
+  componentDidMount(){
+    
+  console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
+    const user = this.props.navigation.state.params.data;
+    
+    const navigateAction = NavigationActions.setParams({
+        params: { user: user }
+      });
+
+    this.props.navigation.dispatch(navigateAction);
+    console.log("params set")
+    
+    this.setState({user: user});
+    API.getUser(user._id)
+    .then(res => {
+      this.getUserClients(res.data.user._id);
+      console.log(res);
+    })
+};
+
+getUserClients = (id) => {
+  API.getUserClients(id)
+  .then(res => this.setState({clients: res.data.client}))
+};
 
   render() {
     return (

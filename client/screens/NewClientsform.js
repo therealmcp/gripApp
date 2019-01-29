@@ -9,7 +9,7 @@ import {
 import { Card } from 'native-base';
 import { NavigationActions } from "react-navigation";
 
-import API from '../API.js';
+import API from '../utils/API.js';
 import TextArea from '../components/TextArea';
 import GripHeader from '../components/GripHeader';
 import TextInput from '../components/TextInput';
@@ -44,85 +44,18 @@ export default class NewClientsform extends React.Component {
     }
 
     componentDidMount(){
-      // console.log(this.props.navigation.state.params.data.user)
-      const user = {
-        _id: "5c47af84e7b746002ae89c37",
-        firstName: "Derek",
-        lastName: "Rutter",
-        email: "rutterer@gmail.com",
-        photo: "image",
-        __v: 0
-      };
-      // this.props.navigation.setParams({ user })
+      console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
+      const user = this.props.navigation.state.params.data;
+      this.props.navigation.setParams({ user })
       const navigateAction = NavigationActions.setParams({
-          key: "id-1547683730508-2",
           params: { user: user }
         });
 
       this.props.navigation.dispatch(navigateAction);
       console.log("params set")
-        // this.props.navigation.goBack();
       
-      this.setState({user})
-    }
-
-    /* updateValue(text, field) {
-      // console.warn(text)
-      if(field=='firstName')
-      {
-        this.setState({
-          firstName:text,
-        })
-      }
-      else if(field=='lastName')
-      {
-        this.setState({
-          lastName:text,
-        })
-      }
-      else if(field=='email')
-      {
-        this.setState({
-          email:text,
-        })
-      }
-      else if(field=='sex')
-      {
-        this.setState({
-          sex:text,
-        })
-      }
-      else if(field=='height')
-      {
-        this.setState({
-          height:text,
-        })
-      }
-      else if(field=='date')
-      {
-        this.setState({
-          dob:text,
-        })
-      }
-      else if(field=='emergencyContact')
-      {
-        this.setState({
-          emergencyContact:text,
-        })
-      }
-      else if(field=='emergencyNumber')
-      {
-        this.setState({
-          emergencyNumber:text,
-        })
-      }
-      else
-      {
-        this.setState({
-          note:text,
-        })
-      }
-    } */
+      this.setState({user: user});
+    };
 
     submit()
   {
@@ -136,21 +69,14 @@ export default class NewClientsform extends React.Component {
     collection.emergencyContact=this.state.emergencyContact,
     collection.emergencyNumber=this.state.emergencyNumber,
     collection.note=this.state.notes,
+    collection.user=this.state.user._id
 
-    console.warn(collection);
+    //console.warn(collection);
 
-    API.saveClient(collection, this.state.user._id)
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
-    // axios({
-    //   method: 'POST',
-    //   url: 'http://10.0.0.2:3001/api/clients',
-    //   data: {
-    //       collection
-    //   }
-    // }).catch(err=>{throw err});
-  
-  }
+    API.saveClient(collection)
+      //.then(res => console.log(res))
+      //.catch(err => console.log(err))
+  };
 
   render() {
 

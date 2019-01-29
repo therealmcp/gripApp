@@ -20,9 +20,10 @@ import API from "../../utils/API";
 
 
 export default class Login extends React.Component {
-  // static navigationOptions = {
-  //   header: null,
-  // }
+   static navigationOptions = {
+     header: null,
+   }
+   
   state = {
     email: '',
     password: ''

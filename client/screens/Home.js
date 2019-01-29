@@ -8,11 +8,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { NavigationActions } from "react-navigation";
 import { WebBrowser } from 'expo';
 import { Button } from 'native-base';
 import CardImage from '../components/CardImage';
 import { MonoText } from '../components/StyledText';
-
+import API from '../utils/API.js';
 import GripHeader from '../components/GripHeader';
 import PrimaryButton from '../components/PrimaryButton';
 import Link from '../components/Link';
@@ -29,10 +30,48 @@ export default class Home extends React.Component {
     }
   };
 
+  state = {
+    user: null
+  }
+
+  componentDidMount(){
+    console.log("this.props.navigation.state.params.data.user: ", this.props.navigation.state.params.data.user)
+    const user = this.props.navigation.state.params.data.user;
+    // this.props.navigation.setParams({ user })
+    const navigateAction = NavigationActions.setParams({
+       // key: "id-1547683730508-2",
+        params: { user: user }
+      });
+
+    this.props.navigation.dispatch(navigateAction);
+    console.log("params set")
+      // this.props.navigation.goBack();
+    
+    this.setState({user})
+  }
+
+  goToNewClient = (userObj) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "NewClientsform",
+      params: { data: userObj }
+    });
+    this.props.navigation.dispatch(navigateAction);
+    // this.props.navigation.goBack();
+  }
+
+  goToClients = (userObj) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "ClientsPage",
+      params: { data: userObj }
+    });
+    this.props.navigation.dispatch(navigateAction);
+    // this.props.navigation.goBack();
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.titleText} >Welcome, Trainer Name!</Text>
+        <Text style={styles.titleText} >Welcome, </Text>
         <CardImage />
         <Link />
         <Text style={styles.subText} >Upcoming Sessions</Text>
@@ -45,12 +84,12 @@ export default class Home extends React.Component {
           />
           <PrimaryButton 
             text='New Client' 
-            onPress={() => this.props.navigation.navigate('NewClientsform')}
+            onPress={() => this.goToNewClient(this.state.user)}
             style={styles.button}
           />
           <PrimaryButton 
             text='Clients Page' 
-            onPress={() => this.props.navigation.navigate('ClientsPage')}
+            onPress={() => this.goToClients(this.state.user)}
             text='Clients' 
             style={styles.button}
           />
