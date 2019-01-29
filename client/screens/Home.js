@@ -50,14 +50,14 @@ export default class Home extends React.Component {
     this.setState({user})
   }
 
-  goToNewClient = (userObj) => {
-    const navigateAction = NavigationActions.navigate({
-      routeName: "NewClientsform",
-      params: { data: userObj }
-    });
-    this.props.navigation.dispatch(navigateAction);
-    // this.props.navigation.goBack();
-  }
+  // goToNewClient = (userObj) => {
+  //   const navigateAction = NavigationActions.navigate({
+  //     routeName: "NewClientsform",
+  //     params: { data: userObj }
+  //   });
+  //   this.props.navigation.dispatch(navigateAction);
+  //   // this.props.navigation.goBack();
+  // }
 
   goToClients = (userObj) => {
     const navigateAction = NavigationActions.navigate({
@@ -82,11 +82,11 @@ export default class Home extends React.Component {
             onPress={() => this.props.navigation.navigate('Login')}
             style={styles.button}
           />
-          <PrimaryButton 
+          {/* <PrimaryButton 
             text='New Client' 
             onPress={() => this.goToNewClient(this.state.user)}
             style={styles.button}
-          />
+          /> */}
           <PrimaryButton 
             text='Clients Page' 
             onPress={() => this.goToClients(this.state.user)}
