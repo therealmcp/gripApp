@@ -18,6 +18,7 @@ import GripHeader from '../components/GripHeader';
 import PrimaryButton from '../components/PrimaryButton';
 import Link from '../components/Link';
 import Cards from '../components/Cards';
+import OutlineButton from '../components/OutlineButton';
 
 export default class Home extends React.Component {
 
@@ -31,7 +32,7 @@ export default class Home extends React.Component {
   };
 
   state = {
-    user: null,
+    user: "",
     clients: []
   }
 
@@ -83,7 +84,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.titleText} >Welcome, </Text>
+        <Text style={styles.titleText} >Welcome, {this.state.user.firstName}! </Text>
         <CardImage />
         <Link />
         <Text style={styles.subText} >Upcoming Sessions</Text>
@@ -103,11 +104,11 @@ export default class Home extends React.Component {
         </ScrollView>
 
 
-        <PrimaryButton 
+       {/*  <PrimaryButton 
             text='Back to Login' 
             onPress={() => this.props.navigation.navigate('Login')}
             style={styles.button}
-          />
+          /> */}
           {/* <PrimaryButton 
             text='New Client' 
             onPress={() => this.goToNewClient(this.state.user)}
@@ -116,10 +117,10 @@ export default class Home extends React.Component {
           <PrimaryButton 
             text='Clients Page' 
             onPress={() => this.goToClients(this.state.user)}
-            text='Clients' 
+            text='Go to Clients' 
             style={styles.button}
           />
-           <PrimaryButton 
+          {/*  <PrimaryButton 
             text='Sessions Page' 
             onPress={() => this.props.navigation.navigate('Sessions')}
             style={styles.button}
@@ -133,6 +134,11 @@ export default class Home extends React.Component {
             text='Session' 
             onPress={() => this.props.navigation.navigate('Session')}
             style={styles.button}
+          /> */}
+          <OutlineButton 
+            text='Log Out' 
+            onPress={() => this.props.navigation.navigate('Login')}
+            style={styles.button2}
           />
           
       </View>
@@ -151,7 +157,14 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: 'center',
-    backgroundColor: 'blue'
+    backgroundColor: 'blue',
+    margin: 20
+  },
+  button2: {
+    alignSelf: 'center',
+    //backgroundColor: 'blue',
+    //color: 'white',
+    margin: 20
   },
   titleText: {
     fontSize: 20,

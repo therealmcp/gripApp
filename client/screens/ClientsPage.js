@@ -70,9 +70,15 @@ goToNewClient = (userObj) => {
     params: { data: userObj }
   });
   this.props.navigation.dispatch(navigateAction);
-  // this.props.navigation.goBack();
 }
 
+goToClientProfile = (clientID) => {
+  const navigateAction = NavigationActions.navigate({
+    routeName: "ClientProfile",
+    params: { data: clientID }
+  });
+  this.props.navigation.dispatch(navigateAction);
+}
 
   render() {
     return (
@@ -96,7 +102,9 @@ goToNewClient = (userObj) => {
                   <Cards key={client._id} 
                   style={styles.sessionCards} 
                   text1={client.firstName + " " + client.lastName}
-                  text2={client.notes}/>
+                  text2={client.notes}
+                  onPress={() => this.goToClientProfile(client._id)}
+                  />
                 )}
             )}
 
