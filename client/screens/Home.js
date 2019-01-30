@@ -101,6 +101,8 @@ export default class Home extends React.Component {
             )}
 
         </ScrollView>
+        
+
 
 
         <PrimaryButton 
@@ -132,6 +134,12 @@ export default class Home extends React.Component {
             <PrimaryButton 
             text='Session' 
             onPress={() => this.props.navigation.navigate('Session')}
+            style={styles.button}
+          />
+
+           <PrimaryButton 
+            text='Progress' 
+            onPress={() => this.props.navigation.navigate('Progress')}
             style={styles.button}
           />
           
