@@ -14,6 +14,7 @@ import TextArea from '../components/TextArea';
 import GripHeader from '../components/GripHeader';
 import TextInput from '../components/TextInput';
 import GripDatePicker from '../components/GripDatePicker';
+import PrimaryButton from '../components/PrimaryButton.js';
 
 export default class NewClientsform extends React.Component {
   
@@ -130,15 +131,21 @@ export default class NewClientsform extends React.Component {
             <TextArea 
               numberOfLines={10}
               multiline={true}
-              onChangeText={(value) => this.setState({notes: value})}/> 
+              onChangeText={(value) => this.setState({notes: value})}
+              placeholder={"Client Notes"}/> 
           </View>
 
-          <TouchableOpacity
+          <PrimaryButton
+          onPress={()=>this.submit()} 
+          text="Create Client"
+          style={styles.button}/>
+
+          {/* <TouchableOpacity
           onPress={()=>this.submit()} 
           // onPress={() => this.props.navigation.navigate('Home')}
           style={styles.button} >
            <Text style={styles.btntext}>Create Client</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
         </ScrollView>
       </View>
@@ -179,9 +186,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   button: {
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    padding: 20,
+    alignSelf: 'center',
+    //alignItems: 'center',
+    //padding: 20,
+    marginTop: 20,
     marginBottom: 100,
     backgroundColor: 'blue'
   },
@@ -206,8 +214,11 @@ const styles = StyleSheet.create({
   },
   textArea: {
     //height: 300,
-    width: '80%',
-    justifyContent: "flex-start",
+    //flex: 1,
+    width: 300,
+    justifyContent: "center",
+    backgroundColor: 'white',
+    margin: 20
   },
 
 });

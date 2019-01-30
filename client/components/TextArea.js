@@ -5,7 +5,7 @@ const TextArea = (props) => {
   
     return (
           <Form>
-            <Textarea rowSpan={5} bordered placeholder="Notes:" 
+            <Textarea rowSpan={5} bordered /* placeholder="Notes:" */ 
             placeholder={props.placeholder}
             onChangeText={props.onChangeText}
             numberOfLines={props.numberOfLines}

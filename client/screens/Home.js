@@ -31,7 +31,8 @@ export default class Home extends React.Component {
   };
 
   state = {
-    user: null
+    user: null,
+    clients: []
   }
 
   componentDidMount(){
@@ -47,8 +48,19 @@ export default class Home extends React.Component {
     console.log("params set")
       // this.props.navigation.goBack();
     
-    this.setState({user})
-  }
+    this.setState({user: user})
+
+    API.getUser(user._id)
+    .then(res => {
+      this.getUserStuff(res.data._id);
+      // console.log(res);
+    })
+  };
+
+  getUserStuff = (id) => {
+    API.getUserStuff(id)
+    .then(res => this.setState({clients: res.data.clients}))
+  };
 
   // goToNewClient = (userObj) => {
   //   const navigateAction = NavigationActions.navigate({
@@ -75,8 +87,22 @@ export default class Home extends React.Component {
         <CardImage />
         <Link />
         <Text style={styles.subText} >Upcoming Sessions</Text>
-        <Cards style={styles.sessionCards}/>
-        <Cards/>
+
+        <ScrollView contentContainerStyle={styles.scrollView}>
+
+          {this.state.clients.map(client => {
+                return (
+                  <Cards key={client._id} 
+                  style={styles.sessionCards} 
+                  text1={client.firstName + " " + client.lastName}
+                  // text2={client.notes}
+                  />
+                )}
+            )}
+
+        </ScrollView>
+
+
         <PrimaryButton 
             text='Back to Login' 
             onPress={() => this.props.navigation.navigate('Login')}
@@ -142,9 +168,18 @@ const styles = StyleSheet.create({
   sessionCards: {
     // padding: '15px',
     // width: '100px',
-    // alignItems: 'center',
-    justifyContent: 'center',
-    // width: '80%',
+     alignItems: 'center',
+     justifyContent: 'center',
+     width: '80%',
     // margin: 10,
+    // flex: 0
+  },
+  scrollView: {
+    /* flex: 1, */
+    /* flexGrow: 1, */
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%'
   }
 });
