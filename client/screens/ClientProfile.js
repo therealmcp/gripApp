@@ -11,8 +11,11 @@ import {
 } from 'react-native';
 import { WebBrowser, ImagePicker, Permissions } from 'expo';
 import { Card } from 'native-base';
+import { NavigationActions } from "react-navigation";
 
 import { MonoText } from '../components/StyledText';
+
+import API from '../utils/API.js';
 
 import PrimaryButton from '../components/PrimaryButton';
 import OutlineButton from '../components/OutlineButton';
@@ -31,15 +34,38 @@ export default class ClientProfile extends React.Component {
     };
 
     state = {
-      dob: '',
-      sex: '',
-      height: '',
-      weight: '',
-      bodyFat: '',
-      caloricIntake: '',
-      notes:''
+      client: {},
+      sessions: []
     }
 
+    componentDidMount(){
+    
+      console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
+        const clientID = this.props.navigation.state.params.data;
+        
+        /* const navigateAction = NavigationActions.setParams({
+            params: { user: user }
+          });
+    
+        this.props.navigation.dispatch(navigateAction);
+        console.log("params set") */
+        
+        /* this.setState({client: client}); */
+    
+        API.getClient(clientID)
+        .then(res => 
+          this.setState({client: res.data})
+          //console.log(res.data)
+      )
+    };
+
+    goToSessions = (clientID) => {
+      const navigateAction = NavigationActions.navigate({
+        routeName: "Sessions",
+        params: { data: clientID }
+      });
+      this.props.navigation.dispatch(navigateAction);
+    }
     
   render() {
 
@@ -49,7 +75,7 @@ export default class ClientProfile extends React.Component {
         <ScrollView contentContainerStyle={styles.scrollView}>
         
           <Card style={styles.card}>
-            <Text style={styles.h1}>Profile for: Client Name</Text>
+            <Text style={styles.h1}>Profile for {this.state.client.firstName} {this.state.client.lastName}</Text>
           </Card>
           
 
@@ -60,23 +86,24 @@ export default class ClientProfile extends React.Component {
           
           <PrimaryButton 
               text='Go to Sessions' 
-              onPress={() => this.props.navigation.navigate('Sessions')}
+              onPress={() => this.goToSessions(this.state.client._id)}
               style={styles.button2}/>
 
 
           <Card style={styles.card}>
-            <Text style={styles.h1}>Date of Birth:</Text>
-            <Text style={styles.h1}>Sex:</Text>
-            <Text style={styles.h1}>Height:</Text>
+            <Text style={styles.h1}>Date of Birth: {this.state.client.dob}</Text>
+            <Text style={styles.h1}>Sex: {this.state.client.sex}</Text>
+            <Text style={styles.h1}>Height: {this.state.client.height}</Text>
             <Text style={styles.h1}>Weight:</Text>
             <Text style={styles.h1}>Body Fat %:</Text>
             <Text style={styles.h1}>Caloric Intake:</Text>
+            <Text style={styles.h1}>Goal Notes: {this.state.client.notes}</Text>
           </Card>
 
-          <TextInput placeholder="Goal Notes:" style={styles.textInput}/>
+         {/*  <TextInput placeholder="Goal Notes:" style={styles.textInput}/> */}
 
-          <Button title='Edit Client Info' onPress={() => this.props.navigation.navigate('ClientsPage')} />
-          <Button title='Delete Client' onPress={() => this.props.navigation.navigate('ClientsPage')} />
+          {/* <Button title='Edit Client Info' onPress={() => this.props.navigation.navigate('ClientsPage')} />
+          <Button title='Delete Client' onPress={() => this.props.navigation.navigate('ClientsPage')} /> */}
           
           {/* <View style={styles.containerInline}>
             <TextInput placeholder="First Name" style={styles.textInputHalf}/>
@@ -95,8 +122,8 @@ export default class ClientProfile extends React.Component {
 
          
           <PrimaryButton 
-              text='Back to Client' 
-              onPress={() => this.props.navigation.navigate('')}
+              text='Back to Clients' 
+              onPress={() => this.props.navigation.navigate('ClientsPage')}
               style={styles.button}/>
 
         </ScrollView>

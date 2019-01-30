@@ -8,11 +8,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { NavigationActions } from "react-navigation";
 import { WebBrowser } from 'expo';
 import { Button } from 'native-base';
 import CardImage from '../components/CardImage';
 import { MonoText } from '../components/StyledText';
 
+import API from '../utils/API.js';
 import GripHeader from '../components/GripHeader';
 import PrimaryButton from '../components/PrimaryButton';
 import Link from '../components/Link';
@@ -29,6 +31,61 @@ export default class Sessions extends React.Component {
             </TouchableOpacity>
           }
         };
+
+    state = {
+      client: {},
+      sessions: [
+        {
+          "workouts": [],
+          "_id": "5c512a41fd74b3002ac7fab6",
+          "client": "5c4feae2758d4f002a1943c8",
+          "date": "2019-01-24T00:00:00.000Z",
+          "calories": 2000,
+          "notes": "leg day",
+          "__v": 0
+      }
+      ]
+    }
+  
+    componentDidMount(){
+
+      console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
+        const clientID = this.props.navigation.state.params.data;
+        
+        /* const navigateAction = NavigationActions.setParams({
+            params: { user: user }
+          });
+    
+        this.props.navigation.dispatch(navigateAction);
+        console.log("params set") */
+        
+        /* this.setState({client: client}); */
+    
+        API.getClient(clientID)
+        .then(res => 
+          this.getSessions(res.data.sessions)
+          //console.log(res.data)
+      )
+    };
+
+    getSessions = (sessionsArray) => {
+      let allSessions = [];
+      for (i=0; i<sessionsArray.length; i++) {
+        API.getSession(sessionArray[i])
+        .then(res => 
+          allSessions.push(res.data))
+         .then(this.setState({sessions: allSessions}))
+      }   
+    }
+
+
+    goToSessionPage = (sessionID) => {
+      const navigateAction = NavigationActions.navigate({
+        routeName: "Session",
+        params: { data: sessionID }
+      });
+      this.props.navigation.dispatch(navigateAction);
+    }
 
   render() {
     return (
@@ -47,9 +104,18 @@ export default class Sessions extends React.Component {
           <PlusButton/> */}
 
         <ScrollView contentContainerStyle={styles.scrollView}>  
-            <Cards style={styles.sessionCards}/>
-            <Cards style={styles.sessionCards}/>
-            <Cards style={styles.sessionCards}/>
+            
+          {this.state.sessions.map(session => {
+                  return (
+                    <Cards key={session._id} 
+                    style={styles.sessionCards} 
+                    text1={session.date}
+                    text2={session.notes}
+                    onPress={() => this.goToSessionPage(session._id)}
+                    />
+                  )}
+              )}
+
         </ScrollView>
 
         

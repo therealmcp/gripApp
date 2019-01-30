@@ -22,4 +22,10 @@ export default {
     /* getUserClients: (userId) => {
         return axios.get("https://heroku-grip-app.herokuapp.com/api/clients/" + userId)
     } */
+    getClient: (clientID) => {
+        return axios.get("https://heroku-grip-app.herokuapp.com/api/clients/" + clientID)
+    },
+    getSession: (sessionID) => {
+        return axios.get("https://heroku-grip-app.herokuapp.com/api/sessions/" + sessionID)
+    },
 }

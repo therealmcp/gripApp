@@ -132,7 +132,7 @@ export default class NewClientsform extends React.Component {
               numberOfLines={10}
               multiline={true}
               onChangeText={(value) => this.setState({notes: value})}
-              placeholder={"Client Notes"}/> 
+              placeholder={"Goal Notes"}/> 
           </View>
 
           <PrimaryButton
