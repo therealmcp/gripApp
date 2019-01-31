@@ -47,16 +47,20 @@ export default class ClientsPage extends React.Component {
         params: { user: user }
       });
 
-    this.props.navigation.dispatch(navigateAction);
+    //this.props.navigation.dispatch(navigateAction);
     console.log("params set")
     
     this.setState({user: user});
 
-    API.getUser(user._id)
-    .then(res => {
+    this.props.navigation.addListener('willFocus', (route) => { 
+      API.getUser(user._id)
+      .then(res => {
       this.getUserStuff(res.data._id);
       //console.log(res);
     })
+  });
+
+    
 };
 
 getUserStuff = (id) => {

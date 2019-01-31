@@ -8,11 +8,11 @@ const GripDatePicker = (props) => {
         <Content>
           <DatePicker
             defaultDate={new Date(2018, 20, 1)}
-            minimumDate={new Date(1970, 1, 1)}
-            maximumDate={new Date(2019, 1, 20)}
+            minimumDate={new Date(1920, 1, 1)}
+            maximumDate={new Date(2020, 1, 20)}
             locale={"en"}
             timeZoneOffsetInMinutes={undefined}
-            modalTransparent={false}
+            modalTransparent={true}
             animationType={"fade"}
             androidMode={"default"}
             placeHolderText={props.placeholder}
