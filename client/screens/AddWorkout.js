@@ -64,7 +64,7 @@ export default class NewSession extends React.Component {
     workout.reps=this.state.reps,
     workout.weight=this.state.weight,
 
-    API.addWorkoutUpdateSession(collection);
+    API.addWorkout(collection);
       //.then(res => console.log(res))
       //.catch(err => console.log(err))
     
