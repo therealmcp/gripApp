@@ -7,18 +7,23 @@ import {
   View,
 } from 'react-native';
 import { Card } from 'native-base';
-import TextArea from '../components/TextArea';
+import { NavigationActions } from "react-navigation";
 
+import API from '../utils/API.js';
+import TextArea from '../components/TextArea';
 import GripHeader from '../components/GripHeader';
 import TextInput from '../components/TextInput';
-import DatePicker from '../components/DatePicker';
+import GripDatePicker from '../components/GripDatePicker';
+import PrimaryButton from '../components/PrimaryButton.js';
 
 export default class NewClientsform extends React.Component {
   
   static navigationOptions = ({navigation}) => {
     return {
-      header: 
-        <GripHeader/>
+      header:
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <GripHeader/>
+        </TouchableOpacity>
       }
     };
 
@@ -26,6 +31,7 @@ export default class NewClientsform extends React.Component {
     {
       super();
       this.state={
+        user: null,
         firstName:'',
         lastName:'',
         email:'',
@@ -35,67 +41,22 @@ export default class NewClientsform extends React.Component {
         notes: '',
         emergencyContact: '',
         emergencyNumber: '',
-
       }
     }
 
-    updateValue(text, field) {
-      // console.warn(text)
-      if(field=='first Name')
-      {
-        this.setState({
-          firstName:text,
-        })
-      }
-      else if(field=='last Name')
-      {
-        this.setState({
-          lastName:text,
-        })
-      }
-      else if(field=='email')
-      {
-        this.setState({
-          email:text,
-        })
-      }
-      else if(field=='sex')
-      {
-        this.setState({
-          sex:text,
-        })
-      }
-      else if(field=='height')
-      {
-        this.setState({
-          height:text,
-        })
-      }
-      else if(field=='date')
-      {
-        this.setState({
-          dob:text,
-        })
-      }
-      else if(field=='emergency contact')
-      {
-        this.setState({
-          emergencyContact:text,
-        })
-      }
-      else if(field=='emergency number')
-      {
-        this.setState({
-          emergencyNumber:text,
-        })
-      }
-      else
-      {
-        this.setState({
-          note:text,
-        })
-      }
-    }
+    componentDidMount(){
+      console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
+      const user = this.props.navigation.state.params.data;
+      this.props.navigation.setParams({ user })
+      const navigateAction = NavigationActions.setParams({
+          params: { user: user }
+        });
+
+      this.props.navigation.dispatch(navigateAction);
+      console.log("params set")
+      
+      this.setState({user: user});
+    };
 
     submit()
   {
@@ -108,17 +69,27 @@ export default class NewClientsform extends React.Component {
     collection.dob=this.state.dob,
     collection.emergencyContact=this.state.emergencyContact,
     collection.emergencyNumber=this.state.emergencyNumber,
-    collection.note=this.state.note,
+    collection.notes=this.state.notes,
+    collection.user=this.state.user._id
 
-    console.warn(collection);
-    // axios({
-    //   method: 'POST',
-    //   url: 'http://10.0.0.2:3001/api/clients',
-    //   data: {
-    //       collection
-    //   }
-    // }).catch(err=>{throw err});
-  
+    //console.warn(collection);
+
+    API.saveClient(collection);
+      //.then(res => console.log(res))
+      //.catch(err => console.log(err))
+    
+    this.goToClients(this.state.user);
+    //this.props.navigation.navigate('ClientsPage');
+    
+  };
+
+  goToClients = (userObj) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "ClientsPage",
+      params: { data: userObj }
+    });
+    this.props.navigation.dispatch(navigateAction);
+    // this.props.navigation.goBack();
   }
 
   render() {
@@ -134,40 +105,47 @@ export default class NewClientsform extends React.Component {
           </Card>
           
           <View style={styles.containerInline}>
-            <TextInput placeholder="First Name" style={styles.textInputHalf}/>
-            <TextInput placeholder="Last Name" style={styles.textInputHalf}/>
+            <TextInput placeholder="First Name" style={styles.textInputHalf} onChangeText={(value) => this.setState({firstName: value})}/>
+            <TextInput placeholder="Last Name" style={styles.textInputHalf} onChangeText={(value) => this.setState({lastName: value})}/>
           </View>
 
-          <TextInput placeholder="Email" style={styles.textInput}/>
+          <TextInput placeholder="Email" style={styles.textInput} onChangeText={(value) => this.setState({email: value})}/>
 
           <View style={styles.containerInline}>
-            <TextInput placeholder="Height" style={styles.textInputHalf}/>
-            <TextInput placeholder="Sex" style={styles.textInputHalf}/>
+            <TextInput placeholder="Height" style={styles.textInputHalf} onChangeText={(value) => this.setState({height: value})}/>
+            <TextInput placeholder="Sex" style={styles.textInputHalf} onChangeText={(value) => this.setState({sex: value})}/>
           </View>
         
           <View style={styles.containerInline}>
-          <DatePicker 
-            placeholder="date of birth"
+          <GripDatePicker 
+            placeholder="Date of Birth"
+            onDateChange={(date) => this.setState({dob: date})}
           />
           </View>
           
 
-          <TextInput placeholder="Emergency Contact" style={styles.textInput}/>
-          <TextInput placeholder="Emergency #" style={styles.textInput}/>
+          <TextInput placeholder="Emergency Contact" style={styles.textInput} onChangeText={(value) => this.setState({emergencyContact: value})}/>
+          <TextInput placeholder="Emergency #" style={styles.textInput} onChangeText={(value) => this.setState({emergencyNumber: value})}/>
 
           <View style={styles.textArea}>
             <TextArea 
               numberOfLines={10}
               multiline={true}
-              onChangeText={(text) => this.updateValue(text, 'Notes')}/> 
+              onChangeText={(value) => this.setState({notes: value})}
+              placeholder={"Goal Notes"}/> 
           </View>
 
-          <TouchableOpacity
+          <PrimaryButton
+          onPress={()=>this.submit()} 
+          text="Create Client"
+          style={styles.button}/>
+
+          {/* <TouchableOpacity
           onPress={()=>this.submit()} 
           // onPress={() => this.props.navigation.navigate('Home')}
           style={styles.button} >
-           <Text style={styles.btntext}>create Client</Text>
-          </TouchableOpacity>
+           <Text style={styles.btntext}>Create Client</Text>
+          </TouchableOpacity> */}
 
         </ScrollView>
       </View>
@@ -208,9 +186,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   button: {
-    alignSelf:'stretch',
-    alignItems: 'center',
-    padding: 20,
+    alignSelf: 'center',
+    //alignItems: 'center',
+    //padding: 20,
+    marginTop: 20,
     marginBottom: 100,
     backgroundColor: 'blue'
   },
@@ -234,9 +213,12 @@ const styles = StyleSheet.create({
     color: 'blue'
   },
   textArea: {
-    height: 300,
+    //height: 300,
+    //flex: 1,
     width: 300,
-    justifyContent: "flex-start",
+    justifyContent: "center",
+    backgroundColor: 'white',
+    margin: 20
   },
 
 });

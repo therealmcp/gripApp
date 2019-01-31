@@ -11,6 +11,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "@expo/samples": "2.1.1",
     "@expo/vector-icons": "^9.0.0",
     "axios": "^0.18.0",
@@ -21,7 +22,9 @@
     "react-native-datepicker": "^1.7.2",
     "react-native-local-mongodb": "^2.2.4",
     "react-native-ui-xg": "0.0.6",
-    "react-navigation": "^3.0.9"
+    "react-native-chart-kit": "^2.0.0",
+    "react-navigation": "^3.0.9",
+    "react-native-scrollable-tab-view": "^0.10.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",

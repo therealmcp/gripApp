@@ -18,7 +18,7 @@ import PrimaryButton from '../components/PrimaryButton';
 import OutlineButton from '../components/OutlineButton';
 import GripHeader from '../components/GripHeader';
 import TextInput from '../components/TextInput';
-import DatePicker from '../components/DatePicker';
+import GripDatePicker from '../components/GripDatePicker';
 
 export default class NewSession extends React.Component {
   
@@ -32,11 +32,28 @@ export default class NewSession extends React.Component {
         };
 
     state = {
+      clientID: '',
+      sessionID: '',
       sessionDate: '',
       weight: '',
       bodyFat: '',
       caloric: '',
       sessionNotes: ''
+    };
+
+    componentDidMount(){
+
+      console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
+        const clientID = this.props.navigation.state.params.data;
+        
+        /* const navigateAction = NavigationActions.setParams({
+            params: { user: user }
+          });
+    
+        this.props.navigation.dispatch(navigateAction);
+        console.log("params set") */
+        
+        this.setState({clientID: clientID});
     };
 
   render() {
@@ -47,7 +64,9 @@ export default class NewSession extends React.Component {
 
         <Text style={styles.h1}>New Session</Text>
 
-        <DatePicker/>
+        <Text>Date:</Text>
+        <GripDatePicker/>
+
         <View style={styles.containerInline}>
             <TextInput placeholder="Weight" style={styles.textInputHalf}/>
             <TextInput placeholder="Body Fat %" style={styles.textInputHalf}/>
