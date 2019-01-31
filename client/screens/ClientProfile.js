@@ -56,7 +56,7 @@ export default class ClientProfile extends React.Component {
         .then(res => 
           this.setState({client: res.data})
           //console.log(res.data)
-      )
+          )
     };
 
     goToSessions = (clientID) => {

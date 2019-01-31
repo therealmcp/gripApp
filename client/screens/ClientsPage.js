@@ -60,7 +60,9 @@ export default class ClientsPage extends React.Component {
     })
   });
 
-    
+  /* API.getUser(user._id)
+      .then(res => {
+      this.getUserStuff(res.data._id)}) */
 };
 
 getUserStuff = (id) => {

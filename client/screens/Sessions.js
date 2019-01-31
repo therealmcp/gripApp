@@ -63,20 +63,10 @@ export default class Sessions extends React.Component {
     
         API.getClient(clientID)
         .then(res => 
-          this.getSessions(res.data.sessions)
+          this.setState({sessions: res.data.sessions})
           //console.log(res.data)
       )
     };
-
-    getSessions = (sessionsArray) => {
-      let allSessions = [];
-      for (i=0; i<sessionsArray.length; i++) {
-        API.getSession(sessionArray[i])
-        .then(res => 
-          allSessions.push(res.data))
-         .then(this.setState({sessions: allSessions}))
-      }   
-    }
 
 
     goToSessionPage = (sessionID) => {
