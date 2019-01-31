@@ -54,9 +54,9 @@ export default class ClientProfile extends React.Component {
     
         API.getClient(clientID)
         .then(res => 
-          this.setState({client: res.data})
+          this.setState({client: res.data.dbSession})
           //console.log(res.data)
-      )
+          )
     };
 
     goToSessions = (clientID) => {
