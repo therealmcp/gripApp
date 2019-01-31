@@ -63,7 +63,7 @@ export default class Sessions extends React.Component {
     
         API.getClient(clientID)
         .then(res => 
-          this.setState({sessions: res.data.sessions})
+          this.setState({sessions: res.data.dbSession.sessions})
           //console.log(res.data)
       )
     };
