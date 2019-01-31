@@ -14,6 +14,8 @@ import { Card } from 'native-base';
 
 import { MonoText } from '../components/StyledText';
 
+import API from '../utils/API.js';
+
 import PrimaryButton from '../components/PrimaryButton';
 import OutlineButton from '../components/OutlineButton';
 import GripHeader from '../components/GripHeader';
@@ -32,19 +34,17 @@ export default class NewSession extends React.Component {
         };
 
     state = {
-      clientID: '',
       sessionID: '',
-      sessionDate: '',
-      weight: '',
-      bodyFat: '',
-      caloric: '',
-      sessionNotes: ''
+      name: '',
+      sets: '',
+      reps: '',
+      weight: ''  
     };
 
     componentDidMount(){
 
       console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
-        const clientID = this.props.navigation.state.params.data;
+        const sessionID = this.props.navigation.state.params.data;
         
         /* const navigateAction = NavigationActions.setParams({
             params: { user: user }
@@ -53,8 +53,34 @@ export default class NewSession extends React.Component {
         this.props.navigation.dispatch(navigateAction);
         console.log("params set") */
         
-        this.setState({clientID: clientID});
+        this.setState({sessionID: sessionID});
     };
+
+    submit()
+  {
+    let workout={}
+    workout.name=this.state.name,
+    workout.sets=this.state.sets,
+    workout.reps=this.state.reps,
+    workout.weight=this.state.weight,
+
+    API.addWorkoutUpdateSession(collection);
+      //.then(res => console.log(res))
+      //.catch(err => console.log(err))
+    
+    this.backToNewSession(this.state.sessionID);
+    //this.props.navigation.navigate('ClientsPage');
+    
+  };
+
+  backToNewSession = (sessionID) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "NewSession",
+      params: { data: sessionID }
+    });
+    this.props.navigation.dispatch(navigateAction);
+    // this.props.navigation.goBack();
+  }
 
   render() {
 
@@ -62,27 +88,22 @@ export default class NewSession extends React.Component {
 
       <View style={styles.container}>
 
-        <Text style={styles.h1}>New Session</Text>
+        <Text style={styles.h1}>Add Workout to New Session</Text>
 
-        <Text>Date:</Text>
-        <GripDatePicker/>
-
-        <View style={styles.containerInline}>
-            <TextInput placeholder="Weight" style={styles.textInputHalf}/>
-            <TextInput placeholder="Body Fat %" style={styles.textInputHalf}/>
-        </View>
-        <TextInput placeholder="Caloric Intake" style={styles.textInputHalf}/>
+        <TextInput placeholder="Workout Name" style={styles.textInput} onChangeText={(value) => this.setState({name: value})}/>
         
-        <PrimaryButton 
-            text='Add New Workout' 
-            onPress={() => this.props.navigation.navigate('')}
-            style={styles.button}
-          />
+        <View style={styles.containerInline}>
+            <TextInput placeholder="Sets" style={styles.textInputHalf} onChangeText={(value) => this.setState({sets: value})}/>
+            <TextInput placeholder="Reps/Distance" style={styles.textInputHalf} onChangeText={(value) => this.setState({reps: value})}/>
+        </View>
+        <TextInput placeholder="Weight" style={styles.textInputHalf} onChangeText={(value) => this.setState({weight: value})}/>
 
+        <PrimaryButton
+          onPress={()=>this.submit()} 
+          text="Add Workout"
+          style={styles.button}/>
 
-            <ScrollView contentContainerStyle={styles.scrollView}>
-
-            </ScrollView>
+        
       </View>
     );
   }

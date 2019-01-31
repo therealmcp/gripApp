@@ -33,7 +33,7 @@ export default class Sessions extends React.Component {
         };
 
     state = {
-      client: {},
+      clientID: "",
       sessions: [
         {
           "workouts": [],
@@ -59,7 +59,7 @@ export default class Sessions extends React.Component {
         this.props.navigation.dispatch(navigateAction);
         console.log("params set") */
         
-        /* this.setState({client: client}); */
+        this.setState({clientID: clientID});
     
         API.getClient(clientID)
         .then(res => 
@@ -87,6 +87,14 @@ export default class Sessions extends React.Component {
       this.props.navigation.dispatch(navigateAction);
     }
 
+    goToNewSession = (clientID) => {
+      const navigateAction = NavigationActions.navigate({
+        routeName: "NewSession",
+        params: { data: clientID }
+      });
+      this.props.navigation.dispatch(navigateAction);
+    }
+
   render() {
     return (
       <View style={styles.container}>
@@ -94,7 +102,7 @@ export default class Sessions extends React.Component {
         {/* Needs a place for React Native to take it to set up a Session */}
         <PlusButton
         text='Add a Session'
-        onPress={() => this.props.navigation.navigate('NewClientsform')}
+        onPress={() => this.goToNewSession(this.state.clientID)}
          style={styles.button}/>
         {/* <PrimaryButton 
             text='Add a Client' 
