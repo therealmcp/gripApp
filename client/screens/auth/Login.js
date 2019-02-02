@@ -7,7 +7,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Button
+  Button,
+  ImageBackground
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import { Card } from 'native-base';
@@ -59,6 +60,15 @@ export default class Login extends React.Component {
 
   render() {
     return (
+
+      <ImageBackground
+      source={require('../assets/images/athletes.jpg')}    
+      style={{  flex: 1,
+      width: '100%', // applied to Image
+      height: '100%' 
+    }}
+    >
+
       <View style={styles.container}>
 
         <Card style={styles.card}>
@@ -86,6 +96,7 @@ export default class Login extends React.Component {
         />
 
       </View>
+      </ImageBackground>
     );
   }
 
@@ -95,7 +106,7 @@ export default class Login extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'mintcream',
+    // backgroundColor: 'mintcream',
     alignItems: 'center',
     justifyContent: 'center',
   },

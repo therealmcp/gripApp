@@ -15,9 +15,11 @@ const CardImage = () => {
        
       
            
-            <Thumbnail square large source={{uri: "https://facebook.github.io/react-native/docs/assets/favicon.png"}}/>
+            // <Thumbnail square large source={{uri: "https://facebook.github.io/react-native/docs/assets/favicon.png"}}/>
            
-        
+            <Thumbnail square large  source={require('../assets/images/griplogo.png')}/>
+
+          //  source={require('./img/one.png')}
         
       );
     };
