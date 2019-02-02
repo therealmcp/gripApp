@@ -23,77 +23,77 @@ import PlusButton from '../components/PlusButton';
 
 export default class Sessions extends React.Component {
 
-    static navigationOptions = ({navigation}) => {
-        return {
-          header: 
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-              <GripHeader/>
-            </TouchableOpacity>
-          }
-        };
+  static navigationOptions = ({ navigation }) => {
+    return {
+      header:
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <GripHeader />
+        </TouchableOpacity>
+    }
+  };
 
-    state = {
-      clientID: "",
-      sessions: [
-        {
-          "workouts": [],
-          "_id": "5c512a41fd74b3002ac7fab6",
-          "client": "5c4feae2758d4f002a1943c8",
-          "date": "2019-01-24T00:00:00.000Z",
-          "calories": 2000,
-          "notes": "leg day",
-          "__v": 0
+  state = {
+    clientID: "",
+    sessions: [
+      {
+        "workouts": [],
+        "_id": "5c512a41fd74b3002ac7fab6",
+        "client": "5c4feae2758d4f002a1943c8",
+        "date": "2019-01-24T00:00:00.000Z",
+        "calories": 2000,
+        "notes": "leg day",
+        "__v": 0
       }
-      ]
-    }
-  
-    componentDidMount(){
+    ]
+  }
 
-      console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
-        const clientID = this.props.navigation.state.params.data;
-        
-        /* const navigateAction = NavigationActions.setParams({
-            params: { user: user }
-          });
-    
-        this.props.navigation.dispatch(navigateAction);
-        console.log("params set") */
-        
-        this.setState({clientID: clientID});
-    
-        API.getClient(clientID)
-        .then(res => 
-          this.setState({sessions: res.data.dbSession.sessions})
-          //console.log(res.data)
+  componentDidMount() {
+
+    console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
+    const clientID = this.props.navigation.state.params.data;
+
+    /* const navigateAction = NavigationActions.setParams({
+        params: { user: user }
+      });
+ 
+    this.props.navigation.dispatch(navigateAction);
+    console.log("params set") */
+
+    this.setState({ clientID: clientID });
+
+    API.getClient(clientID)
+      .then(res =>
+        this.setState({ sessions: res.data.dbSession.sessions })
+        //console.log(res.data)
       )
-    };
+  };
 
 
-    goToSessionPage = (sessionID) => {
-      const navigateAction = NavigationActions.navigate({
-        routeName: "Session",
-        params: { data: sessionID }
-      });
-      this.props.navigation.dispatch(navigateAction);
-    }
+  goToSessionPage = (sessionID) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "Session",
+      params: { data: sessionID }
+    });
+    this.props.navigation.dispatch(navigateAction);
+  }
 
-    goToNewSession = (clientID) => {
-      const navigateAction = NavigationActions.navigate({
-        routeName: "NewSession",
-        params: { data: clientID }
-      });
-      this.props.navigation.dispatch(navigateAction);
-    }
+  goToNewSession = (clientID) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "NewSession",
+      params: { data: clientID }
+    });
+    this.props.navigation.dispatch(navigateAction);
+  }
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.titleText} >Sessions</Text>
         {/* Needs a place for React Native to take it to set up a Session */}
-        <PlusButton
-        text='Add a Session'
-        onPress={() => this.goToNewSession(this.state.clientID)}
-         style={styles.button}/>
+        {/* <PlusButton
+          text='Add a Session'
+          onPress={() => this.goToNewSession(this.state.clientID)}
+          style={styles.button} /> */}
         {/* <PrimaryButton 
             text='Add a Client' 
             onPress={() => this.props.navigation.navigate('NewClientsForm')}
@@ -101,30 +101,31 @@ export default class Sessions extends React.Component {
           />
           <PlusButton/> */}
 
-        <ScrollView contentContainerStyle={styles.scrollView}>  
-            
+        <ScrollView contentContainerStyle={styles.scrollView}>
+
           {this.state.sessions.map(session => {
-                  return (
-                    <Cards key={session._id} 
-                    style={styles.sessionCards} 
-                    text1={session.date}
-                    text2={session.notes}
-                    onPress={() => this.goToSessionPage(session._id)}
-                    />
-                  )}
-              )}
+            return (
+              <Cards key={session._id}
+                style={styles.sessionCards}
+                text1={session.date}
+                text2={session.notes}
+                onPress={() => this.goToSessionPage(session._id)}
+              />
+            )
+          }
+          )}
 
         </ScrollView>
 
-        
-          <PrimaryButton 
-            text='Back to Home' 
-            onPress={() => this.props.navigation.navigate('Home')}
-            style={styles.button}
-          />
+
+        <PrimaryButton
+          text='Back to Home'
+          onPress={() => this.props.navigation.navigate('Home')}
+          style={styles.button}
+        />
       </View>
 
-      
+
     );
   }
 }

@@ -36,31 +36,31 @@ export default class Home extends React.Component {
     clients: []
   }
 
-  componentDidMount(){
+  componentDidMount() {
     console.log("this.props.navigation.state.params.data.user: ", this.props.navigation.state.params.data.user)
     const user = this.props.navigation.state.params.data.user;
     // this.props.navigation.setParams({ user })
     const navigateAction = NavigationActions.setParams({
-       // key: "id-1547683730508-2",
-        params: { user: user }
-      });
+      // key: "id-1547683730508-2",
+      params: { user: user }
+    });
 
     this.props.navigation.dispatch(navigateAction);
     console.log("params set")
-      // this.props.navigation.goBack();
-    
-    this.setState({user: user})
+    // this.props.navigation.goBack();
+
+    this.setState({ user: user })
 
     API.getUser(user._id)
-    .then(res => {
-      this.getUserStuff(res.data._id);
-      // console.log(res);
-    })
+      .then(res => {
+        this.getUserStuff(res.data._id);
+        // console.log(res);
+      })
   };
 
   getUserStuff = (id) => {
     API.getUserStuff(id)
-    .then(res => this.setState({clients: res.data.clients}))
+      .then(res => this.setState({ clients: res.data.clients }))
   };
 
   // goToNewClient = (userObj) => {
@@ -91,7 +91,7 @@ export default class Home extends React.Component {
 
         <ScrollView contentContainerStyle={styles.scrollView}>
 
-          {this.state.clients.map(client => {
+          {/* {this.state.clients.map(client => {
                 return (
                   <Cards key={client._id} 
                   style={styles.sessionCards} 
@@ -99,30 +99,30 @@ export default class Home extends React.Component {
                   // text2={client.notes}
                   />
                 )}
-            )}
+            )} */}
 
         </ScrollView>
-        
 
 
 
-       {/*  <PrimaryButton 
+
+        {/*  <PrimaryButton 
             text='Back to Login' 
             onPress={() => this.props.navigation.navigate('Login')}
             style={styles.button}
           /> */}
-          {/* <PrimaryButton 
+        {/* <PrimaryButton 
             text='New Client' 
             onPress={() => this.goToNewClient(this.state.user)}
             style={styles.button}
           /> */}
-          <PrimaryButton 
-            text='Clients Page' 
-            onPress={() => this.goToClients(this.state.user)}
-            text='Go to Clients' 
-            style={styles.button}
-          />
-          {/*  <PrimaryButton 
+        <PrimaryButton
+          text='Clients Page'
+          onPress={() => this.goToClients(this.state.user)}
+          text='Go to Clients'
+          style={styles.button}
+        />
+        {/*  <PrimaryButton 
             text='Sessions Page' 
             onPress={() => this.props.navigation.navigate('Sessions')}
             style={styles.button}
@@ -137,18 +137,18 @@ export default class Home extends React.Component {
             onPress={() => this.props.navigation.navigate('Session')}
             style={styles.button}
           /> */}
-          <OutlineButton 
-            text='Log Out' 
-            onPress={() => this.props.navigation.navigate('Login')}
-            style={styles.button2}
-          />
+        <OutlineButton
+          text='Log Out'
+          onPress={() => this.props.navigation.navigate('Login')}
+          style={styles.button2}
+        />
 
-           <PrimaryButton 
-            text='Progress' 
-            onPress={() => this.props.navigation.navigate('Progress')}
-            style={styles.button}
-          />
-          
+        <PrimaryButton
+          text='Progress'
+          onPress={() => this.props.navigation.navigate('Progress')}
+          style={styles.button}
+        />
+
       </View>
 
 
@@ -189,9 +189,9 @@ const styles = StyleSheet.create({
   sessionCards: {
     // padding: '15px',
     // width: '100px',
-     alignItems: 'center',
-     justifyContent: 'center',
-     width: '80%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '80%',
     // margin: 10,
     // flex: 0
   },

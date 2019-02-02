@@ -17,70 +17,68 @@ import GripDatePicker from '../components/GripDatePicker';
 import PrimaryButton from '../components/PrimaryButton.js';
 
 export default class NewClientsform extends React.Component {
-  
-  static navigationOptions = ({navigation}) => {
+
+  static navigationOptions = ({ navigation }) => {
     return {
       header:
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <GripHeader/>
+          <GripHeader />
         </TouchableOpacity>
-      }
-    };
-
-    constructor()
-    {
-      super();
-      this.state={
-        user: null,
-        firstName:'',
-        lastName:'',
-        email:'',
-        dob: '',
-        sex: '',
-        height: '',
-        notes: '',
-        emergencyContact: '',
-        emergencyNumber: '',
-      }
     }
+  };
 
-    componentDidMount(){
-      console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
-      const user = this.props.navigation.state.params.data;
-      this.props.navigation.setParams({ user })
-      const navigateAction = NavigationActions.setParams({
-          params: { user: user }
-        });
+  constructor() {
+    super();
+    this.state = {
+      user: null,
+      firstName: '',
+      lastName: '',
+      email: '',
+      dob: '',
+      sex: '',
+      height: '',
+      notes: '',
+      emergencyContact: '',
+      emergencyNumber: ''
+    }
+  }
 
-      this.props.navigation.dispatch(navigateAction);
-      console.log("params set")
-      
-      this.setState({user: user});
-    };
+  componentDidMount() {
+    console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
+    const user = this.props.navigation.state.params.data;
+    this.props.navigation.setParams({ user })
+    const navigateAction = NavigationActions.setParams({
+      params: { user: user }
+    });
 
-    submit()
-  {
-    let collection={}
-    collection.firstName=this.state.firstName,
-    collection.lastName=this.state.lastName,
-    collection.email=this.state.email,
-    collection.sex=this.state.sex,
-    collection.height=this.state.height,
-    collection.dob=this.state.dob,
-    collection.emergencyContact=this.state.emergencyContact,
-    collection.emergencyNumber=this.state.emergencyNumber,
-    collection.notes=this.state.notes,
-    collection.user=this.state.user._id
+    this.props.navigation.dispatch(navigateAction);
+    console.log("params set")
+
+    this.setState({ user: user });
+  };
+
+  submit() {
+    let collection = {}
+    collection.firstName = this.state.firstName,
+      collection.lastName = this.state.lastName,
+      collection.email = this.state.email,
+      collection.sex = this.state.sex,
+      collection.height = this.state.height,
+      collection.dob = this.state.dob,
+      collection.emergencyContact = this.state.emergencyContact,
+      collection.emergencyNumber = this.state.emergencyNumber,
+      collection.notes = this.state.notes,
+      collection.user = this.state.user._id
 
     //console.warn(collection);
 
     API.saveClient(collection);
-      //.then(res => console.log(res))
-      //.catch(err => console.log(err))
-    
+    //.then(res => console.log(res))
+    //.catch(err => console.log(err))
+
     this.goToClients(this.state.user);
     //this.props.navigation.navigate('ClientsPage');
-    
+
   };
 
   goToClients = (userObj) => {
@@ -98,47 +96,47 @@ export default class NewClientsform extends React.Component {
 
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollView}>
-        
+
 
           <Card style={styles.card}>
             <Text style={styles.h1}>Add New Client</Text>
           </Card>
-          
-          <View style={styles.containerInline}>
-            <TextInput placeholder="First Name" style={styles.textInputHalf} onChangeText={(value) => this.setState({firstName: value})}/>
-            <TextInput placeholder="Last Name" style={styles.textInputHalf} onChangeText={(value) => this.setState({lastName: value})}/>
-          </View>
-
-          <TextInput placeholder="Email" style={styles.textInput} onChangeText={(value) => this.setState({email: value})}/>
 
           <View style={styles.containerInline}>
-            <TextInput placeholder="Height" style={styles.textInputHalf} onChangeText={(value) => this.setState({height: value})}/>
-            <TextInput placeholder="Sex" style={styles.textInputHalf} onChangeText={(value) => this.setState({sex: value})}/>
+            <TextInput placeholder="First Name" style={styles.textInputHalf} onChangeText={(value) => this.setState({ firstName: value })} />
+            <TextInput placeholder="Last Name" style={styles.textInputHalf} onChangeText={(value) => this.setState({ lastName: value })} />
           </View>
-        
-          <View style={styles.containerInline}>
-          <GripDatePicker 
-            placeholder="Date of Birth"
-            onDateChange={(date) => this.setState({dob: date})}
-          />
-          </View>
-          
 
-          <TextInput placeholder="Emergency Contact" style={styles.textInput} onChangeText={(value) => this.setState({emergencyContact: value})}/>
-          <TextInput placeholder="Emergency #" style={styles.textInput} onChangeText={(value) => this.setState({emergencyNumber: value})}/>
+          <TextInput placeholder="Email" style={styles.textInput} onChangeText={(value) => this.setState({ email: value })} />
+
+          <View style={styles.containerInline}>
+            <TextInput placeholder="Height" style={styles.textInputHalf} onChangeText={(value) => this.setState({ height: value })} />
+            <TextInput placeholder="Sex" style={styles.textInputHalf} onChangeText={(value) => this.setState({ sex: value })} />
+          </View>
+
+          <View style={styles.containerInline}>
+            <GripDatePicker
+              placeholder="Date of Birth"
+              onDateChange={(date) => this.setState({ dob: date })}
+            />
+          </View>
+
+
+          <TextInput placeholder="Emergency Contact" style={styles.textInput} onChangeText={(value) => this.setState({ emergencyContact: value })} />
+          <TextInput placeholder="Emergency #" style={styles.textInput} onChangeText={(value) => this.setState({ emergencyNumber: value })} />
 
           <View style={styles.textArea}>
-            <TextArea 
+            <TextArea
               numberOfLines={10}
               multiline={true}
-              onChangeText={(value) => this.setState({notes: value})}
-              placeholder={"Goal Notes"}/> 
+              onChangeText={(value) => this.setState({ notes: value })}
+              placeholder={"Goal Notes"} />
           </View>
 
           <PrimaryButton
-          onPress={()=>this.submit()} 
-          text="Create Client"
-          style={styles.button}/>
+            onPress={() => this.submit()}
+            text="Create Client"
+            style={styles.button} />
 
           {/* <TouchableOpacity
           onPress={()=>this.submit()} 
@@ -168,15 +166,15 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   containerInline: {
-    flexWrap: 'wrap', 
+    flexWrap: 'wrap',
     padding: 0,
     justifyContent: 'space-between',
-    flexDirection:'row',
+    flexDirection: 'row',
     width: '82%',
   },
   textInput: {
     width: '80%',
-    margin: 10, 
+    margin: 10,
     backgroundColor: 'white'
   },
   textInputHalf: {

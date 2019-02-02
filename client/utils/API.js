@@ -28,6 +28,9 @@ export default {
     getSession: (sessionID) => {
         return axios.get("https://heroku-grip-app.herokuapp.com/api/sessions/" + sessionID)
     },
+    saveSession: (sessionObj) => {
+        return axios.post("https://heroku-grip-app.herokuapp.com/api/sessions/", sessionObj)
+    },
     addWorkout: (sessionID) => {
         return axios.put("https://heroku-grip-app.herokuapp.com/api/workouts/" + sessionID)
     },
