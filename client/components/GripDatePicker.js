@@ -9,7 +9,7 @@ const GripDatePicker = (props) => {
           <DatePicker
             defaultDate={new Date(2018, 20, 1)}
             minimumDate={new Date(1920, 1, 1)}
-            maximumDate={new Date(2020, 1, 20)}
+            maximumDate={new Date(2120, 1, 20)}
             locale={"en"}
             timeZoneOffsetInMinutes={undefined}
             modalTransparent={true}

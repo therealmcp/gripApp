@@ -35,7 +35,7 @@ export default class ClientsPage extends React.Component {
 
   state = {
     user: null,
-    clients: []
+    clients: null
   }
 
   componentDidMount(){
@@ -67,7 +67,7 @@ export default class ClientsPage extends React.Component {
 
 getUserStuff = (id) => {
   API.getUserStuff(id)
-  .then(res => this.setState({clients: res.data.clients}))
+  .then(res => this.setState({clients: res.data}))
 };
 
 goToNewClient = (userObj) => {
@@ -103,7 +103,8 @@ goToClientProfile = (clientID) => {
 
         <ScrollView contentContainerStyle={styles.scrollView}>
 
-          {this.state.clients.map(client => {
+          {this.state.clients !== null ? this.state.clients.map(data => {
+            const client = data[0]
                 return (
                   <Cards key={client._id} 
                   style={styles.sessionCards} 
@@ -111,8 +112,8 @@ goToClientProfile = (clientID) => {
                   text2={client.notes}
                   onPress={() => this.goToClientProfile(client._id)}
                   />
-                )}
-            )}
+                )})
+            : null}
 
         </ScrollView>
 
