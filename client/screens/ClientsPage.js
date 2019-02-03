@@ -103,6 +103,7 @@ goToClientProfile = (clientID) => {
 
         <ScrollView contentContainerStyle={styles.scrollView}>
 
+
           {this.state.clients !== null ? this.state.clients.map(data => {
             const client = data[0]
                 return (
