@@ -102,8 +102,9 @@ export default class Sessions extends React.Component {
           <PlusButton/> */}
 
         <ScrollView contentContainerStyle={styles.scrollView}>  
+        {/* Comment the below out per Derek to Styling */}
             
-          {this.state.sessions.map(session => {
+          {/* {this.state.sessions.map(session => {
                   return (
                     <Cards key={session._id} 
                     style={styles.sessionCards} 
@@ -112,7 +113,7 @@ export default class Sessions extends React.Component {
                     onPress={() => this.goToSessionPage(session._id)}
                     />
                   )}
-              )}
+              )} */}
 
         </ScrollView>
 

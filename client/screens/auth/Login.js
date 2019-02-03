@@ -62,7 +62,7 @@ export default class Login extends React.Component {
     return (
 
       <ImageBackground
-      source={require('../assets/images/athletes.jpg')}    
+      source={require('../../assets/images/athletes.jpg')}    
       style={{  flex: 1,
       width: '100%', // applied to Image
       height: '100%' 

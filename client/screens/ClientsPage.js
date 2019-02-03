@@ -103,7 +103,8 @@ goToClientProfile = (clientID) => {
 
         <ScrollView contentContainerStyle={styles.scrollView}>
 
-          {this.state.clients.map(client => {
+{/* Commented this out per Derek to style */}
+          {/* {this.state.clients.map(client => {
                 return (
                   <Cards key={client._id} 
                   style={styles.sessionCards} 
@@ -112,7 +113,7 @@ goToClientProfile = (clientID) => {
                   onPress={() => this.goToClientProfile(client._id)}
                   />
                 )}
-            )}
+            )} */}
 
         </ScrollView>
 
