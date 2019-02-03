@@ -21,6 +21,7 @@ import Link from '../components/Link';
 import Cards from '../components/Cards';
 import PlusButton from '../components/PlusButton';
 
+
 export default class Sessions extends React.Component {
 
     static navigationOptions = ({navigation}) => {

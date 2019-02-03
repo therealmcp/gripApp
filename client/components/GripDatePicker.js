@@ -12,7 +12,7 @@ const GripDatePicker = (props) => {
             maximumDate={new Date(2120, 1, 20)}
             locale={"en"}
             timeZoneOffsetInMinutes={undefined}
-            modalTransparent={true}
+            modalTransparent={false}
             animationType={"fade"}
             androidMode={"default"}
             placeHolderText={props.placeholder}

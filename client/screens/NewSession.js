@@ -21,6 +21,7 @@ import OutlineButton from '../components/OutlineButton';
 import GripHeader from '../components/GripHeader';
 import TextInput from '../components/TextInput';
 import GripDatePicker from '../components/GripDatePicker';
+import TextArea from '../components/TextArea';
 
 export default class NewSession extends React.Component {
 
@@ -67,7 +68,7 @@ export default class NewSession extends React.Component {
 
     this.setState({ clientID: clientID });
   };
-  
+
   submit() {
     let collection = {}
 
@@ -82,7 +83,8 @@ export default class NewSession extends React.Component {
 
     API.saveSession(collection)
     //.then(res => console.log(res))
-    //.catch(err => console.log(err))
+    .catch(err => console.log(err))
+  
 
     this.goToWorkouts(this.state.clientID);
     //this.props.navigation.navigate('ClientsPage');
@@ -107,13 +109,27 @@ export default class NewSession extends React.Component {
         <Text style={styles.h1}>New Session</Text>
 
         <Text>Date:</Text>
-        <GripDatePicker />
+        <GripDatePicker 
+         placeholder="Tap to Pick Session Date"
+         onDateChange={(date) => {
+           // date = moment().format("MMM Do YY")
+           this.setState({sessionDate: date})}
+         }
+        />
 
         <View style={styles.containerInline}>
           <TextInput placeholder="Weight" style={styles.textInputHalf} onChangeText={(value) => this.setState({ weight: value })} />
           <TextInput placeholder="Body Fat %" style={styles.textInputHalf} onChangeText={(value) => this.setState({ bodyFat: value })} />
         </View>
         <TextInput placeholder="Caloric Intake" style={styles.textInputHalf} onChangeText={(value) => this.setState({ caloric: value })} />
+
+        <View style={styles.textArea}>
+            <TextArea 
+              numberOfLines={10}
+              multiline={true}
+              onChangeText={(value) => this.setState({sessionNotes: value})}
+              placeholder={"Session Notes"}/> 
+          </View>
 
         <PrimaryButton
           text='Add New Session'
@@ -197,5 +213,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     padding: 5,
     color: 'blue'
-  }
+  },
+  textArea: {
+    //height: 300,
+    //flex: 1,
+    width: 300,
+    justifyContent: "center",
+    backgroundColor: 'white',
+    margin: 20
+  },
 });
