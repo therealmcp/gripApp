@@ -69,7 +69,7 @@ export default class ClientProfile extends React.Component {
     }
 
     formattedDate = (date) => {
-      return moment(date).format("MMM Do YY")
+      return moment(date).format("MMM Do YY")}
 
     goToProgress = (clientID) => {
       const navigateAction = NavigationActions.navigate({

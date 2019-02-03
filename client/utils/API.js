@@ -25,6 +25,9 @@ export default {
     getClient: (clientID) => {
         return axios.get("https://heroku-grip-app.herokuapp.com/api/clients/" + clientID)
     },
+    saveSession: (sessionObj) => {
+        return axios.post("https://heroku-grip-app.herokuapp.com/api/sessions/", sessionObj)
+    },
     getSession: (sessionID) => {
         return axios.get("https://heroku-grip-app.herokuapp.com/api/sessions/" + sessionID)
     },
