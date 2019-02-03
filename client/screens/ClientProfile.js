@@ -12,6 +12,7 @@ import {
 import { WebBrowser, ImagePicker, Permissions } from 'expo';
 import { Card } from 'native-base';
 import { NavigationActions } from "react-navigation";
+import moment from "moment";
 
 import { MonoText } from '../components/StyledText';
 
@@ -67,6 +68,9 @@ export default class ClientProfile extends React.Component {
       this.props.navigation.dispatch(navigateAction);
     }
 
+    formattedDate = (date) => {
+      return moment(date).format("MMM Do YY")
+
     goToProgress = (clientID) => {
       const navigateAction = NavigationActions.navigate({
         routeName: "Progress",
@@ -98,7 +102,7 @@ export default class ClientProfile extends React.Component {
 
 
           <Card style={styles.card}>
-            <Text style={styles.h1}>Date of Birth: {this.state.client.dob}</Text>
+            <Text style={styles.h1}>Date of Birth: {this.formattedDate(this.state.client.dob)}</Text>
             <Text style={styles.h1}>Sex: {this.state.client.sex}</Text>
             <Text style={styles.h1}>Height: {this.state.client.height}</Text>
             <Text style={styles.h1}>Weight:</Text>
