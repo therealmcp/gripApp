@@ -141,14 +141,7 @@ export default class Home extends React.Component {
             text='Log Out' 
             onPress={() => this.props.navigation.navigate('Login')}
             style={styles.button2}
-          />
-
-           <PrimaryButton 
-            text='Progress' 
-            onPress={() => this.props.navigation.navigate('Progress')}
-            style={styles.button}
-          />
-          
+          />          
       </View>
 
 

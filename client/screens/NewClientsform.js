@@ -154,6 +154,13 @@ export default class NewClientsform extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  containerInline: {
+    flexWrap: 'wrap', 
+    padding: 0,
+    justifyContent: 'space-between',
+    flexDirection:'row',
+    width: '82%',
+  },
   container: {
     flex: 1,
     backgroundColor: 'mintcream',

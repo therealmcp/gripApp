@@ -13,6 +13,8 @@ import { WebBrowser, ImagePicker, Permissions } from 'expo';
 
 import GripHeader from '../components/GripHeader';
 import Graph from '../components/Graph';
+import API from '../utils/API.js';
+
 
 
 export default class Progress extends React.Component {
@@ -31,11 +33,9 @@ export default class Progress extends React.Component {
 
     return (
 
-        <ScrollView>
 
         <Graph />
 
-        </ScrollView>
     );
   }
 }
