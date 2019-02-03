@@ -71,10 +71,10 @@ export default class Login extends React.Component {
 
       <View style={styles.container}>
 
-        <Card style={styles.card}>
-          <Text style={styles.h1}>GRIP</Text>
-          <Text style={styles.h2}>for Personal Trainers</Text>
-        </Card>
+        {/* <Card style={styles.card}> */}
+          <Text style={styles.h1}>grip</Text>
+          <Text style={styles.h2}>for personal trainers</Text>
+        {/* </Card> */}
 
 
         <TextInput
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: 'center',
+    padding:5,
     marginTop: 20,
     marginBottom: 10,
     backgroundColor: 'blue'
@@ -132,14 +133,21 @@ const styles = StyleSheet.create({
   },
   h1: {
     fontWeight: 'bold',
-    fontSize: 52,
-    padding: 5,
-    color: 'blue'
+    fontSize: 82,
+    padding: 2,
+    color: '#0080FF',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 3, height: 3},
+   bottom: 85,
+    
   },
   h2: {
     fontWeight: 'bold',
     fontSize: 28,
-    padding: 5,
-    color: 'blue'
+    padding: 2,
+    color: '#0080FF',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 3, height: 3},
+    bottom:75,
   }
 });
