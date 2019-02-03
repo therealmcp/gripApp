@@ -49,13 +49,13 @@ export default class Login extends React.Component {
 
   login = (event) => {
     event.preventDefault();
-    console.log("Pre login", this.state)
+    // console.log("Pre login", this.state)
     API.login(this.state)
       .then(res => {
-        // console.log("Login Successful")
+        // console.log("Login Successful", res)
         this.goToMain(res.data)
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log("LOGIN ERROR: ", err))
   }
 
   render() {

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { Card } from 'native-base';
 import { NavigationActions } from "react-navigation";
+import moment from "moment";
 
 import API from '../utils/API.js';
 import TextArea from '../components/TextArea';
@@ -119,7 +120,10 @@ export default class NewClientsform extends React.Component {
           <View style={styles.containerInline}>
           <GripDatePicker 
             placeholder="Date of Birth"
-            onDateChange={(date) => this.setState({dob: date})}
+            onDateChange={(date) => {
+              // date = moment().format("MMM Do YY")
+              this.setState({dob: date})}
+            }
           />
           </View>
           
@@ -154,6 +158,13 @@ export default class NewClientsform extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  containerInline: {
+    flexWrap: 'wrap', 
+    padding: 0,
+    justifyContent: 'space-between',
+    flexDirection:'row',
+    width: '82%',
+  },
   container: {
     flex: 1,
     backgroundColor: 'mintcream',

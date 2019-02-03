@@ -33,34 +33,39 @@ export default class Home extends React.Component {
 
   state = {
     user: "",
-    clients: []
+    clients: null
   }
 
   componentDidMount(){
-    console.log("this.props.navigation.state.params.data.user: ", this.props.navigation.state.params.data.user)
+    // console.log("this.props.navigation.state.params.data.user: ", this.props.navigation.state.params.data.user)
     const user = this.props.navigation.state.params.data.user;
     // this.props.navigation.setParams({ user })
-    const navigateAction = NavigationActions.setParams({
-       // key: "id-1547683730508-2",
-        params: { user: user }
-      });
+    // const navigateAction = NavigationActions.setParams({
+    //    // key: "id-1547683730508-2",
+    //     params: { user: user }
+    //   });
 
-    this.props.navigation.dispatch(navigateAction);
-    console.log("params set")
+    // this.props.navigation.dispatch(navigateAction);
+    // console.log("USER DATA: ", user)
       // this.props.navigation.goBack();
     
-    this.setState({user: user})
+    // this.setState({user: user})
 
-    API.getUser(user._id)
-    .then(res => {
-      this.getUserStuff(res.data._id);
-      // console.log(res);
-    })
+    // API.getUser(user._id)
+    // .then(res => {
+    //   this.getUserStuff(res.data._id);
+    //   // console.log(res);
+    // })
+    this.getUserStuff(user)
+
   };
 
-  getUserStuff = (id) => {
-    API.getUserStuff(id)
-    .then(res => this.setState({clients: res.data.clients}))
+  getUserStuff = (user) => {
+    API.getUserStuff(user._id)
+    .then(res => {
+      // console.log("CLIENT DATA: ", res)
+      this.setState({user: user, clients: res})
+    })
   };
 
   // goToNewClient = (userObj) => {
@@ -82,6 +87,7 @@ export default class Home extends React.Component {
   }
 
   render() {
+    // console.log("HOME STATE: ", this.state)
     return (
       <View style={styles.container}>
         <Text style={styles.titleText} >Welcome, {this.state.user.firstName}! </Text>
@@ -90,16 +96,19 @@ export default class Home extends React.Component {
         <Text style={styles.subText} >Upcoming Sessions</Text>
 
         <ScrollView contentContainerStyle={styles.scrollView}>
-
-          {this.state.clients.map(client => {
+ 
+          {this.state.clients !== null ? this.state.clients.data.map(data => {
+            console.log("DATA", client)
+              const client = data[0]
                 return (
                   <Cards key={client._id} 
                   style={styles.sessionCards} 
                   text1={client.firstName + " " + client.lastName}
+                  // onPress={() => this.props.navigation.navigate(this.state.client)}
                   // text2={client.notes}
                   />
                 )}
-            )}
+            ) : null} 
 
         </ScrollView>
         
@@ -141,14 +150,7 @@ export default class Home extends React.Component {
             text='Log Out' 
             onPress={() => this.props.navigation.navigate('Login')}
             style={styles.button2}
-          />
-
-           <PrimaryButton 
-            text='Progress' 
-            onPress={() => this.props.navigation.navigate('Progress')}
-            style={styles.button}
-          />
-          
+          />          
       </View>
 
 
