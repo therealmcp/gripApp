@@ -90,7 +90,7 @@ export default class Sessions extends React.Component {
       <View style={styles.container}>
         <Text style={styles.titleText} >Sessions</Text>
         {/* Needs a place for React Native to take it to set up a Session */}
-        <PlusButton
+        <PrimaryButton
         text='Add a Session'
         onPress={() => this.goToNewSession(this.state.clientID)}
          style={styles.button}/>
