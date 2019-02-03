@@ -1,37 +1,65 @@
 // Mock data object used for LineChart and BarChart
 
-const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+const weight = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     datasets: [{
       data: [
-        50,
-        20,
-        2,
-        86,
-        71,
-        100
-      ],
-      color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})` // optional
-    },{
-      data: [
-        20,
-        10,
-        4,
-        56,
-        87,
-        90
-      ]
-    },{
-      data: [
-        30,
-        90,
-        67,
-        54,
-        10,
-        2
+        150,
+        140,
+        130,
+        170,
+        180,
+        190,
+        200,
+        130,
+        150,
+        188,
+        190,
+        180
       ]
     }]
   }
+
+  const totalWeightMove = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    datasets: [{
+      data: [
+        1000,
+        1200,
+        1500,
+        1100,
+        1010,
+        1020,
+        1450,
+        1200,
+        1300,
+        1400,
+        1500,
+        1600
+      ]
+    }]
+  }
+      // color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})` // optional
+    // },{
+    //   data: [
+    //     20,
+    //     10,
+    //     4,
+    //     56,
+    //     87,
+    //     90
+    //   ]
+    // },{
+    //   data: [
+    //     30,
+    //     90,
+    //     67,
+    //     54,
+    //     10,
+    //     2
+  //     // ]
+  //   }]
+  // }
 
   // Mock data object used for Contribution Graph
 
@@ -61,6 +89,6 @@ const data = {
 
   // Mock data object for Progress
 
-  const progressChartData = [0.4, 0.6, 0.8]
+  // const progressChartData = [0.4, 0.6, 0.8]
 
-  export { data, progressChartData }
+  export { weight, totalWeightMove }

@@ -70,6 +70,13 @@ export default class ClientProfile extends React.Component {
 
     formattedDate = (date) => {
       return moment(date).format("MMM Do YY")
+
+    goToProgress = (clientID) => {
+      const navigateAction = NavigationActions.navigate({
+        routeName: "Progress",
+        params: { data: clientID }
+      });
+      this.props.navigation.dispatch(navigateAction);
     }
     
   render() {
@@ -83,11 +90,10 @@ export default class ClientProfile extends React.Component {
             <Text style={styles.h1}>Profile for {this.state.client.firstName} {this.state.client.lastName}</Text>
           </Card>
           
-
           <PrimaryButton 
-              text='Progress Reports' 
-              onPress={() => this.props.navigation.navigate('')}
-              style={styles.button}/>
+              text='Go to Progress' 
+              onPress={() => this.goToProgress(this.state.client._id)}
+              style={styles.button2}/>
           
           <PrimaryButton 
               text='Go to Sessions' 
@@ -204,86 +210,3 @@ const styles = StyleSheet.create({
     color: 'blue'
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// me
-// export default class ClientProfile extends React.Component {
-//   static navigationOptions = ({navigation}) => {
-//     return {
-//       header:
-//        <GripHeader/>
-//     }
-//   };
-
-//   state = {
-//     dob: '',
-//     sex: '',
-//     height: '',
-//     weight: '',
-//     bodyFat: '',
-//     caloricIntake: '',
-//     notes:''
-//   }
-  
-//   render() {
-
-//     return (
-//       <View style={styles.container}>
-
-//        <ScrollView contentContainerStyle={styles.scrollView}>>
-//        <Text></Text>
-
-//         <PrimaryButton 
-//           text='Create Account' 
-//           onPress={() => this.props.navigation.navigate('Progress Reports')}
-//           style={styles.button}
-//         />
-
-//           <PrimaryButton 
-//             text='Create Account' 
-//             onPress={() => this.props.navigation.navigate('Sessions')}
-//             style={styles.button}
-//           />
-
-//        </ScrollView>
-//       </View>
-//     )
-//   }
-// }
-
-
-
-
-
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: 'mintcream',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   scrollView: {
-//     backgroundColor: 'transparent',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     width: '100%'
-//   }
-
-// });
