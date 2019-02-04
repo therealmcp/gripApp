@@ -15,6 +15,7 @@ import { Card } from 'native-base';
 import { MonoText } from '../components/StyledText';
 
 import API from '../utils/API.js';
+import { NavigationActions } from "react-navigation";
 
 import PrimaryButton from '../components/PrimaryButton';
 import OutlineButton from '../components/OutlineButton';
@@ -63,7 +64,7 @@ export default class NewSession extends React.Component {
       workout.reps = this.state.reps,
       workout.weight = this.state.weight,
 
-      API.addWorkout(collection);
+      API.addWorkout(workout);
     //.then(res => console.log(res))
     //.catch(err => console.log(err))
 

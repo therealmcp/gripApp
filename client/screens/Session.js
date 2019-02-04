@@ -52,6 +52,10 @@ export default class NewClientsform extends React.Component {
 
   submit() {
 
+    let collection = {}
+
+    collection.session = this.state.sessionID
+
     API.addWorkout(collection);
     //.then(res => console.log(res))
     //.catch(err => console.log(err))
