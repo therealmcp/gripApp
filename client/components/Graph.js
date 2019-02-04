@@ -8,6 +8,7 @@ import {
   ProgressChart,
   ContributionGraph
 } from 'react-native-chart-kit'
+import moment from 'moment';
 import { weight, totalWeightMove } from './data'
 import 'babel-polyfill'
 import API from '../utils/API.js';
@@ -98,56 +99,92 @@ export default class Graph extends React.Component {
   //       weight: {},
   //     }
   // }
-  // state= {
-  //   clientID: '',
-  //   sessionID: '',
-  //   weight: {},
+  state= {
+    clientID: '',
+    sessionID: '',
+    weight: {},
 
-  // }
+  }
 
-  // componentDidMount(){
-  //   console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
+  componentDidMount(){
+    console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
 
-  //     const clientID =this.props.navigation.params.data;
-  //     console.log("CLIENTID: ", clientID);
-  //     // const clientID = ""
+      const clientID =this.props.navigation.params.data;
+      console.log("CLIENTID: ", clientID);
+      // const clientID = ""
 
-  //     API.getClient(clientID)
-  //      .then(res => {
-  //       console.warn(res.data.dbSession);
-  //       let weight = { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-  //         datasets: [{
-  //           data: [], // weight.datasets[0].data => push into this from the array below
-  //       }]
-  //     }
-  //       let preProcData = res.data.dbSession.sessions;
-  //       // array.foreach ( item => { access weight field and push into a new array})
-  //       this.setState({ weight: res.data.dbSession }); 
-  //     // const weight = {
-      //   labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      //   datasets: [{
-      //     data: [
-      //       150,
-      //       140,
-      //       130,
-      //       170,
-      //       180,
-      //       190,
-      //       200,
-      //       130,
-      //       150,
-      //       188,
-      //       190,
-      //       180
-      //     ]
-      //   }]
-      // }
+      API.getClient(clientID)
+       /*.then (res => {
+        console.warn(res.data.dbSession);
+        let weight = { labels: [],
+          datasets: [{
+            data: [], // weight.datasets[0].data => push into this from the array below
+         }]
+       }
+        let preProcData = res.data.dbSession.sessions;
+        //array.foreach ( item => { access weight field and push into a new array})
+        let labelsArr = [];
+        let weightArr = [];
 
-      // sthis.setState({weight})
+        res.data.dbSession.sessions.foreach(function (element) {
+            labelsArr.push(element.date);
+            weightArr.push(element.weight)
+        })
+
+        // this.setState({ weight: res.data.dbSession }); 
+
+       const weight = {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [{
+          data: [
+            150,
+            140,
+            130,
+            170,
+            180,
+            190,
+            200,
+            130,
+            150,
+            188,
+            190,
+            180
+          ]
+        }]
+      }
+
+      sthis.setState({weight})
 
 
-//   })
-// }
+  }) */
+          .then(function (response) {
+            //console.log(response);
+
+            let labelsArr = [];
+            let weightArr = [];
+
+            response.data.dbSession.sessions.forEach(function (element) {
+                labelsArr.push(formattedDate(element.date));
+                weightArr.push(element.weight)
+            })
+            console.log(labelsArr);
+            console.log(weightArr);
+            let weightData = { labels: labelsArr,
+                datasets: [{
+                  data: weightArr,
+              }]
+            }
+            console.log(weightData);
+          
+          this.setState({weight: weightData})
+            
+        })
+        .catch(err => 
+            console.log(err));
+  }
+
+  formattedDate = (date) => {
+    return moment(date).format("MMM Do YY")}
 
   render() {
     const width = Dimensions.get('window').width
