@@ -18,50 +18,104 @@ import FooterTabsIcon from '../components/FooterWithText';
 
 
 export default class NewClientsform extends React.Component {
-  
-  static navigationOptions = ({navigation}) => {
+
+  static navigationOptions = ({ navigation }) => {
     return {
       header:
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <GripHeader/>
+          <GripHeader />
         </TouchableOpacity>
-      }
+    }
   };
+
+  constructor() {
+    super();
+    this.state = {
+      sessionID: ''
+    }
+  }
+
+  componentDidMount() {
+
+    console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
+    const sessionID = this.props.navigation.state.params.data;
+
+    /* const navigateAction = NavigationActions.setParams({
+        params: { user: user }
+      });
+ 
+    this.props.navigation.dispatch(navigateAction);
+    console.log("params set") */
+
+    this.setState({ sessionID: sessionID });
+  };
+
+  // submit() {
+
+  //   let collection = {}
+
+  //   collection.session = this.state.sessionID
+
+  //   API.addWorkout(collection);
+  //   //.then(res => console.log(res))
+  //   //.catch(err => console.log(err))
+
+  //   this.goToWorkouts(this.state.sessionID);
+  //   //this.props.navigation.navigate('ClientsPage');
+
+  // };
+
+  goToAddWorkout = (sessionID) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "AddWorkout",
+      params: { data: sessionID }
+    });
+    this.props.navigation.dispatch(navigateAction);
+    // this.props.navigation.goBack();
+  }
+
+
 
   render() {
 
     return (
 
       <View style={styles.container}>
-        
-          <Card style={styles.card}>
-            <Text style={styles.h1}>Session for:</Text>
-          </Card>
 
-          <ScrollView contentContainerStyle={styles.scrollView}>  
-          
-            <Cards style={styles.sessionCards}/>
-            <Cards style={styles.sessionCards}/>
-            <Cards style={styles.sessionCards}/>
-            <Cards style={styles.sessionCards}/>
-            <Cards style={styles.sessionCards}/>
-            <Cards style={styles.sessionCards}/>
-            <Cards style={styles.sessionCards}/>
-            <Cards style={styles.sessionCards}/>
+        <Card style={styles.card}>
+          <Text style={styles.h1}>Session for:</Text>
+        </Card>
 
-             <PrimaryButton 
-            text='Back to Client Sessions' 
+        <PrimaryButton
+          text='Add New Workouts'
+          onPress={() => this.goToAddWorkout(this.state.sessionID)}
+          style={styles.button}
+        />
+
+        <ScrollView contentContainerStyle={styles.scrollView}>
+
+          <Cards style={styles.sessionCards} />
+          <Cards style={styles.sessionCards} />
+          <Cards style={styles.sessionCards} />
+          <Cards style={styles.sessionCards} />
+          <Cards style={styles.sessionCards} />
+          <Cards style={styles.sessionCards} />
+          <Cards style={styles.sessionCards} />
+          <Cards style={styles.sessionCards} />
+
+          <PrimaryButton
+            text='Back to Client Sessions'
             onPress={() => this.props.navigation.navigate('Sessions')}
             style={styles.button}
-            />
+          />
 
-            <FooterTabsIcon />
-           
-          </ScrollView>
+          <FooterTabsIcon />
 
-          
+        </ScrollView>
 
-           
+
+
+
 
       </View>
     );
@@ -82,15 +136,15 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   containerInline: {
-    flexWrap: 'wrap', 
+    flexWrap: 'wrap',
     padding: 0,
     justifyContent: 'space-between',
-    flexDirection:'row',
+    flexDirection: 'row',
     width: '82%',
   },
   textInput: {
     width: '80%',
-    margin: 10, 
+    margin: 10,
     backgroundColor: 'white'
   },
   textInputHalf: {

@@ -86,15 +86,15 @@ export default class NewSession extends React.Component {
     .catch(err => console.log(err))
   
 
-    this.goToWorkouts(this.state.clientID);
+    this.goToSessions(this.state.clientID);
     //this.props.navigation.navigate('ClientsPage');
 
   };
 
-  goToWorkouts = (userObj) => {
+  goToSessions = (clientID) => {
     const navigateAction = NavigationActions.navigate({
       routeName: "AddWorkout",
-      params: { data: userObj }
+      params: { data: clientID }
     });
     this.props.navigation.dispatch(navigateAction);
     // this.props.navigation.goBack();
