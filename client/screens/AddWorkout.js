@@ -59,21 +59,21 @@ export default class NewSession extends React.Component {
 
   submit() {
     let workout = {}
-    workout.name = this.state.name,
+      workout.name = this.state.name,
       workout.sets = this.state.sets,
       workout.reps = this.state.reps,
       workout.weight = this.state.weight,
 
-      API.addWorkout(workout);
+      API.addWorkout(this.state.sessionID, workout);
     //.then(res => console.log(res))
     //.catch(err => console.log(err))
 
-    this.backToNewSession(this.state.sessionID);
+    this.backToSessionPage(this.state.sessionID);
     //this.props.navigation.navigate('ClientsPage');
 
   };
 
-  backToNewSession = (sessionID) => {
+  backToSessionPage = (sessionID) => {
     const navigateAction = NavigationActions.navigate({
       routeName: "Session",
       params: { data: sessionID }
@@ -88,7 +88,7 @@ export default class NewSession extends React.Component {
 
       <View style={styles.container}>
 
-        <Text style={styles.h1}>Add Workout to New Session</Text>
+        <Text style={styles.h1}>Add Workout to Session</Text>
 
         <TextInput placeholder="Workout Name" style={styles.textInput} onChangeText={(value) => this.setState({ name: value })} />
 

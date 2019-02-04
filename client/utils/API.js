@@ -32,7 +32,7 @@ export default {
         return axios.get("https://heroku-grip-app.herokuapp.com/api/sessions/" + sessionID)
     },
     addWorkout: (sessionID, workoutObj) => {
-        return axios.put("https://heroku-grip-app.herokuapp.com/api/workouts/" + sessionID, workoutObj)
+        return axios.post("https://heroku-grip-app.herokuapp.com/api/workouts/" + sessionID, workoutObj)
     },
 }
 

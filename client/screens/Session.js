@@ -50,25 +50,25 @@ export default class NewClientsform extends React.Component {
     this.setState({ sessionID: sessionID });
   };
 
-  submit() {
+  // submit() {
 
-    let collection = {}
+  //   let collection = {}
 
-    collection.session = this.state.sessionID
+  //   collection.session = this.state.sessionID
 
-    API.addWorkout(collection);
-    //.then(res => console.log(res))
-    //.catch(err => console.log(err))
+  //   API.addWorkout(collection);
+  //   //.then(res => console.log(res))
+  //   //.catch(err => console.log(err))
 
-    this.goToWorkouts(this.state.sessionID);
-    //this.props.navigation.navigate('ClientsPage');
+  //   this.goToWorkouts(this.state.sessionID);
+  //   //this.props.navigation.navigate('ClientsPage');
 
-  };
+  // };
 
-  goToWorkouts = (userObj) => {
+  goToAddWorkout = (sessionID) => {
     const navigateAction = NavigationActions.navigate({
       routeName: "AddWorkout",
-      params: { data: userObj }
+      params: { data: sessionID }
     });
     this.props.navigation.dispatch(navigateAction);
     // this.props.navigation.goBack();
@@ -88,7 +88,7 @@ export default class NewClientsform extends React.Component {
 
         <PrimaryButton
           text='Add New Workouts'
-          onPress={() => this.submit()}
+          onPress={() => this.goToAddWorkout(this.state.sessionID)}
           style={styles.button}
         />
 
