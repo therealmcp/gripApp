@@ -23,59 +23,58 @@ import TextInput from '../components/TextInput';
 import GripDatePicker from '../components/GripDatePicker';
 
 export default class NewSession extends React.Component {
-  
-    static navigationOptions = ({navigation}) => {
-        return {
-          header: 
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-              <GripHeader/>
-            </TouchableOpacity>
-          }
-        };
 
-    state = {
-      sessionID: '',
-      name: '',
-      sets: '',
-      reps: '',
-      weight: ''  
-    };
+  static navigationOptions = ({ navigation }) => {
+    return {
+      header:
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <GripHeader />
+        </TouchableOpacity>
+    }
+  };
 
-    componentDidMount(){
+  state = {
+    sessionID: '',
+    name: '',
+    sets: '',
+    reps: '',
+    weight: ''
+  };
 
-      console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
-        const sessionID = this.props.navigation.state.params.data;
-        
-        /* const navigateAction = NavigationActions.setParams({
-            params: { user: user }
-          });
-    
-        this.props.navigation.dispatch(navigateAction);
-        console.log("params set") */
-        
-        this.setState({sessionID: sessionID});
-    };
+  componentDidMount() {
 
-    submit()
-  {
-    let workout={}
-    workout.name=this.state.name,
-    workout.sets=this.state.sets,
-    workout.reps=this.state.reps,
-    workout.weight=this.state.weight,
+    console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
+    const sessionID = this.props.navigation.state.params.data;
 
-    API.addWorkout(collection);
-      //.then(res => console.log(res))
-      //.catch(err => console.log(err))
-    
+    /* const navigateAction = NavigationActions.setParams({
+        params: { user: user }
+      });
+ 
+    this.props.navigation.dispatch(navigateAction);
+    console.log("params set") */
+
+    this.setState({ sessionID: sessionID });
+  };
+
+  submit() {
+    let workout = {}
+    workout.name = this.state.name,
+      workout.sets = this.state.sets,
+      workout.reps = this.state.reps,
+      workout.weight = this.state.weight,
+
+      API.addWorkout(collection);
+    //.then(res => console.log(res))
+    //.catch(err => console.log(err))
+
     this.backToNewSession(this.state.sessionID);
     //this.props.navigation.navigate('ClientsPage');
-    
+
   };
 
   backToNewSession = (sessionID) => {
     const navigateAction = NavigationActions.navigate({
-      routeName: "NewSession",
+      routeName: "Session",
       params: { data: sessionID }
     });
     this.props.navigation.dispatch(navigateAction);
@@ -90,20 +89,20 @@ export default class NewSession extends React.Component {
 
         <Text style={styles.h1}>Add Workout to New Session</Text>
 
-        <TextInput placeholder="Workout Name" style={styles.textInput} onChangeText={(value) => this.setState({name: value})}/>
-        
+        <TextInput placeholder="Workout Name" style={styles.textInput} onChangeText={(value) => this.setState({ name: value })} />
+
         <View style={styles.containerInline}>
-            <TextInput placeholder="Sets" style={styles.textInputHalf} onChangeText={(value) => this.setState({sets: value})}/>
-            <TextInput placeholder="Reps/Distance" style={styles.textInputHalf} onChangeText={(value) => this.setState({reps: value})}/>
+          <TextInput placeholder="Sets" style={styles.textInputHalf} onChangeText={(value) => this.setState({ sets: value })} />
+          <TextInput placeholder="Reps/Distance" style={styles.textInputHalf} onChangeText={(value) => this.setState({ reps: value })} />
         </View>
-        <TextInput placeholder="Weight" style={styles.textInputHalf} onChangeText={(value) => this.setState({weight: value})}/>
+        <TextInput placeholder="Weight" style={styles.textInputHalf} onChangeText={(value) => this.setState({ weight: value })} />
 
         <PrimaryButton
-          onPress={()=>this.submit()} 
+          onPress={() => this.submit()}
           text="Add Workout"
-          style={styles.button}/>
+          style={styles.button} />
 
-        
+
       </View>
     );
   }
@@ -124,15 +123,15 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   containerInline: {
-    /* flexWrap: 'wrap', */ 
+    /* flexWrap: 'wrap', */
     padding: 0,
     justifyContent: 'space-between',
-    flexDirection:'row',
+    flexDirection: 'row',
     width: '80%',
   },
   textInput: {
     width: '80%',
-    margin: 10, 
+    margin: 10,
     /* marginLeft: 15, */
     backgroundColor: 'white'
   },

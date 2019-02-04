@@ -52,9 +52,9 @@ export default class NewClientsform extends React.Component {
 
   submit() {
 
-    // API.addWorkout(collection);
-    //   //.then(res => console.log(res))
-    //   //.catch(err => console.log(err))
+    API.addWorkout(collection);
+    //.then(res => console.log(res))
+    //.catch(err => console.log(err))
 
     this.goToWorkouts(this.state.sessionID);
     //this.props.navigation.navigate('ClientsPage');
@@ -83,7 +83,7 @@ export default class NewClientsform extends React.Component {
         </Card>
 
         <PrimaryButton
-          text='Add New Workout'
+          text='Add New Workouts'
           onPress={() => this.submit()}
           style={styles.button}
         />
