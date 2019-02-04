@@ -173,5 +173,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%'
+  },
+  button: {
+    alignSelf: 'center',
+    bottom: 60,
+    backgroundColor: '#0080FF',
   }
 });
