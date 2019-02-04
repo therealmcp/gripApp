@@ -102,7 +102,7 @@ export default class Graph extends React.Component {
   state= {
     clientID: '',
     sessionID: '',
-    weight: {},
+    weight: weight,
 
   }
 
@@ -216,8 +216,8 @@ export default class Graph extends React.Component {
             >
               <Text style={labelStyle}>Weight</Text>
               <LineChart
-                //data={this.state.weight}
-                data={weight}
+                //data={weight}
+                data={this.state.weight}
                 width={width}
                 height={height}
                 chartConfig={chartConfig}
