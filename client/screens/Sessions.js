@@ -13,6 +13,7 @@ import { WebBrowser } from 'expo';
 import { Button } from 'native-base';
 import CardImage from '../components/CardImage';
 import { MonoText } from '../components/StyledText';
+import moment from 'moment';
 
 import API from '../utils/API.js';
 import GripHeader from '../components/GripHeader';
@@ -86,6 +87,10 @@ export default class Sessions extends React.Component {
       this.props.navigation.dispatch(navigateAction);
     }
 
+    formattedDate = (date) => {
+      return moment(date).format("MMM Do YY")}
+
+
   render() {
     return (
       <View style={styles.container}>
@@ -105,11 +110,11 @@ export default class Sessions extends React.Component {
         <ScrollView contentContainerStyle={styles.scrollView}>  
         
             
-          {this.state.sessions.map(session => {
+          {this.state.sessions.sort(function(a,b){a.date - b.date}).reverse().map(session => {
                   return (
                     <Cards key={session._id} 
                     style={styles.sessionCards} 
-                    text1={session.date}
+                    text1={this.formattedDate(session.date)}
                     text2={session.notes}
                     onPress={() => this.goToSessionPage(session._id)}
                     />
@@ -119,11 +124,11 @@ export default class Sessions extends React.Component {
         </ScrollView>
 
         
-          <PrimaryButton 
+          {/* <PrimaryButton 
             text='Back to Home' 
             onPress={() => this.props.navigation.navigate('Home')}
             style={styles.button}
-          />
+          /> */}
       </View>
 
       
