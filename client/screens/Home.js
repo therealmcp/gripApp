@@ -11,6 +11,7 @@ import {
 import { NavigationActions } from "react-navigation";
 import { WebBrowser, BlurView } from 'expo';
 import { Button } from 'native-base';
+import moment from 'moment';
 import CardImage from '../components/CardImage';
 import { MonoText } from '../components/StyledText';
 import API from '../utils/API.js';
@@ -86,6 +87,17 @@ export default class Home extends React.Component {
     // this.props.navigation.goBack();
   }
 
+  goToSessionPage = (sessionID) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "Session",
+      params: { data: sessionID }
+    });
+    this.props.navigation.dispatch(navigateAction);
+  }
+
+  formattedDate = (date) => {
+    return moment(date).format("MMM Do YY")}
+
   render() {
     // console.log("HOME STATE: ", this.state)
     return (
@@ -98,14 +110,14 @@ export default class Home extends React.Component {
         <ScrollView contentContainerStyle={styles.scrollView}>
  
           {this.state.clients !== null ? this.state.clients.data.map(data => {
-            console.log("DATA", client)
+            //console.log("DATA", client)
               const client = data[0]
                 return (
                   <Cards key={client._id} 
                   style={styles.sessionCards} 
                   text1={client.firstName + " " + client.lastName}
-                  onPress={() => this.props.navigation.navigate(this.state.client)}
-                  text2={client.notes}
+                  onPress={client.sessions.length !== 0 ? () => this.goToSessionPage(client.sessions[client.sessions.length -1]._id) : null}
+                  text2={client.sessions.length !== 0 ? this.formattedDate(client.sessions[client.sessions.length -1].date) : null}
                   />
                 )}
             ) : null} 

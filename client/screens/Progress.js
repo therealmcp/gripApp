@@ -7,7 +7,7 @@ import {
   PieChart,
   ProgressChart,
   ContributionGraph
-} from 'react-native-chart-kit'
+} from 'react-native-chart-kit';
 import moment from 'moment';
 import { weight, totalWeightMove } from '../components/data';
 import 'babel-polyfill'
@@ -169,7 +169,7 @@ export default class Graph extends React.Component {
             response.data.dbSession.sessions.forEach(function (element) {
               
               formattedDate = (date) => {
-                return moment(date).format("MMM Do YY")}
+                return moment(date).format("MMM DD")}
 
                 labelsArr.push(formattedDate(element.date));
                 weightArr.push(element.weight)
