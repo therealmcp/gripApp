@@ -120,11 +120,11 @@ goToClientProfile = (clientID) => {
         </ScrollView>
 
         
-          <PrimaryButton 
+          {/* <PrimaryButton 
             text='Back to Home' 
             onPress={() => this.props.navigation.navigate('Home')}
             style={styles.button}
-          />
+          /> */}
       </View>
 
       
