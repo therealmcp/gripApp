@@ -55,7 +55,7 @@ export default class ClientProfile extends React.Component {
     
         API.getClient(clientID)
         .then(res => 
-          this.setState({client: res.data.dbSession})
+          this.setState({client: res.data.dbSession, sessions: res.data.dbSession.sessions})
           //console.log(res.data)
           )
     };
@@ -80,7 +80,7 @@ export default class ClientProfile extends React.Component {
     }
     
   render() {
-
+    console.log("CLIENTPROFILE: THIS.STATE", this.state)
     return (
 
       <View style={styles.container}>
@@ -105,9 +105,9 @@ export default class ClientProfile extends React.Component {
             <Text style={styles.h1}>Date of Birth: {this.formattedDate(this.state.client.dob)}</Text>
             <Text style={styles.h1}>Sex: {this.state.client.sex}</Text>
             <Text style={styles.h1}>Height: {this.state.client.height}</Text>
-            <Text style={styles.h1}>Weight: {this.state.client.sessions ? this.state.client.sessions[this.state.client.sessions.length - 1].weight : ""}</Text>
-            <Text style={styles.h1}>Body Fat %: {this.state.client.sessions ? this.state.client.sessions[this.state.client.sessions.length - 1].bodyFat : ""}</Text>
-            <Text style={styles.h1}>Caloric Intake: {this.state.client.sessions ? this.state.client.sessions[this.state.client.sessions.length - 1].calories : ""}</Text>
+            <Text style={styles.h1}>Weight: {this.state.sessions.length !== 0 ? this.state.sessions[this.state.sessions.length - 1].weight : null}</Text>
+            <Text style={styles.h1}>Body Fat %: {this.state.sessions.length !== 0 ? this.state.sessions[this.state.sessions.length - 1].bodyFat : null}</Text>
+            <Text style={styles.h1}>Caloric Intake: {this.state.sessions.length !== 0 ? this.state.sessions[this.state.sessions.length - 1].calories : null}</Text>
             <Text style={styles.h1}>Goal Notes: {this.state.client.notes}</Text>
           </Card>
 
