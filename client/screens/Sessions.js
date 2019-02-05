@@ -62,13 +62,14 @@ export default class Sessions extends React.Component {
         console.log("params set") */
         
         this.setState({clientID: clientID});
-    
-        API.getClient(clientID)
+
+        this.props.navigation.addListener('willFocus', (route) => { 
+          API.getClient(clientID)
         .then(res => 
           this.setState({sessions: res.data.dbSession.sessions})
           //console.log(res.data)
-      )
-    };
+          )})
+    }
 
 
     goToSessionPage = (sessionID) => {

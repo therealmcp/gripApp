@@ -82,8 +82,9 @@ export default class NewSession extends React.Component {
     //console.warn(collection);
 
     API.saveSession(collection)
-    //.then(res => console.log(res))
-    .catch(err => console.log(err))
+    // .then(res => 
+    //   this.goToAddWorkout(res.data._id))
+    //.catch(err => console.log(err))
   
 
     this.goToSessions(this.state.clientID);
@@ -93,12 +94,21 @@ export default class NewSession extends React.Component {
 
   goToSessions = (clientID) => {
     const navigateAction = NavigationActions.navigate({
-      routeName: "AddWorkout",
+      routeName: "Sessions",
       params: { data: clientID }
     });
     this.props.navigation.dispatch(navigateAction);
     // this.props.navigation.goBack();
   }
+
+  // goToAddWorkout = (clientID) => {
+  //   const navigateAction = NavigationActions.navigate({
+  //     routeName: "AddWorkout",
+  //     params: { data: clientID }
+  //   });
+  //   this.props.navigation.dispatch(navigateAction);
+  //   // this.props.navigation.goBack();
+  // }
 
   render() {
 
