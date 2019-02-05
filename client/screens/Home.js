@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     //backgroundColor: 'blue',
     //color: 'white',
     // margin: 20,
-    backgrundColor: '#0080FF',
+    backgroundColor: '#0080FF',
     bottom: 30,
   },
   titleText: {
