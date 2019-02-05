@@ -90,17 +90,17 @@ goToClientProfile = (clientID) => {
     return (
       <View style={styles.container}>
         <Text style={styles.titleText}>Clients</Text>
-        <PlusButton
+       {/*  <PlusButton
         style={styles.plusButton}
         text='Add a Client'
         onPress={() => this.goToNewClient(this.state.user)}
-         />
-        {/* <PrimaryButton 
+         /> */}
+        <PrimaryButton 
             text='Add a Client' 
-            onPress={() => this.props.navigation.navigate('NewClientsForm')}
+            onPress={() => this.goToNewClient(this.state.user)}
             style={styles.button}
           />
-          <PlusButton/> */}
+
 
         <ScrollView contentContainerStyle={styles.scrollView}>
 

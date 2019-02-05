@@ -103,6 +103,7 @@ export default class Graph extends React.Component {
     clientID: '',
     sessionID: '',
     weight: weight,
+    weightMoved: totalWeightMove
 
   }
 
@@ -162,6 +163,8 @@ export default class Graph extends React.Component {
 
             let labelsArr = [];
             let weightArr = [];
+            let labelsArr2 = [];
+            let weightMovedArr = [];
 
             response.data.dbSession.sessions.forEach(function (element) {
               
@@ -179,8 +182,34 @@ export default class Graph extends React.Component {
               }]
             }
             console.log(weightData);
+
+            response.data.clientWorkouts.forEach(function (element) {
+
+              labelsArr2.push(formattedDate(element[0].date));
+              
+              var sum = 0;
+  
+                  for (i=0; i<element[0].workouts.length; i++){
+                      const { sets, reps, weight } = element[0].workouts[i];
+                      let mult = sets*reps*weight;
+                      sum += mult
+                  }
+  
+              weightMovedArr.push(sum);
+  
+          })
+  
+          console.log(labelsArr2);
+          console.log(weightMovedArr);
+  
+          let weightMovedData = { labels: labelsArr2,
+              datasets: [{
+                data: weightMovedArr,
+             }]
+           }
           
-          this.setState({weight: weightData})
+          this.setState({weight: weightData,
+                        weightMoved: weightMovedData})
             
         })
         .catch(err => 
@@ -225,14 +254,14 @@ export default class Graph extends React.Component {
                 style={graphStyle}
               />
 
-              {/* <Text style={labelStyle}>Total Weight Moved</Text> */}
-              {/* <LineChart
-                data={totalWeightMove}
+              <Text style={labelStyle}>Total Weight Moved</Text>
+              <LineChart
+                data={this.state.weightMoved}
                 width={width}
                 height={height}
                 chartConfig={chartConfig}
                 style={graphStyle}
-              /> */}
+              />
               {/* <Text style={labelStyle}>Contribution Graph</Text>
               <ContributionGraph
                 values={contributionData}
