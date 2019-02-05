@@ -72,8 +72,8 @@ export default class Login extends React.Component {
       <View style={styles.container}>
 
         {/* <Card style={styles.card}> */}
-          <Text style={styles.h1}>grip</Text>
-          <Text style={styles.h2}>for personal trainers</Text>
+          <Text style={styles.h1}>GRIP</Text>
+          {/* <Text style={styles.h2}>for personal trainers</Text> */}
         {/* </Card> */}
 
 
@@ -113,14 +113,16 @@ const styles = StyleSheet.create({
   textInput: {
     width: '80%',
     margin: 10,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    bottom: 50,
   },
   button: {
     alignSelf: 'center',
     padding:5,
-    marginTop: 20,
+    // marginTop: 20,
     marginBottom: 10,
     backgroundColor: 'blue'
+    
   },
   card: {
     marginBottom: 50,
@@ -133,21 +135,21 @@ const styles = StyleSheet.create({
   },
   h1: {
     fontWeight: 'bold',
-    fontSize: 82,
+    fontSize: 105,
     padding: 2,
     color: '#0080FF',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: 3, height: 3},
-   bottom: 85,
+    textShadowOffset: {width: 5, height: 5},
+   bottom: 105,
     
   },
-  h2: {
-    fontWeight: 'bold',
-    fontSize: 28,
-    padding: 2,
-    color: '#0080FF',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: 3, height: 3},
-    bottom:75,
-  }
+  // h2: {
+  //   fontWeight: 'bold',
+  //   fontSize: 28,
+  //   padding: 2,
+  //   color: '#0080FF',
+  //   textShadowColor: 'rgba(0, 0, 0, 0.75)',
+  //   textShadowOffset: {width: 3, height: 3},
+  //   bottom:75,
+  // }
 });

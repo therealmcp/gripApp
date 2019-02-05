@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import { NavigationActions } from "react-navigation";
-import { WebBrowser } from 'expo';
+import { WebBrowser, BlurView } from 'expo';
 import { Button } from 'native-base';
 import CardImage from '../components/CardImage';
 import { MonoText } from '../components/StyledText';
@@ -91,7 +91,7 @@ export default class Home extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.titleText} >Welcome, {this.state.user.firstName}! </Text>
-        <CardImage />
+        <CardImage style={styles.thumbnail} />
         <Link />
         <Text style={styles.subText} >Upcoming Sessions</Text>
 
@@ -146,7 +146,7 @@ export default class Home extends React.Component {
             onPress={() => this.props.navigation.navigate('Session')}
             style={styles.button}
           /> */}
-          <OutlineButton 
+          <PrimaryButton 
             text='Log Out' 
             onPress={() => this.props.navigation.navigate('Login')}
             style={styles.button2}
@@ -168,20 +168,34 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: 'center',
     backgroundColor: 'blue',
-    margin: 20
+    margin: 20,
+    bottom: 40,
   },
   button2: {
     alignSelf: 'center',
     //backgroundColor: 'blue',
     //color: 'white',
-    margin: 20
+    // margin: 20,
+    backgroundColor: '#0080FF',
+    bottom: 30,
   },
   titleText: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
+    color: '#0080FF',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 0.5, height: 0.5},
+    top: 15,
+   
   },
   subText: {
-    fontSize: 17,
+    fontSize: 27,
+    fontWeight: 'bold',
+    color: "#0080FF",
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 0.5, height: 0.5},
+
+
 
   },
   header: {
@@ -204,5 +218,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%'
-  }
+  },
+  // thumbnail: {
+  // width: 400, height: 250, top: 200 
+  // },
 });
