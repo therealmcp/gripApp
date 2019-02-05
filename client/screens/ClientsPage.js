@@ -91,9 +91,10 @@ goToClientProfile = (clientID) => {
       <View style={styles.container}>
         <Text style={styles.titleText}>Clients</Text>
         <PlusButton
+        style={styles.plusButton}
         text='Add a Client'
         onPress={() => this.goToNewClient(this.state.user)}
-         style={styles.button}/>
+         />
         {/* <PrimaryButton 
             text='Add a Client' 
             onPress={() => this.props.navigation.navigate('NewClientsForm')}
@@ -135,6 +136,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'mintcream',
+    // backgroundColor: '#89d4cf',
+    // backgroundImage: 'linearGradient(315deg, #89d4cf 0%, #6e45e1 74%)',
+
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -146,8 +150,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue'
   },
   titleText: {
-    fontSize: 30,
+    fontSize: 45,
     fontWeight: 'bold',
+    color: '#0080FF',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 0.5, height: 0.5},
+    top: 15,
+   
   },
   subText: {
     fontSize: 17,
@@ -178,5 +187,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     bottom: 60,
     backgroundColor: '#0080FF',
-  }
+  },
+  plusButton: {
+    fontSize: 50,
+    color: '#0080FF',
+    
+  },
 });
