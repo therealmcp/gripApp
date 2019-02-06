@@ -118,8 +118,9 @@ export default class NewSession extends React.Component {
 
         <Text style={styles.h1}>New Session</Text>
 
-        <Text>Date:</Text>
+        <Text style={styles.h3}>Date:</Text>
         <GripDatePicker 
+        style={styles.datePick}
          placeholder="Tap to Pick Session Date"
          onDateChange={(date) => {
            // date = moment().format("MMM Do YY")
@@ -216,13 +217,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 28,
     padding: 10,
-    color: 'blue'
+    color: '#0080FF',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 1, height: 1},
   },
   h2: {
     fontWeight: 'bold',
     fontSize: 18,
     padding: 5,
     color: 'blue'
+  },
+  h3: {
+    fontSize: 20,
+    color: '#0080FF'
   },
   textArea: {
     //height: 300,
@@ -232,4 +239,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     margin: 20
   },
+  
 });

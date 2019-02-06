@@ -16,8 +16,9 @@ const GripDatePicker = (props) => {
             animationType={"fade"}
             androidMode={"default"}
             placeHolderText={props.placeholder}
-            textStyle={{ color: "black" }}
-            placeHolderTextStyle={{ color: "black" }}
+            textStyle={{ color: "#0080FF" }}
+            // fontSize={{fontSize: 30}}
+            placeHolderTextStyle={{ color: "#0080FF" }}
             onDateChange={props.onDateChange}
             disabled={false}
             />
