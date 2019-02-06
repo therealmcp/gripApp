@@ -117,7 +117,6 @@ export default class NewClientsform extends React.Component {
                   text1={workout.name}
                   text2={"Sets: " + workout.sets + " Reps/Distance: " + workout.reps + " Weight: " + workout.weight}
                   /* onPress={() => this.goToClientProfile(client._id)} */
-                  onPress={() => this.props.navigation.navigate('Sessions')}
 
                   />
                 )})
