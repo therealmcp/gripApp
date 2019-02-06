@@ -97,10 +97,12 @@ export default class Sessions extends React.Component {
       <View style={styles.container}>
         <Text style={styles.titleText} >Sessions</Text>
         {/* Needs a place for React Native to take it to set up a Session */}
+        
         <PrimaryButton
         text='Add a Session'
         onPress={() => this.goToNewSession(this.state.clientID)}
-         style={styles.button}/>
+        style={styles.button}/>
+
         {/* <PrimaryButton 
             text='Add a Client' 
             onPress={() => this.props.navigation.navigate('NewClientsForm')}
@@ -147,7 +149,7 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: 'center',
     backgroundColor: 'blue',
-    top: 40
+    //top: 40
   },
   titleText: {
     fontSize: 30,
@@ -155,7 +157,8 @@ const styles = StyleSheet.create({
     color: '#0080FF',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: {width: 0.5, height: 0.5},
-    top: 15,
+    //top: 15,
+    margin: 20
   },
   subText: {
     fontSize: 17,
@@ -180,6 +183,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    top: 95,
+    //top: 95,
+    marginTop: 20
   }
 });
