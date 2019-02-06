@@ -151,8 +151,8 @@ const styles = StyleSheet.create({
     color: '#0080FF',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: {width: 0.5, height: 0.5},
-    top: 15,
-   
+    //top: 15,
+    margin: 30
   },
   subText: {
     fontSize: 17,
@@ -178,13 +178,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    top: 115,
+    //top: 115,
+    margin: 20
   },
   button: {
     alignSelf: 'center',
-    bottom: 60,
+    //bottom: 60,
     backgroundColor: '#0080FF',
-    top: 50
+    //top: 50
+    margin: 10
   },
   plusButton: {
     fontSize: 50,
