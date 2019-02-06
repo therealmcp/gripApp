@@ -146,11 +146,16 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: 'center',
-    backgroundColor: 'blue'
+    backgroundColor: 'blue',
+    top: 40
   },
   titleText: {
     fontSize: 30,
     fontWeight: 'bold',
+    color: '#0080FF',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 0.5, height: 0.5},
+    top: 15,
   },
   subText: {
     fontSize: 17,
@@ -166,6 +171,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '80%',
+    
     // margin: 10,
   },
   scrollView: {
@@ -173,6 +179,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%'
+    width: '100%',
+    top: 95,
   }
 });

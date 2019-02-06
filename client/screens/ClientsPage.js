@@ -145,10 +145,6 @@ const styles = StyleSheet.create({
   container2: {
     flex: 1
   },
-  button: {
-    alignSelf: 'center',
-    backgroundColor: 'blue'
-  },
   titleText: {
     fontSize: 45,
     fontWeight: 'bold',
@@ -181,12 +177,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%'
+    width: '100%',
+    top: 115,
   },
   button: {
     alignSelf: 'center',
     bottom: 60,
     backgroundColor: '#0080FF',
+    top: 50
   },
   plusButton: {
     fontSize: 50,
