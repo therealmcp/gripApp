@@ -34,7 +34,8 @@ export default class NewClientsform extends React.Component {
     this.state = {
       sessionID: '',
       session: {},
-      workouts: []
+      workouts: [],
+      clientID: ''
     }
   }
 
@@ -57,7 +58,8 @@ export default class NewClientsform extends React.Component {
         .then(res => {
         this.setState({
           workouts: res.data.workouts,
-          session: res.data})
+          session: res.data,
+          clientID: res.data.client})
       })
     });
 
@@ -83,6 +85,15 @@ export default class NewClientsform extends React.Component {
     const navigateAction = NavigationActions.navigate({
       routeName: "AddWorkout",
       params: { data: sessionID }
+    });
+    this.props.navigation.dispatch(navigateAction);
+    // this.props.navigation.goBack();
+  }
+
+  goToClientSessions = (clientID) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "Sessions",
+      params: { data: clientID }
     });
     this.props.navigation.dispatch(navigateAction);
     // this.props.navigation.goBack();
@@ -125,7 +136,7 @@ export default class NewClientsform extends React.Component {
 
         <PrimaryButton
             text='Back to Client Sessions'
-            onPress={() => this.props.navigation.navigate('Sessions')}
+            onPress={() => this.goToClientSessions(this.state.clientID)}
             style={styles.button}
           />
 
