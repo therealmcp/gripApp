@@ -104,7 +104,7 @@ export default class Home extends React.Component {
       <View style={styles.container}>
         <Text style={styles.titleText} >Welcome, {this.state.user.firstName}! </Text>
         <CardImage style={styles.thumbnail} />
-        <Link />
+        {/* <Link /> */}
         <Text style={styles.subText} >Upcoming Sessions</Text>
 
         <ScrollView contentContainerStyle={styles.scrollView}>
@@ -201,11 +201,12 @@ const styles = StyleSheet.create({
    
   },
   subText: {
-    fontSize: 27,
+    fontSize: 22,
     fontWeight: 'bold',
     color: "#0080FF",
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: {width: 0.5, height: 0.5},
+    top: 50
 
 
 
@@ -229,9 +230,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%'
+    width: '100%',
+    top: 80,
   },
-  // thumbnail: {
-  // width: 400, height: 250, top: 200 
-  // },
+ 
 });
