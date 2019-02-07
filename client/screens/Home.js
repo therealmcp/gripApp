@@ -34,12 +34,14 @@ export default class Home extends React.Component {
 
   state = {
     user: "",
-    clients: null
+    clients: null,
+    userID: null
   }
 
   componentDidMount(){
     // console.log("this.props.navigation.state.params.data.user: ", this.props.navigation.state.params.data.user)
     const user = this.props.navigation.state.params.data.user;
+  
     // this.props.navigation.setParams({ user })
     // const navigateAction = NavigationActions.setParams({
     //    // key: "id-1547683730508-2",
@@ -65,7 +67,7 @@ export default class Home extends React.Component {
     API.getUserStuff(user._id)
     .then(res => {
       // console.log("CLIENT DATA: ", res)
-      this.setState({user: user, clients: res})
+      this.setState({user: user, clients: res, userID: user._id})
     })
   };
 
@@ -78,10 +80,10 @@ export default class Home extends React.Component {
   //   // this.props.navigation.goBack();
   // }
 
-  goToClients = (userObj) => {
+  goToClients = (userID) => {
     const navigateAction = NavigationActions.navigate({
       routeName: "ClientsPage",
-      params: { data: userObj }
+      params: { data: userID }
     });
     this.props.navigation.dispatch(navigateAction);
     // this.props.navigation.goBack();
@@ -109,7 +111,13 @@ export default class Home extends React.Component {
 
         <ScrollView contentContainerStyle={styles.scrollView}>
  
-          {this.state.clients !== null ? this.state.clients.data.map(data => {
+          {this.state.clients !== null ? this.state.clients.data
+          .sort(function(a,b){
+            if (a[0].sessions.length !==0 && b[0].sessions.length !==0) {
+              return new Date(b[0].sessions[b[0].sessions.length-1].date) - new Date(a[0].sessions[a[0].sessions.length-1].date)
+            } else {null}
+          })
+          .map(data => {
             //console.log("DATA", client)
               const client = data[0]
                 return (
@@ -139,7 +147,7 @@ export default class Home extends React.Component {
           /> */}
           <PrimaryButton 
             text='Clients Page' 
-            onPress={() => this.goToClients(this.state.user)}
+            onPress={() => this.goToClients(this.state.userID)}
             text='Go to Clients' 
             style={styles.button}
           />
