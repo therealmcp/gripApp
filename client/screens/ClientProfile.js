@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   card: {
     marginBottom: 20,
     width: '90%',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     backgroundColor: 'transparent',
     shadowColor: 'transparent',
     borderColor: 'transparent'
