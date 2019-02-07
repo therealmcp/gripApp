@@ -124,7 +124,7 @@ export default class NewSession extends React.Component {
               onPress: () => console.log('Cancel Pressed'),
               style: 'cancel',
             },
-            {text: 'OK', onPress: () => console.log('OK Pressed')},
+            {text: 'OK', onPress: () => this.setState({requiredFields: true})},
           ],
           {cancelable: false},
         );
@@ -278,6 +278,7 @@ const styles = StyleSheet.create({
     //height: 300,
     //flex: 1,
     width: 300,
+    height: 100,
     justifyContent: "center",
     backgroundColor: 'white',
     margin: 20

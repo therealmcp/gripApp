@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: 'blue',
     margin: 20,
-    bottom: 40,
+    bottom: 20,
   },
   button2: {
     alignSelf: 'center',

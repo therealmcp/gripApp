@@ -211,11 +211,11 @@ const styles = StyleSheet.create({
   },
   h1: {
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 22,
     padding: 10,
-    color: 'blue',
-    alignSelf: 'flex-start'
-    
+    color: '#0080FF',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 0.5, height: 0.5},
   },
   h2: {
     fontWeight: 'bold',
