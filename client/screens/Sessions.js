@@ -113,7 +113,7 @@ export default class Sessions extends React.Component {
         <ScrollView contentContainerStyle={styles.scrollView}>  
         
             
-          {this.state.sessions.sort(function(a,b){a.date - b.date}).reverse().map(session => {
+          {this.state.sessions.sort(function(a,b){return new Date(b.date) - new Date(a.date)}).map(session => {
                   return (
                     <Cards key={session._id} 
                     style={styles.sessionCards} 

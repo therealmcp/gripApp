@@ -93,7 +93,7 @@ export default class NewSession extends React.Component {
         <TextInput placeholder="Workout Name" style={styles.textInput} onChangeText={(value) => this.setState({ name: value })} />
 
         <View style={styles.containerInline}>
-          <TextInput placeholder="Sets" style={styles.textInputHalf} onChangeText={(value) => this.setState({ sets: value })} />
+          <TextInput placeholder="Sets/Laps" style={styles.textInputHalf} onChangeText={(value) => this.setState({ sets: value })} />
           <TextInput placeholder="Reps/Distance" style={styles.textInputHalf} onChangeText={(value) => this.setState({ reps: value })} />
         </View>
         <TextInput placeholder="Weight" style={styles.textInputHalf} onChangeText={(value) => this.setState({ weight: value })} />

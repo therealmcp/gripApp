@@ -166,13 +166,13 @@ export default class Graph extends React.Component {
             let labelsArr2 = [];
             let weightMovedArr = [];
 
-            response.data.dbSession.sessions.forEach(function (element) {
-              
-              formattedDate = (date) => {
-                return moment(date).format("MMM DD")}
+            formattedDate = (date) => {
+              return moment(date).format("MMM DD")}
+
+            response.data.dbSession.sessions.sort(function(a,b){return new Date(a.date)- new Date(b.date)}).forEach(function (element) {
 
                 labelsArr.push(formattedDate(element.date));
-                weightArr.push(element.weight)
+                weightArr.push(element.weight);
             })
             console.log(labelsArr);
             console.log(weightArr);
@@ -183,7 +183,7 @@ export default class Graph extends React.Component {
             }
             console.log(weightData);
 
-            response.data.clientWorkouts.forEach(function (element) {
+            response.data.clientWorkouts.sort(function(a,b){return new Date(a[0].date)- new Date(b[0].date)}).forEach(function (element) {
 
               labelsArr2.push(formattedDate(element[0].date));
               
