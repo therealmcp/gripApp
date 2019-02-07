@@ -4,11 +4,13 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import { Card } from 'native-base';
 import { NavigationActions } from "react-navigation";
 import moment from "moment";
+import {Keyboard} from 'react-native'
 
 import API from '../utils/API.js';
 import TextArea from '../components/TextArea';
@@ -16,6 +18,8 @@ import GripHeader from '../components/GripHeader';
 import TextInput from '../components/TextInput';
 import GripDatePicker from '../components/GripDatePicker';
 import PrimaryButton from '../components/PrimaryButton.js';
+
+
 
 export default class NewClientsform extends React.Component {
   
@@ -96,7 +100,7 @@ export default class NewClientsform extends React.Component {
   render() {
 
     return (
-
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollView}>
         
@@ -131,13 +135,20 @@ export default class NewClientsform extends React.Component {
           <TextInput placeholder="Emergency Contact" style={styles.textInput} onChangeText={(value) => this.setState({emergencyContact: value})}/>
           <TextInput placeholder="Emergency #" style={styles.textInput} onChangeText={(value) => this.setState({emergencyNumber: value})}/>
 
-          <View style={styles.textArea}>
-            <TextArea 
+        
+  
+        
+          {/* <View style={styles.textArea} style={{flex: 1}}> */}
+            <TextInput style={styles.textArea}
+              style={styles.textInput}
               numberOfLines={10}
               multiline={true}
               onChangeText={(value) => this.setState({notes: value})}
-              placeholder={"Goal Notes"}/> 
-          </View>
+              placeholder={"Goal Notes"}
+              /> 
+          {/* </View> */}
+          
+        
 
           <PrimaryButton
           onPress={()=>this.submit()} 
@@ -153,6 +164,7 @@ export default class NewClientsform extends React.Component {
 
         </ScrollView>
       </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -226,8 +238,8 @@ const styles = StyleSheet.create({
   textArea: {
     //height: 300,
     //flex: 1,
-    width: 300,
-    justifyContent: "center",
+    width: '100%',
+    // justifyContent: "center",
     backgroundColor: 'white',
     margin: 20
   },
