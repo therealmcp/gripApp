@@ -4,6 +4,7 @@ import { Container, Header, Content, Textarea, Form } from "native-base";
 const TextArea = (props) => {
   
     return (
+
           <Form>
             <Textarea rowSpan={5} bordered /* placeholder="Notes:" */ 
             placeholder={props.placeholder}

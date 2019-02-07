@@ -7,7 +7,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Button
+  Button,
+  ImageBackground
 } from 'react-native';
 import { WebBrowser, ImagePicker, Permissions } from 'expo';
 import { Card } from 'native-base';
@@ -22,6 +23,7 @@ import PrimaryButton from '../components/PrimaryButton';
 import OutlineButton from '../components/OutlineButton';
 import GripHeader from '../components/GripHeader';
 import TextInput from '../components/TextInput';
+import { WorldAlignment } from 'expo/build/AR';
 
 export default class ClientProfile extends React.Component {
   
@@ -83,6 +85,15 @@ export default class ClientProfile extends React.Component {
     console.log("CLIENTPROFILE: THIS.STATE", this.state)
     return (
 
+      <ImageBackground
+      source={require('../assets/images/athletes.jpg')}    
+      style={{  flex: 1,
+      width: '100%', // applied to Image
+      height: '100%' 
+    }}
+    >
+
+
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollView}>
         
@@ -139,6 +150,7 @@ export default class ClientProfile extends React.Component {
 
         </ScrollView>
       </View>
+      </ImageBackground>
     );
   }
 }
@@ -204,7 +216,6 @@ const styles = StyleSheet.create({
     color: '#0080FF',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: {width: 0.5, height: 0.5},
-
   },
   h2: {
     fontWeight: 'bold',
