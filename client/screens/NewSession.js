@@ -7,7 +7,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Button
+  Button,
+  Alert
 } from 'react-native';
 import { WebBrowser, ImagePicker, Permissions } from 'expo';
 import { Card } from 'native-base';
@@ -43,7 +44,8 @@ export default class NewSession extends React.Component {
       weight: '',
       bodyFat: '',
       caloric: '',
-      sessionNotes: ''
+      sessionNotes: '',
+      requiredFields: true
     }
   }
 
@@ -80,17 +82,55 @@ export default class NewSession extends React.Component {
       collection.notes = this.state.sessionNotes
 
     //console.warn(collection);
+    // if date, weight, bodyFat, caloires, and notes are true, then hit our API.saveSession method
+    if (this.state.clientID && this.state.sessionDate && this.state.weight && this.state.bodyFat && this.state.caloric && this.state.sessionNotes) {
+      API.saveSession(collection)
+      this.goToSessions(this.state.clientID);
+      
+    }
 
-    API.saveSession(collection)
+    else {
+      console.log("fill out info")
+      this.setState({ requiredFields: false })
+
+    }
+
+    
+    
     // .then(res => 
     //   this.goToAddWorkout(res.data._id))
     //.catch(err => console.log(err))
+
+    // else 
+    // send an alert box to the user saying that all fields required
   
 
-    this.goToSessions(this.state.clientID);
+    
     //this.props.navigation.navigate('ClientsPage');
 
   };
+
+
+  renderAlert = () => {
+    if(!this.state.requiredFields){
+        Alert.alert(
+          'Alert Title',
+          'My Alert Msg',
+          [
+            {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+            {
+              text: 'Cancel',
+              onPress: () => console.log('Cancel Pressed'),
+              style: 'cancel',
+            },
+            {text: 'OK', onPress: () => console.log('OK Pressed')},
+          ],
+          {cancelable: false},
+        );
+    }
+  }
+
+
 
   goToSessions = (clientID) => {
     const navigateAction = NavigationActions.navigate({
@@ -115,6 +155,7 @@ export default class NewSession extends React.Component {
     return (
 
       <View style={styles.container}>
+        {this.renderAlert()}
 
         <Text style={styles.h1}>New Session</Text>
 
@@ -134,13 +175,13 @@ export default class NewSession extends React.Component {
         </View>
         <TextInput placeholder="Caloric Intake" style={styles.textInputHalf} onChangeText={(value) => this.setState({ caloric: value })} />
 
-        <View style={styles.textArea}>
-            <TextArea 
+        {/* <View style={styles.textArea}> */}
+            <TextInput style={styles.textArea}
               numberOfLines={10}
               multiline={true}
               onChangeText={(value) => this.setState({sessionNotes: value})}
               placeholder={"Session Notes"}/> 
-          </View>
+          {/* </View> */}
 
         <PrimaryButton
           text='Add New Session'
