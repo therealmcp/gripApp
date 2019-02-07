@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { WebBrowser, ImagePicker, Permissions } from 'expo';
 import { Card } from 'native-base';
+import moment from 'moment';
 
 import { MonoText } from '../components/StyledText';
 import { NavigationActions } from "react-navigation";
@@ -114,10 +115,10 @@ export default class NewSession extends React.Component {
   renderAlert = () => {
     if(!this.state.requiredFields){
         Alert.alert(
-          'Alert Title',
-          'My Alert Msg',
+          'Required Fields Missing',
+          'Please fill in all listed fields.',
           [
-            {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+            //{text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
             {
               text: 'Cancel',
               onPress: () => console.log('Cancel Pressed'),
@@ -130,7 +131,8 @@ export default class NewSession extends React.Component {
     }
   }
 
-
+  formattedDate = (date) => {
+    return moment(date).format("MMM Do YY")}
 
   goToSessions = (clientID) => {
     const navigateAction = NavigationActions.navigate({
@@ -164,7 +166,7 @@ export default class NewSession extends React.Component {
         style={styles.datePick}
          placeholder="Tap to Pick Session Date"
          onDateChange={(date) => {
-           // date = moment().format("MMM Do YY")
+           //let formDate = this.formattedDate(date);
            this.setState({sessionDate: date})}
          }
         />
