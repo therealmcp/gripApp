@@ -38,7 +38,8 @@ export default class ClientProfile extends React.Component {
 
     state = {
       client: {},
-      sessions: []
+      sessions: [],
+      userID: null
     }
 
     componentDidMount(){
@@ -57,7 +58,7 @@ export default class ClientProfile extends React.Component {
     
         API.getClient(clientID)
         .then(res => 
-          this.setState({client: res.data.dbSession, sessions: res.data.dbSession.sessions})
+          this.setState({client: res.data.dbSession, sessions: res.data.dbSession.sessions, userID: res.data.dbSession.user})
           //console.log(res.data)
           )
     };
@@ -80,6 +81,15 @@ export default class ClientProfile extends React.Component {
       });
       this.props.navigation.dispatch(navigateAction);
     }
+
+    goToClients = (userID) => {
+      const navigateAction = NavigationActions.navigate({
+        routeName: "ClientsPage",
+        params: { data: userID }
+      });
+      this.props.navigation.dispatch(navigateAction);
+      // this.props.navigation.goBack();
+    }
     
   render() {
     console.log("CLIENTPROFILE: THIS.STATE", this.state)
@@ -95,7 +105,7 @@ export default class ClientProfile extends React.Component {
 
 
       <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollView}>
+        
         
           <Card style={styles.card}>
             <Text style={styles.h1}>Profile for {this.state.client.firstName} {this.state.client.lastName}</Text>
@@ -110,17 +120,18 @@ export default class ClientProfile extends React.Component {
               text='Go to Sessions' 
               onPress={() => this.goToSessions(this.state.client._id)}
               style={styles.button2}/>
+          
+          <ScrollView contentContainerStyle={styles.scrollView}>
 
-
-          <Card style={styles.card}>
-            <Text style={styles.h1}>Date of Birth: {this.formattedDate(this.state.client.dob)}</Text>
-            <Text style={styles.h1}>Sex: {this.state.client.sex}</Text>
-            <Text style={styles.h1}>Height: {this.state.client.height}</Text>
-            <Text style={styles.h1}>Weight: {this.state.sessions.length !== 0 ? this.state.sessions[this.state.sessions.length - 1].weight : null}</Text>
-            <Text style={styles.h1}>Body Fat %: {this.state.sessions.length !== 0 ? this.state.sessions[this.state.sessions.length - 1].bodyFat : null}</Text>
-            <Text style={styles.h1}>Caloric Intake: {this.state.sessions.length !== 0 ? this.state.sessions[this.state.sessions.length - 1].calories : null}</Text>
-            <Text style={styles.h1}>Goal Notes: {this.state.client.notes}</Text>
-          </Card>
+            <Card style={styles.card}>
+              <Text style={styles.h1}>Date of Birth: {this.formattedDate(this.state.client.dob)}</Text>
+              <Text style={styles.h1}>Sex: {this.state.client.sex}</Text>
+              <Text style={styles.h1}>Height: {this.state.client.height}</Text>
+              <Text style={styles.h1}>Weight: {this.state.sessions.length !== 0 ? this.state.sessions[this.state.sessions.length - 1].weight : null}</Text>
+              <Text style={styles.h1}>Body Fat %: {this.state.sessions.length !== 0 ? this.state.sessions[this.state.sessions.length - 1].bodyFat : null}</Text>
+              <Text style={styles.h1}>Caloric Intake: {this.state.sessions.length !== 0 ? this.state.sessions[this.state.sessions.length - 1].calories : null}</Text>
+              <Text style={styles.h1}>Goal Notes: {this.state.client.notes}</Text>
+            </Card>
 
          {/*  <TextInput placeholder="Goal Notes:" style={styles.textInput}/> */}
 
@@ -143,12 +154,15 @@ export default class ClientProfile extends React.Component {
               style={styles.button2}/> */}
 
          
-          <PrimaryButton 
-              text='Back to Clients' 
-              onPress={() => this.props.navigation.navigate('ClientsPage')}
-              style={styles.button}/>
+          
 
         </ScrollView>
+
+        <PrimaryButton 
+              text='Back to Clients' 
+              onPress={() => this.goToClients(this.state.userID)}
+              style={styles.button}/>
+
       </View>
       </ImageBackground>
     );
@@ -216,6 +230,7 @@ const styles = StyleSheet.create({
     color: '#0080FF',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: {width: 0.5, height: 0.5},
+    alignSelf: 'center'
   },
   h2: {
     fontWeight: 'bold',

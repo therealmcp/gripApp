@@ -43,9 +43,9 @@ export default class ClientsPage extends React.Component {
   console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
     const user = this.props.navigation.state.params.data;
     
-    const navigateAction = NavigationActions.setParams({
-        params: { user: user }
-      });
+    // const navigateAction = NavigationActions.setParams({
+    //     params: { user: user }
+    //   });
 
     //this.props.navigation.dispatch(navigateAction);
     console.log("params set")
@@ -53,7 +53,7 @@ export default class ClientsPage extends React.Component {
     this.setState({user: user});
 
     this.props.navigation.addListener('willFocus', (route) => { 
-      API.getUser(user._id)
+      API.getUser(user)
       .then(res => {
       this.getUserStuff(res.data._id);
       //console.log(res);

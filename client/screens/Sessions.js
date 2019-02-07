@@ -88,6 +88,14 @@ export default class Sessions extends React.Component {
       this.props.navigation.dispatch(navigateAction);
     }
 
+    goToClientProfile = (clientID) => {
+      const navigateAction = NavigationActions.navigate({
+        routeName: "ClientProfile",
+        params: { data: clientID }
+      });
+      this.props.navigation.dispatch(navigateAction);
+    }
+
     formattedDate = (date) => {
       return moment(date).format("MMM Do YY")}
 
@@ -126,6 +134,12 @@ export default class Sessions extends React.Component {
 
         </ScrollView>
 
+        <PrimaryButton
+            text='Back to Client Profile'
+            onPress={() => this.goToClientProfile(this.state.clientID)}
+            style={styles.button}
+          />
+
         
           {/* <PrimaryButton 
             text='Back to Home' 
@@ -149,7 +163,7 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: 'center',
     backgroundColor: 'blue',
-    //top: 40
+    margin: 10
   },
   titleText: {
     fontSize: 30,
