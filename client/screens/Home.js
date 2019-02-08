@@ -9,8 +9,9 @@ import {
   View,
 } from 'react-native';
 import { NavigationActions } from "react-navigation";
-import { WebBrowser } from 'expo';
+import { WebBrowser, BlurView } from 'expo';
 import { Button } from 'native-base';
+import moment from 'moment';
 import CardImage from '../components/CardImage';
 import { MonoText } from '../components/StyledText';
 import API from '../utils/API.js';
@@ -33,34 +34,41 @@ export default class Home extends React.Component {
 
   state = {
     user: "",
-    clients: []
+    clients: null,
+    userID: null
   }
 
   componentDidMount(){
-    console.log("this.props.navigation.state.params.data.user: ", this.props.navigation.state.params.data.user)
+    // console.log("this.props.navigation.state.params.data.user: ", this.props.navigation.state.params.data.user)
     const user = this.props.navigation.state.params.data.user;
+  
     // this.props.navigation.setParams({ user })
-    const navigateAction = NavigationActions.setParams({
-       // key: "id-1547683730508-2",
-        params: { user: user }
-      });
+    // const navigateAction = NavigationActions.setParams({
+    //    // key: "id-1547683730508-2",
+    //     params: { user: user }
+    //   });
 
-    this.props.navigation.dispatch(navigateAction);
-    console.log("params set")
+    // this.props.navigation.dispatch(navigateAction);
+    // console.log("USER DATA: ", user)
       // this.props.navigation.goBack();
     
-    this.setState({user: user})
+    // this.setState({user: user})
 
-    API.getUser(user._id)
-    .then(res => {
-      this.getUserStuff(res.data._id);
-      // console.log(res);
-    })
+    // API.getUser(user._id)
+    // .then(res => {
+    //   this.getUserStuff(res.data._id);
+    //   // console.log(res);
+    // })
+    this.getUserStuff(user)
+
   };
 
-  getUserStuff = (id) => {
-    API.getUserStuff(id)
-    .then(res => this.setState({clients: res.data.clients}))
+  getUserStuff = (user) => {
+    API.getUserStuff(user._id)
+    .then(res => {
+      // console.log("CLIENT DATA: ", res)
+      this.setState({user: user, clients: res, userID: user._id})
+    })
   };
 
   // goToNewClient = (userObj) => {
@@ -72,34 +80,55 @@ export default class Home extends React.Component {
   //   // this.props.navigation.goBack();
   // }
 
-  goToClients = (userObj) => {
+  goToClients = (userID) => {
     const navigateAction = NavigationActions.navigate({
       routeName: "ClientsPage",
-      params: { data: userObj }
+      params: { data: userID }
     });
     this.props.navigation.dispatch(navigateAction);
     // this.props.navigation.goBack();
   }
 
+  goToSessionPage = (sessionID) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "Session",
+      params: { data: sessionID }
+    });
+    this.props.navigation.dispatch(navigateAction);
+  }
+
+  formattedDate = (date) => {
+    return moment(date).format("MMM Do YY")}
+
   render() {
+    // console.log("HOME STATE: ", this.state)
     return (
       <View style={styles.container}>
         <Text style={styles.titleText} >Welcome, {this.state.user.firstName}! </Text>
-        <CardImage />
-        <Link />
+        <CardImage style={styles.thumbnail} />
+        {/* <Link /> */}
         <Text style={styles.subText} >Upcoming Sessions</Text>
 
         <ScrollView contentContainerStyle={styles.scrollView}>
-
-          {this.state.clients.map(client => {
+ 
+          {this.state.clients !== null ? this.state.clients.data
+          .sort(function(a,b){
+            if (a[0].sessions.length !==0 && b[0].sessions.length !==0) {
+              return new Date(b[0].sessions[b[0].sessions.length-1].date) - new Date(a[0].sessions[a[0].sessions.length-1].date)
+            } else {null}
+          })
+          .map(data => {
+            //console.log("DATA", client)
+              const client = data[0]
                 return (
                   <Cards key={client._id} 
                   style={styles.sessionCards} 
                   text1={client.firstName + " " + client.lastName}
-                  // text2={client.notes}
+                  onPress={client.sessions.length !== 0 ? () => this.goToSessionPage(client.sessions[client.sessions.length -1]._id) : null}
+                  text2={client.sessions.length !== 0 ? this.formattedDate(client.sessions[client.sessions.length -1].date) : null}
                   />
                 )}
-            )}
+            ) : null} 
 
         </ScrollView>
         
@@ -118,7 +147,7 @@ export default class Home extends React.Component {
           /> */}
           <PrimaryButton 
             text='Clients Page' 
-            onPress={() => this.goToClients(this.state.user)}
+            onPress={() => this.goToClients(this.state.userID)}
             text='Go to Clients' 
             style={styles.button}
           />
@@ -137,7 +166,7 @@ export default class Home extends React.Component {
             onPress={() => this.props.navigation.navigate('Session')}
             style={styles.button}
           /> */}
-          <OutlineButton 
+          <PrimaryButton 
             text='Log Out' 
             onPress={() => this.props.navigation.navigate('Login')}
             style={styles.button2}
@@ -159,20 +188,35 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: 'center',
     backgroundColor: 'blue',
-    margin: 20
+    margin: 20,
+    bottom: 20,
   },
   button2: {
     alignSelf: 'center',
     //backgroundColor: 'blue',
     //color: 'white',
-    margin: 20
+    // margin: 20,
+    backgroundColor: '#0080FF',
+    bottom: 30,
   },
   titleText: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
+    color: '#0080FF',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 0.5, height: 0.5},
+    top: 15,
+   
   },
   subText: {
-    fontSize: 17,
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: "#0080FF",
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 0.5, height: 0.5},
+    top: 50
+
+
 
   },
   header: {
@@ -194,6 +238,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%'
-  }
+    width: '100%',
+    top: 80,
+  },
+ 
 });

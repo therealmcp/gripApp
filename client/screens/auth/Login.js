@@ -7,7 +7,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Button
+  Button,
+  ImageBackground
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import { Card } from 'native-base';
@@ -48,23 +49,32 @@ export default class Login extends React.Component {
 
   login = (event) => {
     event.preventDefault();
-    console.log("Pre login", this.state)
+    // console.log("Pre login", this.state)
     API.login(this.state)
       .then(res => {
-        // console.log("Login Successful")
+        // console.log("Login Successful", res)
         this.goToMain(res.data)
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log("LOGIN ERROR: ", err))
   }
 
   render() {
     return (
+
+      <ImageBackground
+      source={require('../../assets/images/athletes.jpg')}    
+      style={{  flex: 1,
+      width: '100%', // applied to Image
+      height: '100%' 
+    }}
+    >
+
       <View style={styles.container}>
 
-        <Card style={styles.card}>
+        {/* <Card style={styles.card}> */}
           <Text style={styles.h1}>GRIP</Text>
-          <Text style={styles.h2}>for Personal Trainers</Text>
-        </Card>
+          {/* <Text style={styles.h2}>for personal trainers</Text> */}
+        {/* </Card> */}
 
 
         <TextInput
@@ -86,6 +96,7 @@ export default class Login extends React.Component {
         />
 
       </View>
+      </ImageBackground>
     );
   }
 
@@ -95,20 +106,23 @@ export default class Login extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'mintcream',
+    // backgroundColor: 'mintcream',
     alignItems: 'center',
     justifyContent: 'center',
   },
   textInput: {
     width: '80%',
     margin: 10,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    bottom: 50,
   },
   button: {
     alignSelf: 'center',
-    marginTop: 20,
+    padding:5,
+    // marginTop: 20,
     marginBottom: 10,
     backgroundColor: 'blue'
+    
   },
   card: {
     marginBottom: 50,
@@ -121,14 +135,21 @@ const styles = StyleSheet.create({
   },
   h1: {
     fontWeight: 'bold',
-    fontSize: 52,
-    padding: 5,
-    color: 'blue'
+    fontSize: 105,
+    padding: 2,
+    color: '#0080FF',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 5, height: 5},
+   bottom: 105,
+    
   },
-  h2: {
-    fontWeight: 'bold',
-    fontSize: 28,
-    padding: 5,
-    color: 'blue'
-  }
+  // h2: {
+  //   fontWeight: 'bold',
+  //   fontSize: 28,
+  //   padding: 2,
+  //   color: '#0080FF',
+  //   textShadowColor: 'rgba(0, 0, 0, 0.75)',
+  //   textShadowOffset: {width: 3, height: 3},
+  //   bottom:75,
+  // }
 });

@@ -12,6 +12,7 @@ import NewSession from '../screens/NewSession';
 import ClientProfile from '../screens/ClientProfile';
 import Session from '../screens/Session';
 import Progress from '../screens/Progress';
+import AddWorkout from '../screens/AddWorkout';
 
 // This creates our app's "stack" of pages; the keys in the first object are the routes, values are the pages (found in "screens" folder)
 const RootStack = createStackNavigator(
@@ -25,7 +26,8 @@ const RootStack = createStackNavigator(
         ClientProfile: ClientProfile,
         NewSession: NewSession,
         Session: Session,
-        Progress:Progress
+        Progress:Progress,
+        AddWorkout: AddWorkout
     },
     {
         initialRouteName: 'Login',

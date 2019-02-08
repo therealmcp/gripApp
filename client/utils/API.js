@@ -25,11 +25,14 @@ export default {
     getClient: (clientID) => {
         return axios.get("https://heroku-grip-app.herokuapp.com/api/clients/" + clientID)
     },
+    saveSession: (sessionObj) => {
+        return axios.post("https://heroku-grip-app.herokuapp.com/api/sessions/", sessionObj)
+    },
     getSession: (sessionID) => {
         return axios.get("https://heroku-grip-app.herokuapp.com/api/sessions/" + sessionID)
     },
-    addWorkout: (sessionID) => {
-        return axios.put("https://heroku-grip-app.herokuapp.com/api/workouts/" + sessionID)
+    addWorkout: (sessionID, workoutObj) => {
+        return axios.post("https://heroku-grip-app.herokuapp.com/api/workouts/" + sessionID, workoutObj)
     },
 }
 

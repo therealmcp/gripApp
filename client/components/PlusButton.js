@@ -12,9 +12,9 @@ const PlusButton = (props) => {
         
         
          
-          <Content>
+          <Content style={{top:50}}>
           <Button iconLeft transparent primary onPress={props.onPress} >
-            <Icon name='person'/>
+            <Icon name='person' style={{color: 'blue', fontSize: 40}}/>
             <Text>{props.text}</Text>
           </Button>
         </Content>

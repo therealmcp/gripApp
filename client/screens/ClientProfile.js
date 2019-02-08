@@ -7,11 +7,13 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Button
+  Button,
+  ImageBackground
 } from 'react-native';
 import { WebBrowser, ImagePicker, Permissions } from 'expo';
 import { Card } from 'native-base';
 import { NavigationActions } from "react-navigation";
+import moment from "moment";
 
 import { MonoText } from '../components/StyledText';
 
@@ -21,6 +23,7 @@ import PrimaryButton from '../components/PrimaryButton';
 import OutlineButton from '../components/OutlineButton';
 import GripHeader from '../components/GripHeader';
 import TextInput from '../components/TextInput';
+import { WorldAlignment } from 'expo/build/AR';
 
 export default class ClientProfile extends React.Component {
   
@@ -35,7 +38,8 @@ export default class ClientProfile extends React.Component {
 
     state = {
       client: {},
-      sessions: []
+      sessions: [],
+      userID: null
     }
 
     componentDidMount(){
@@ -54,7 +58,7 @@ export default class ClientProfile extends React.Component {
     
         API.getClient(clientID)
         .then(res => 
-          this.setState({client: res.data.dbSession})
+          this.setState({client: res.data.dbSession, sessions: res.data.dbSession.sessions, userID: res.data.dbSession.user})
           //console.log(res.data)
           )
     };
@@ -67,6 +71,9 @@ export default class ClientProfile extends React.Component {
       this.props.navigation.dispatch(navigateAction);
     }
 
+    formattedDate = (date) => {
+      return moment(date).format("MMM Do YY")}
+
     goToProgress = (clientID) => {
       const navigateAction = NavigationActions.navigate({
         routeName: "Progress",
@@ -74,13 +81,31 @@ export default class ClientProfile extends React.Component {
       });
       this.props.navigation.dispatch(navigateAction);
     }
+
+    goToClients = (userID) => {
+      const navigateAction = NavigationActions.navigate({
+        routeName: "ClientsPage",
+        params: { data: userID }
+      });
+      this.props.navigation.dispatch(navigateAction);
+      // this.props.navigation.goBack();
+    }
     
   render() {
-
+    console.log("CLIENTPROFILE: THIS.STATE", this.state)
     return (
 
+      <ImageBackground
+      source={require('../assets/images/athletes.jpg')}    
+      style={{  flex: 1,
+      width: '100%', // applied to Image
+      height: '100%' 
+    }}
+    >
+
+
       <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollView}>
+        
         
           <Card style={styles.card}>
             <Text style={styles.h1}>Profile for {this.state.client.firstName} {this.state.client.lastName}</Text>
@@ -95,17 +120,18 @@ export default class ClientProfile extends React.Component {
               text='Go to Sessions' 
               onPress={() => this.goToSessions(this.state.client._id)}
               style={styles.button2}/>
+          
+          <ScrollView contentContainerStyle={styles.scrollView}>
 
-
-          <Card style={styles.card}>
-            <Text style={styles.h1}>Date of Birth: {this.state.client.dob}</Text>
-            <Text style={styles.h1}>Sex: {this.state.client.sex}</Text>
-            <Text style={styles.h1}>Height: {this.state.client.height}</Text>
-            <Text style={styles.h1}>Weight:</Text>
-            <Text style={styles.h1}>Body Fat %:</Text>
-            <Text style={styles.h1}>Caloric Intake:</Text>
-            <Text style={styles.h1}>Goal Notes: {this.state.client.notes}</Text>
-          </Card>
+            <Card style={styles.card}>
+              <Text style={styles.h1}>Date of Birth: {this.formattedDate(this.state.client.dob)}</Text>
+              <Text style={styles.h1}>Sex: {this.state.client.sex}</Text>
+              <Text style={styles.h1}>Height: {this.state.client.height}</Text>
+              <Text style={styles.h1}>Weight: {this.state.sessions.length !== 0 ? this.state.sessions[this.state.sessions.length - 1].weight : null}</Text>
+              <Text style={styles.h1}>Body Fat %: {this.state.sessions.length !== 0 ? this.state.sessions[this.state.sessions.length - 1].bodyFat : null}</Text>
+              <Text style={styles.h1}>Caloric Intake: {this.state.sessions.length !== 0 ? this.state.sessions[this.state.sessions.length - 1].calories : null}</Text>
+              <Text style={styles.h1}>Goal Notes: {this.state.client.notes}</Text>
+            </Card>
 
          {/*  <TextInput placeholder="Goal Notes:" style={styles.textInput}/> */}
 
@@ -128,13 +154,17 @@ export default class ClientProfile extends React.Component {
               style={styles.button2}/> */}
 
          
-          <PrimaryButton 
-              text='Back to Clients' 
-              onPress={() => this.props.navigation.navigate('ClientsPage')}
-              style={styles.button}/>
+          
 
         </ScrollView>
+
+        <PrimaryButton 
+              text='Back to Clients' 
+              onPress={() => this.goToClients(this.state.userID)}
+              style={styles.button}/>
+
       </View>
+      </ImageBackground>
     );
   }
 }
@@ -188,16 +218,19 @@ const styles = StyleSheet.create({
   card: {
     marginBottom: 20,
     width: '90%',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     backgroundColor: 'transparent',
     shadowColor: 'transparent',
     borderColor: 'transparent'
   },
   h1: {
     fontWeight: 'bold',
-    fontSize: 28,
+    fontSize: 22,
     padding: 10,
-    color: 'blue'
+    color: '#0080FF',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 0.5, height: 0.5},
+    alignSelf: 'center'
   },
   h2: {
     fontWeight: 'bold',

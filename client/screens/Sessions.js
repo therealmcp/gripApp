@@ -13,6 +13,7 @@ import { WebBrowser } from 'expo';
 import { Button } from 'native-base';
 import CardImage from '../components/CardImage';
 import { MonoText } from '../components/StyledText';
+import moment from 'moment';
 
 import API from '../utils/API.js';
 import GripHeader from '../components/GripHeader';
@@ -20,6 +21,7 @@ import PrimaryButton from '../components/PrimaryButton';
 import Link from '../components/Link';
 import Cards from '../components/Cards';
 import PlusButton from '../components/PlusButton';
+
 
 export default class Sessions extends React.Component {
 
@@ -60,13 +62,14 @@ export default class Sessions extends React.Component {
         console.log("params set") */
         
         this.setState({clientID: clientID});
-    
-        API.getClient(clientID)
+
+        this.props.navigation.addListener('willFocus', (route) => { 
+          API.getClient(clientID)
         .then(res => 
           this.setState({sessions: res.data.dbSession.sessions})
           //console.log(res.data)
-      )
-    };
+          )})
+    }
 
 
     goToSessionPage = (sessionID) => {
@@ -85,15 +88,29 @@ export default class Sessions extends React.Component {
       this.props.navigation.dispatch(navigateAction);
     }
 
+    goToClientProfile = (clientID) => {
+      const navigateAction = NavigationActions.navigate({
+        routeName: "ClientProfile",
+        params: { data: clientID }
+      });
+      this.props.navigation.dispatch(navigateAction);
+    }
+
+    formattedDate = (date) => {
+      return moment(date).format("MMM Do YY")}
+
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.titleText} >Sessions</Text>
         {/* Needs a place for React Native to take it to set up a Session */}
-        <PlusButton
+        
+        <PrimaryButton
         text='Add a Session'
         onPress={() => this.goToNewSession(this.state.clientID)}
-         style={styles.button}/>
+        style={styles.button}/>
+
         {/* <PrimaryButton 
             text='Add a Client' 
             onPress={() => this.props.navigation.navigate('NewClientsForm')}
@@ -102,12 +119,13 @@ export default class Sessions extends React.Component {
           <PlusButton/> */}
 
         <ScrollView contentContainerStyle={styles.scrollView}>  
+        
             
-          {this.state.sessions.map(session => {
+          {this.state.sessions.sort(function(a,b){return new Date(b.date) - new Date(a.date)}).map(session => {
                   return (
                     <Cards key={session._id} 
                     style={styles.sessionCards} 
-                    text1={session.date}
+                    text1={this.formattedDate(session.date)}
                     text2={session.notes}
                     onPress={() => this.goToSessionPage(session._id)}
                     />
@@ -116,12 +134,18 @@ export default class Sessions extends React.Component {
 
         </ScrollView>
 
+        <PrimaryButton
+            text='Back to Client Profile'
+            onPress={() => this.goToClientProfile(this.state.clientID)}
+            style={styles.button}
+          />
+
         
-          <PrimaryButton 
+          {/* <PrimaryButton 
             text='Back to Home' 
             onPress={() => this.props.navigation.navigate('Home')}
             style={styles.button}
-          />
+          /> */}
       </View>
 
       
@@ -138,11 +162,17 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: 'center',
-    backgroundColor: 'blue'
+    backgroundColor: 'blue',
+    margin: 10
   },
   titleText: {
     fontSize: 30,
     fontWeight: 'bold',
+    color: '#0080FF',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 0.5, height: 0.5},
+    //top: 15,
+    margin: 20
   },
   subText: {
     fontSize: 17,
@@ -158,6 +188,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '80%',
+    
     // margin: 10,
   },
   scrollView: {
@@ -165,6 +196,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%'
+    width: '100%',
+    //top: 95,
+    marginTop: 20
   }
 });

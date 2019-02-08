@@ -35,7 +35,7 @@ export default class ClientsPage extends React.Component {
 
   state = {
     user: null,
-    clients: []
+    clients: null
   }
 
   componentDidMount(){
@@ -43,9 +43,9 @@ export default class ClientsPage extends React.Component {
   console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
     const user = this.props.navigation.state.params.data;
     
-    const navigateAction = NavigationActions.setParams({
-        params: { user: user }
-      });
+    // const navigateAction = NavigationActions.setParams({
+    //     params: { user: user }
+    //   });
 
     //this.props.navigation.dispatch(navigateAction);
     console.log("params set")
@@ -53,7 +53,7 @@ export default class ClientsPage extends React.Component {
     this.setState({user: user});
 
     this.props.navigation.addListener('willFocus', (route) => { 
-      API.getUser(user._id)
+      API.getUser(user)
       .then(res => {
       this.getUserStuff(res.data._id);
       //console.log(res);
@@ -67,7 +67,7 @@ export default class ClientsPage extends React.Component {
 
 getUserStuff = (id) => {
   API.getUserStuff(id)
-  .then(res => this.setState({clients: res.data.clients}))
+  .then(res => this.setState({clients: res.data}))
 };
 
 goToNewClient = (userObj) => {
@@ -90,20 +90,23 @@ goToClientProfile = (clientID) => {
     return (
       <View style={styles.container}>
         <Text style={styles.titleText}>Clients</Text>
-        <PlusButton
+       {/*  <PlusButton
+        style={styles.plusButton}
         text='Add a Client'
         onPress={() => this.goToNewClient(this.state.user)}
-         style={styles.button}/>
-        {/* <PrimaryButton 
+         /> */}
+        <PrimaryButton 
             text='Add a Client' 
-            onPress={() => this.props.navigation.navigate('NewClientsForm')}
+            onPress={() => this.goToNewClient(this.state.user)}
             style={styles.button}
           />
-          <PlusButton/> */}
+
 
         <ScrollView contentContainerStyle={styles.scrollView}>
 
-          {this.state.clients.map(client => {
+
+          {this.state.clients !== null ? this.state.clients.map(data => {
+            const client = data[0]
                 return (
                   <Cards key={client._id} 
                   style={styles.sessionCards} 
@@ -111,17 +114,17 @@ goToClientProfile = (clientID) => {
                   text2={client.notes}
                   onPress={() => this.goToClientProfile(client._id)}
                   />
-                )}
-            )}
+                )})
+            : null}
 
         </ScrollView>
 
         
-          <PrimaryButton 
+          {/* <PrimaryButton 
             text='Back to Home' 
             onPress={() => this.props.navigation.navigate('Home')}
             style={styles.button}
-          />
+          /> */}
       </View>
 
       
@@ -133,19 +136,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'mintcream',
+    // backgroundColor: '#89d4cf',
+    // backgroundImage: 'linearGradient(315deg, #89d4cf 0%, #6e45e1 74%)',
+
     alignItems: 'center',
     justifyContent: 'center',
   },
   container2: {
     flex: 1
   },
-  button: {
-    alignSelf: 'center',
-    backgroundColor: 'blue'
-  },
   titleText: {
-    fontSize: 30,
+    fontSize: 45,
     fontWeight: 'bold',
+    color: '#0080FF',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 0.5, height: 0.5},
+    //top: 15,
+    margin: 30
   },
   subText: {
     fontSize: 17,
@@ -170,6 +177,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%'
-  }
+    width: '100%',
+    //top: 115,
+    margin: 20
+  },
+  button: {
+    alignSelf: 'center',
+    //bottom: 60,
+    backgroundColor: '#0080FF',
+    //top: 50
+    margin: 10
+  },
+  plusButton: {
+    fontSize: 50,
+    color: '#0080FF',
+    
+  },
 });

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { Card } from 'native-base';
 import { NavigationActions } from "react-navigation";
+import moment from "moment";
 
 import API from '../utils/API.js';
 import GripHeader from '../components/GripHeader';
@@ -18,50 +19,127 @@ import FooterTabsIcon from '../components/FooterWithText';
 
 
 export default class NewClientsform extends React.Component {
-  
-  static navigationOptions = ({navigation}) => {
+
+  static navigationOptions = ({ navigation }) => {
     return {
       header:
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <GripHeader/>
+          <GripHeader />
         </TouchableOpacity>
-      }
+    }
   };
+
+  constructor() {
+    super();
+    this.state = {
+      sessionID: '',
+      session: {},
+      workouts: [],
+      clientID: ''
+    }
+  }
+
+  componentDidMount() {
+
+    console.log("this.props.navigation.state.params.data: ", this.props.navigation.state.params.data)
+    const sessionID = this.props.navigation.state.params.data;
+
+    /* const navigateAction = NavigationActions.setParams({
+        params: { user: user }
+      });
+ 
+    this.props.navigation.dispatch(navigateAction);
+    console.log("params set") */
+
+    this.setState({ sessionID: sessionID });
+
+      this.props.navigation.addListener('willFocus', (route) => { 
+        API.getSession(sessionID)
+        .then(res => {
+        this.setState({
+          workouts: res.data.workouts,
+          session: res.data,
+          clientID: res.data.client})
+      })
+    });
+
+    
+  };
+
+  // submit() {
+
+  //   let collection = {}
+
+  //   collection.session = this.state.sessionID
+
+  //   API.addWorkout(collection);
+  //   //.then(res => console.log(res))
+  //   //.catch(err => console.log(err))
+
+  //   this.goToWorkouts(this.state.sessionID);
+  //   //this.props.navigation.navigate('ClientsPage');
+
+  // };
+
+  goToAddWorkout = (sessionID) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "AddWorkout",
+      params: { data: sessionID }
+    });
+    this.props.navigation.dispatch(navigateAction);
+    // this.props.navigation.goBack();
+  }
+
+  goToClientSessions = (clientID) => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: "Sessions",
+      params: { data: clientID }
+    });
+    this.props.navigation.dispatch(navigateAction);
+    // this.props.navigation.goBack();
+  }
+
+  formattedDate = (date) => {
+    return moment(date).format("MMM Do YY")}
 
   render() {
 
     return (
 
       <View style={styles.container}>
-        
-          <Card style={styles.card}>
-            <Text style={styles.h1}>Session for:</Text>
-          </Card>
 
-          <ScrollView contentContainerStyle={styles.scrollView}>  
-          
-            <Cards style={styles.sessionCards}/>
-            <Cards style={styles.sessionCards}/>
-            <Cards style={styles.sessionCards}/>
-            <Cards style={styles.sessionCards}/>
-            <Cards style={styles.sessionCards}/>
-            <Cards style={styles.sessionCards}/>
-            <Cards style={styles.sessionCards}/>
-            <Cards style={styles.sessionCards}/>
+        <Card style={styles.card}>
+          <Text style={styles.h1}>Session for {this.formattedDate(this.state.session.date)}</Text>
+          <Text style={styles.h2}>Session Notes: {this.state.session.notes}</Text>
+        </Card>
 
-             <PrimaryButton 
-            text='Back to Client Sessions' 
-            onPress={() => this.props.navigation.navigate('Sessions')}
+        <PrimaryButton
+          text='Add New Workout'
+          onPress={() => this.goToAddWorkout(this.state.sessionID)}
+          style={styles.button}
+        />
+
+        <ScrollView contentContainerStyle={styles.scrollView}>
+
+        {this.state.workouts.map(workout => {
+                return (
+                  <Cards key={workout._id} 
+                  style={styles.sessionCards} 
+                  text1={workout.name}
+                  text2={"Sets: " + workout.sets + " Reps/Distance: " + workout.reps + " Weight: " + workout.weight}
+                  /* onPress={() => this.goToClientProfile(client._id)} */
+
+                  />
+                )})
+          }
+
+        </ScrollView>
+
+        <PrimaryButton
+            text='Back to Client Sessions'
+            onPress={() => this.goToClientSessions(this.state.clientID)}
             style={styles.button}
-            />
-
-            <FooterTabsIcon />
-           
-          </ScrollView>
-
-          
-
-           
+          />
 
       </View>
     );
@@ -82,15 +160,15 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   containerInline: {
-    flexWrap: 'wrap', 
+    flexWrap: 'wrap',
     padding: 0,
     justifyContent: 'space-between',
-    flexDirection:'row',
+    flexDirection: 'row',
     width: '82%',
   },
   textInput: {
     width: '80%',
-    margin: 10, 
+    margin: 10,
     backgroundColor: 'white'
   },
   textInputHalf: {
@@ -116,6 +194,12 @@ const styles = StyleSheet.create({
   h1: {
     fontWeight: 'bold',
     fontSize: 28,
+    padding: 10,
+    color: 'blue'
+  },
+  h2: {
+    fontWeight: 'bold',
+    fontSize: 18,
     padding: 10,
     color: 'blue'
   },
