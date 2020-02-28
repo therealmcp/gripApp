@@ -2,10 +2,10 @@
 
 ![gripapp image](client/assets/images/griplogo.png) 
 # Overview
-Grip is a Fullstack application that allows personal trainers to track their clients and their progress.  It includes user authentication using passport.js and bcrypt, data persistence using MongoDB, data retrieval via Mongoose, Front-end UI/UX using React Native, graphs assembled using React Native Chart Kit, and finally utilizes an Express server built with Node.js.  
+Grip is a Fullstack application that allows personal trainers to track their clients and their progress. It includes user authentication using passport.js and bcrypt, data persistence using MongoDB, data retrieval via Mongoose, Front-end UI/UX using React Native, graphs assembled using React Native Chart Kit, and finally utilizes an Express server built with Node.js.  
 
-## Walkthrough
-our app starts with login page, because we would like each user(trainer) to have access to his/her own clients and be able to find them again
+<!-- ## Walkthrough -->
+The Grip experience starts with account creation, allowing each trainer to access their own specific clients. After logging in, trainers can add clients, associate workouts to those clients, and track progress over time. Check it out!
 
 ![1](https://user-images.githubusercontent.com/38849140/53541312-17e3f480-3ace-11e9-81ad-776e5791fd3d.png)
 ![2](https://user-images.githubusercontent.com/38849140/53541316-1e726c00-3ace-11e9-8daf-92c04f0f5bdb.png)
@@ -18,7 +18,7 @@ our app starts with login page, because we would like each user(trainer) to have
 ![9](https://user-images.githubusercontent.com/38849140/53542197-23d1b580-3ad2-11e9-8e19-50050d812b61.png)
 
 
-
+<!-- 
 
 ## Getting Started
 
@@ -55,7 +55,7 @@ Our graphs were created using React-Native-Chart-Kit.  This is an npm packagage 
 
 Enter next steps info here.
 
-## Architecture
+## Architecture -->
 
 This application was deployed with the following technologies:
 
